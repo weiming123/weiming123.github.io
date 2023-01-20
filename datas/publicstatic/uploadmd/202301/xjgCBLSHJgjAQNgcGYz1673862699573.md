@@ -22,7 +22,6 @@ n.申请;请求;申请书;申请表;(尤指理论、发现等的)应用，运用
 &emsp;&emsp;**attack**
 n.袭击;攻击;(在战争中使用武器的)进攻;(口头和书面的)抨击，非难
 v.袭击;攻击;(在战争等中使用武器)进攻;抨击;非难
-&emsp;&emsp;Refugees had come under attack from federal troops.(难民遭到了联邦军队的袭击。)
 &emsp;&emsp;He publicly attacked the people who've been calling for secret ballot nominations...(他公开抨击了那些主张用不记名投票方式确定任命人选的人。)
 &emsp;&emsp;**auditing**
 v.审计;稽核;旁听(大学课程)
@@ -36,7 +35,6 @@ adj.结束的;结尾的;后端的，后台的(指不归用户直接使用，而�
 n.国界;边界;边疆;边界地区;镶边;包边;(草坪边等的)狭长花坛
 v.和…毗邻;与…接壤;沿…的边;环绕…;给…镶边
 &emsp;&emsp;to cross the border(穿越边界)
-&emsp;&emsp;Both republics border on the Black Sea.(两个共和国都临近黑海。)
 &emsp;&emsp;**breakable**
 adj.会碎的;易碎的
 n.易碎的东西;易破的东西
@@ -47,7 +45,6 @@ n.易碎的东西;易破的东西
 n.必备资料;证明文件;文件记载;文献记录;归档
 如：
 &emsp;&emsp;Passengers must carry proper documentation. (旅客必须携带有效证件.)
-&emsp;&emsp;Further investigation was hindered by the loss of all documentation on the case. (由于案件卷宗全部丢失致使进一步的调查受阻)
 &emsp;&emsp;The OpenSSL website provides downloads and documentation on this software.( OpenSSL 网站提供关于这个软件的下载和文档。 )
 &emsp;&emsp;**some of**
 中的一些;其中一些;其中的一些
@@ -58,12 +55,7 @@ n.(抽查的)样本，样品;(化验的)取样，样本，样;(作为标准或�
 v.尝;品尝;尝试;体验;抽样检验;取样;采样;节录，选录(一段音乐或声音，用于新的乐曲中)
 &emsp;&emsp; You'll receive samples of paint, curtains and upholstery(你将收到涂料、窗帘、家具垫衬套的样品。)
 &emsp;&emsp;We sampled a selection of different bottled waters.(我们品尝了一系列不同品牌的瓶装水。)
-&emsp;&emsp;**brief**
-adj.短时间的;短暂的;简洁的;简单的;过短的;暴露身体的
-n.任务简介;指示;(向辩护律师提供的)案情摘要;委托辩护;辩护状
-v.给(某人)指示;向(某人)介绍情况;向(辩护律师)提供案情摘要
-&emsp;&emsp;She once made a brief appearance on television(她曾经在电视上短暂露面。)
-&emsp;&emsp;In a brief statement, he concentrated entirely on international affairs(他作了一个简短的声明，集中阐述了在国际事务方面的立场。)
+
 &emsp;&emsp;**introduction**
 n.初次投入使用;采用;引进;推行;新采用(或新引进)的事物;(正式的)介绍，引见
 &emsp;&emsp;The book's introduction is brief.（该书的引言简短）
@@ -85,12 +77,6 @@ n.
 adj.一致的;始终如一的;连续的;持续的;与…一致的;相符的;符合的;不矛盾的
 &emsp;&emsp;These are clear consistent policies which we are putting into place.(这些就是我们正在付诸实施的政策，不但清楚而且前后一致。)
 &emsp;&emsp;That has been our consistent stand.(这是我们一贯的主张。)
-&emsp;&emsp;**major**
-adj.主要的;重要的;大的;严重;大调的
-n.少校;主修课程;专业课;主修学生;主修生
-v.主修，专攻
-&emsp;&emsp;The major factor in the decision to stay or to leave was usually professional(职业上的考虑往往是决定去留的主要因素。)
-&emsp;&emsp; He majored in finance at Claremont Men's College in California.(他在加利福尼亚州的克莱尔蒙特男子学院主修金融专业。)
 
 &emsp;&emsp;**exhaustive**
 adj.详尽的;彻底的;全面的
