@@ -1,0 +1,16 @@
+<p>  有的时候我们可能需要在一个操作系统上安装多个版本的node.js，这里在下介绍一些可用的方法。</p>
+<p>一，MAC或Linux上可以用n模块管理node.js版本：</p>
+<p>具体使用方法参考 <a href="https://www.npmjs.com/package/n">https://www.npmjs.com/package/n</a> 即可</p>
+<p>二、Windows上使用nvm来管理node.js版本：</p>
+<p>  国内下载nvm工具可能会很慢，这里分享一个下载链接：<br>链接：<a href="https://pan.baidu.com/s/1-SET1rUr7V5i9X97dxOpNA">https://pan.baidu.com/s/1-SET1rUr7V5i9X97dxOpNA</a><br>提取码：07s2</p>
+<p>  国内nvm下载node和npm速度可能会很慢，可以切换镜像源：</p>
+<pre><code class="language-shell"><span class="code-block">nvm node_mirror http://npm.taobao.org/mirrors/node/
+nvm npm_mirror https://npm.taobao.org/mirrors/npm/</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  下载需要添加的node.js版本：nvm install &lt;version&gt;​<br>如：</p>
+<pre><code class="language-shell"><span class="code-block">nvm install 14.15.0</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  卸载不需要添加的node.js版本：nvm uninstall &lt;version&gt;​<br>如：nvm uninstall 14.15.0</p>
+<p>  查看本地所有的node.js版本：nvm list</p>
+<p>  切换node.js版本：nvm use [version] [arch]<br>如：nvm use 14.15.0<br>arch是指定的版本，如nvm use 14.15.0 64，我们一般都是64位操作系统和64位的node.js，默认可以省略了</p>
+<p>  查看更多关于nvm的命令：nvm -h</p>

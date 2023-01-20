@@ -1,0 +1,150 @@
+<p>  所谓深拷贝也只有针对引用数据类型才会有的，这里我们这里来讲下js如何深拷贝吧。<br>  以前常用的一种方式是使用js的内置对象JSON提供的parse和stringify配合来做的，但是对于现在而言，有一些场景可能就不太能满足我们的需求了。下面结合代码来说。</p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-keyword">let</span> s1=<span class="hljs-title class_">Symbol</span>(<span class="hljs-string">'s1'</span>);
+<span class="hljs-keyword">let</span> s2=<span class="hljs-title class_">Symbol</span>(<span class="hljs-string">'s2'</span>);
+<span class="hljs-keyword">let</span> o1={
+  <span class="hljs-attr">userName</span>:<span class="hljs-string">'object one'</span>,
+  <span class="hljs-attr">testBoolean</span>:<span class="hljs-literal">true</span>,
+  <span class="hljs-attr">testNumber</span>:<span class="hljs-number">1</span>,
+  <span class="hljs-attr">testBigInt</span>:<span class="hljs-number">123n</span>,
+  <span class="hljs-attr">testUnd</span>:<span class="hljs-literal">undefined</span>,
+  <span class="hljs-attr">testNull</span>:<span class="hljs-literal">null</span>,
+  [s1]:<span class="hljs-string">'s1'</span>,
+  <span class="hljs-attr">s2</span>:s2,
+  <span class="hljs-attr">testFunction</span>:<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>){
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'test'</span>)
+  },
+  <span class="hljs-attr">testObj</span>:{
+    <span class="hljs-attr">myname</span>:<span class="hljs-string">'testObj'</span>
+  },
+  <span class="hljs-attr">testSet</span>:<span class="hljs-keyword">new</span> <span class="hljs-title class_">Set</span>([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]),
+  <span class="hljs-attr">testMap</span>:<span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>([
+    [<span class="hljs-string">'myname'</span>,<span class="hljs-string">'testMap'</span>]
+  ]),
+  <span class="hljs-attr">testObj1</span>:{
+    <span class="hljs-attr">testOO</span>:{
+      <span class="hljs-attr">test1</span>:[
+        {
+          <span class="hljs-attr">dd</span>:<span class="hljs-string">'1'</span>
+        },
+        {
+          <span class="hljs-attr">testao</span>:[
+            {
+              <span class="hljs-attr">name</span>:<span class="hljs-number">123</span>
+            }
+          ]
+        }
+      ]
+    }
+  }
+};
+<span class="hljs-keyword">let</span> o2={
+  <span class="hljs-attr">testStr</span>:<span class="hljs-string">'o2 str'</span>,
+  <span class="hljs-attr">testNumber</span>:<span class="hljs-number">2</span>,
+  <span class="hljs-attr">testBoolean</span>:<span class="hljs-literal">true</span>,
+  <span class="hljs-attr">testNull</span>:<span class="hljs-literal">null</span>,
+  <span class="hljs-attr">testUnd</span>:<span class="hljs-literal">undefined</span>,
+  <span class="hljs-attr">testObj2</span>:{
+    <span class="hljs-attr">testOO</span>:{
+      <span class="hljs-attr">test1</span>:[
+        {
+          <span class="hljs-attr">dd</span>:<span class="hljs-string">'1'</span>
+        },
+        {
+          <span class="hljs-attr">testao</span>:[
+            {
+              <span class="hljs-attr">name</span>:<span class="hljs-number">123</span>
+            }
+          ]
+        }
+      ]
+    }
+  }
+};</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>如上代码，我们定义了o1和o2两个对象。<br>  如果是以前对于普通的对象的深拷贝，我们可能会使用:</p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(o2));</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>这种方式来拷贝出一个新的对象来。这种方法就是先对原来的对象进行序列化，然后再从序列化的字符串创建出新的对象来,这种方式也可以对数组和对象进行深度拷贝。<br>  但是现在随着js标准的不断新增，数据类型也有了新的数据类型了，这种方式主要有以下几个问题：<br>1、不能正确的序列化Symbol、Set、Map、function类型数据。<br>2、对于新增的BigInt 数据类型使用JSON.stringify来序列化甚至直接报错。<br>3、对于值为undefined的属性直接被忽略了。<br>  也就是说，如果你的变量是确定没有上面那些特殊变化或者对于值为undefined的属性可以直接忽略的化，那么使用JSON.parse(JSON.stringify(obj));这种方式来深拷贝还是很香的。<br>  但是就是要对那些比较特殊点的数据类型也进行拷贝呢，下面在下写了个自己实现的方法，代码：</p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-keyword">function</span> <span class="hljs-title function_">deepClone</span>(<span class="hljs-params">variable</span>){
+  <span class="hljs-keyword">let</span> _type=<span class="hljs-keyword">typeof</span> variable;
+  <span class="hljs-keyword">switch</span>(_type){
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'object'</span>:
+      <span class="hljs-keyword">if</span>(variable===<span class="hljs-literal">null</span>){
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+      }
+      <span class="hljs-keyword">if</span>(variable <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Boolean</span>){
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Boolean</span>(variable.<span class="hljs-title function_">toString</span>());
+      }
+      <span class="hljs-keyword">if</span>(variable <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Number</span>){
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Number</span>(variable.<span class="hljs-title function_">toString</span>());
+      }
+      <span class="hljs-keyword">if</span>(variable <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">String</span>){
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(variable.<span class="hljs-title function_">toString</span>());
+      }
+      <span class="hljs-keyword">if</span>(variable <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Date</span>){
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(d1.<span class="hljs-title function_">getTime</span>());
+      }
+      <span class="hljs-keyword">if</span>(variable <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">RegExp</span>){
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(<span class="hljs-string">'正则表达式不需要深拷贝'</span>);
+        <span class="hljs-keyword">return</span> variable;
+      }
+      <span class="hljs-keyword">if</span>(variable <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">WeakSet</span>){
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(<span class="hljs-string">'暂时不支持对WeakSet类型的深拷贝,被拷贝WeakSet与原WeakSet是同一个'</span>);
+        <span class="hljs-keyword">return</span> variable;
+      }
+      <span class="hljs-keyword">if</span>(variable <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">WeakMap</span>){
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(<span class="hljs-string">'暂时不支持对WeakMap类型的深拷贝,被拷贝WeakMap与原WeakMap是同一个'</span>);
+        <span class="hljs-keyword">return</span> variable;
+      }
+
+      <span class="hljs-keyword">if</span>(variable <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Set</span>){
+        <span class="hljs-keyword">let</span> tmp=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Set</span>();
+        variable.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">value</span>)=&gt;</span>{
+          tmp.<span class="hljs-title function_">add</span>(<span class="hljs-title function_">deepClone</span>(value));
+        });
+        <span class="hljs-keyword">return</span> tmp;
+      }
+      <span class="hljs-keyword">if</span>(variable <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Map</span>){
+        <span class="hljs-keyword">let</span> tmp=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>();
+        variable.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">value, key</span>)=&gt;</span>{
+          tmp.<span class="hljs-title function_">set</span>(key,<span class="hljs-title function_">deepClone</span>(value));
+        });
+        <span class="hljs-keyword">return</span> tmp;
+      }
+      <span class="hljs-keyword">if</span>(variable <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Array</span>){
+        <span class="hljs-keyword">let</span> tmp=[];
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>,len=variable.<span class="hljs-property">length</span>;i&lt;len;i++){
+          tmp.<span class="hljs-title function_">push</span>(<span class="hljs-title function_">deepClone</span>(variable[i]));
+        }
+        <span class="hljs-keyword">return</span> tmp;
+      }
+      <span class="hljs-keyword">let</span> tmpObjKeys=<span class="hljs-title class_">Reflect</span>.<span class="hljs-title function_">ownKeys</span>(variable);
+      <span class="hljs-keyword">let</span> tmp={};
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> o=<span class="hljs-number">0</span>,olen=tmpObjKeys.<span class="hljs-property">length</span>;o&lt;olen;o++){
+        tmp[tmpObjKeys[o]]=<span class="hljs-title function_">deepClone</span>(variable[tmpObjKeys[o]]);
+      }
+      <span class="hljs-keyword">return</span> tmp;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'function'</span>:
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(<span class="hljs-string">'暂时不支持对函数类型的深拷贝,被拷贝函数与原函数是同一个'</span>);
+      <span class="hljs-keyword">return</span> variable;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'undefined'</span>:
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'string'</span>:
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'boolean'</span>:
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'number'</span>:
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'bigint'</span>:
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'symbol'</span>:
+      <span class="hljs-keyword">return</span> variable;
+    <span class="hljs-attr">default</span>:
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(<span class="hljs-string">'unknown type param'</span>);
+      <span class="hljs-keyword">return</span>;
+  }
+}
+
+<span class="hljs-comment">//测试</span>
+<span class="hljs-keyword">let</span> o11=<span class="hljs-title function_">deepClone</span>(o1);
+
+<span class="hljs-keyword">let</span> o21=<span class="hljs-title function_">deepClone</span>(o2);
+<span class="hljs-keyword">let</span> o22=<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(o2));
+<span class="hljs-comment">//去运行看看吧，结果太多，就不贴出来了</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  上面的代码就是根据当前的传入参数来进行拷贝出新的对象来，对于函数、正则表达式、WeakSet、WeakMap这些我也不知道怎么拷贝好，所以就没有拷贝了。<br>  同时，我们也可以看出，上面是利用了递归来对对象、数组等进行深拷贝的，但是我们知道js引擎对于递归没有特别的优化，性能可能不是很好，所以如果你的需求使用JSON.parse(JSON.stringify(obj));这种方式就能满足的话，那就没必要用自己的方法来拷贝了。</p>

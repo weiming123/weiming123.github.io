@@ -1,0 +1,100 @@
+<p>  <strong>插入排序</strong>（Insertion sort）是一种简单直观且稳定的排序算法。<br>插入排序的基本思想是：每一步将一个待排序的记录，按其关键码值的大小插入前面已经排序的序列中适当位置上，直到全部插入完为止。<br>下面直接上代码：</p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@description</span>: 插入排序-升序,插入排序算法是稳定的算法,平均时间复杂度是O(n*n)
+ * <span class="hljs-doctag">@param</span> {<span class="hljs-type">Array</span>}
+ * <span class="hljs-doctag">@return</span>: Array
+ */</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">insertionSortAsc</span>(<span class="hljs-params">arr</span>) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(arr)) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-title class_">TypeError</span>(<span class="hljs-string">"param must be a Array"</span>);
+    }
+    <span class="hljs-keyword">let</span> _arr = arr.<span class="hljs-title function_">concat</span>();
+    <span class="hljs-keyword">let</span> arrLength = _arr.<span class="hljs-property">length</span>;
+    <span class="hljs-keyword">if</span> (arrLength &lt; <span class="hljs-number">2</span>) {
+        <span class="hljs-keyword">return</span> _arr;
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; arrLength; i++) {
+        <span class="hljs-keyword">let</span> temp = _arr[i];
+        <span class="hljs-keyword">let</span> k = i - <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">while</span>(k &gt;= <span class="hljs-number">0</span> &amp;&amp; _arr[k] &gt; temp){
+            k--;
+        }
+        <span class="hljs-comment">//腾出位置插进去,要插的位置是 k + 1;</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> j = i ; j &gt; k + <span class="hljs-number">1</span>; j--){
+            _arr[j] = _arr[j-<span class="hljs-number">1</span>];
+        }
+        <span class="hljs-comment">//插进去</span>
+        _arr[k+<span class="hljs-number">1</span>] = temp;
+    }
+    <span class="hljs-keyword">return</span> _arr;
+}
+
+
+<span class="hljs-comment">/*上面那是常规的方法，下面这个是在下结合js数组的方法实现的，经过在下测试，速度比上面的会更快些。同时也更容易理解点
+*/</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">insertionSortAsc</span>(<span class="hljs-params">arr</span>) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(arr)) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-title class_">TypeError</span>(<span class="hljs-string">"param must be a Array"</span>);
+    }
+    <span class="hljs-keyword">let</span> _arr = arr.<span class="hljs-title function_">concat</span>();
+    <span class="hljs-keyword">let</span> arrLength = _arr.<span class="hljs-property">length</span>;
+    <span class="hljs-keyword">if</span> (arrLength &lt; <span class="hljs-number">2</span>) {
+        <span class="hljs-keyword">return</span> _arr;
+    }
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=<span class="hljs-number">1</span>;i&lt;arrLength;i++){
+        <span class="hljs-keyword">let</span> current=_arr[i];
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> j=i-<span class="hljs-number">1</span>;j&gt;-<span class="hljs-number">1</span>;j--){
+            <span class="hljs-comment">//从右向左找出第一个小于等于当前元素的元素</span>
+            <span class="hljs-keyword">if</span>(current&lt;_arr[j]){
+                <span class="hljs-keyword">continue</span>;
+            }
+            <span class="hljs-keyword">break</span>;
+        }
+        <span class="hljs-comment">//如果从右向左第一个小于等于当前元素的位置就在当前元素的前一位，就不用再做处理了</span>
+        <span class="hljs-keyword">if</span>(j!=i-<span class="hljs-number">1</span>){
+            <span class="hljs-comment">//将当前元素从数组取出，直接插入到从右向左第一个小于等于当前元素的位置后面</span>
+            _arr.<span class="hljs-title function_">splice</span>(j+<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,_arr.<span class="hljs-title function_">splice</span>(i,<span class="hljs-number">1</span>)[<span class="hljs-number">0</span>]);
+        }
+    }
+    <span class="hljs-keyword">return</span> _arr;
+}</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  从上面实现插入排序的代码，我们可以分析出：插入排序是稳定的排序算法，平均时间复杂度是O(n* n)，最好情况是O(n)，最坏情况是O(n<em>n)；空间复杂度是O(1)。<br>  这里我们还说一下*<em>折半插入排序</em></em>,<br>  折半插入排序（Binary Insertion Sort）也叫二分插入排序，是对插入排序算法的一种改进。从上面插入排序的实现代码我们可以发现，在内层实现插入已排序数组的时候，我们是遍历有序数组的方式来在有序数组中插入新的元素的，而这里我们可以采用折半查找的方法来减少寻找插入点时的查找次数。<br>上代码：</p>
+<pre><code class="language-JavaScript"><span class="code-block">
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@description</span>: 折半插入排序-升序,折半插入排序算法是稳定的算法,平均时间复杂度是O(n*n)
+ * <span class="hljs-doctag">@param</span> {<span class="hljs-type">Array</span>}
+ * <span class="hljs-doctag">@return</span>: Array
+ */</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">halveInsertionSortAsc</span>(<span class="hljs-params">arr</span>) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(arr)) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-title class_">TypeError</span>(<span class="hljs-string">"param must be a Array"</span>);
+    }
+    <span class="hljs-keyword">let</span> _arr = arr.<span class="hljs-title function_">concat</span>();
+    <span class="hljs-keyword">let</span> arrLength = _arr.<span class="hljs-property">length</span>;
+    <span class="hljs-keyword">if</span> (arrLength &lt; <span class="hljs-number">2</span>) {
+        <span class="hljs-keyword">return</span> _arr;
+    }
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=<span class="hljs-number">1</span>;i&lt;arrLength;i++){
+        <span class="hljs-keyword">let</span> current=_arr[i],
+            left = <span class="hljs-number">0</span>,
+            right = i - <span class="hljs-number">1</span>;
+        <span class="hljs-comment">//折半查找</span>
+        <span class="hljs-keyword">while</span>(left&lt;=right){
+            <span class="hljs-keyword">let</span> mid=<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>((left+right)/<span class="hljs-number">2</span>);
+            <span class="hljs-keyword">if</span>(current&lt;_arr[mid]){
+                right=mid-<span class="hljs-number">1</span>;
+            }<span class="hljs-keyword">else</span>{
+                left=mid+<span class="hljs-number">1</span>;
+            }
+        }
+        <span class="hljs-comment">//如果从右向左第一个小于等于当前元素的位置就在当前元素的前一位，就不用再做处理了</span>
+        <span class="hljs-keyword">if</span>(left!=i){
+            <span class="hljs-comment">//将当前元素从数组取出，直接插入到从右向左第一个小于等于当前元素的位置后面</span>
+            _arr.<span class="hljs-title function_">splice</span>(left,<span class="hljs-number">0</span>,_arr.<span class="hljs-title function_">splice</span>(i,<span class="hljs-number">1</span>)[<span class="hljs-number">0</span>]);
+        }
+    }
+    <span class="hljs-keyword">return</span> _arr;
+}</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  从上面实现折半插入排序的代码，我们可以分析出：折半插入排序是稳定的排序算法，平均时间复杂度是O(n* n)，最好情况是O(nlogn)，最坏情况是O(n*n)；空间复杂度是O(1)。<br>  对于上面的代码值得一说的是splice其实也是移动数组元素重排的，但是我测试得出的是比自己在js代码里面来重排会更快一些，或许是因为他更底层吧。<br>代码请见于：<a href="https://gitee.com/liu_yong/study/tree/master/vuees">https://gitee.com/liu_yong/study/tree/master/vuees</a></p>

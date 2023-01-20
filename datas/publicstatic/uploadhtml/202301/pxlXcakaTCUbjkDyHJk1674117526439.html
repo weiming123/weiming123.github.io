@@ -1,0 +1,8 @@
+<p>  git 2.23 版本新增了switch、restore命令，因为git checkout 命令职责较多、不够明确，而restore命令则专门用来还原、撤销修改等，我们这里来总结下git restore 命令的一些常用的用法。另外，这个命令在2.27.0版本还是实验性的，将来行为可能会改变。<br>  查看switch常用用法，可以去这里查看：<a href="https://liu_yong.gitee.io/blogs/79/">https://liu_yong.gitee.io/blogs/79/</a></p>
+<h6 id="git restore 撤销文件工作区的修改"><a href="#git restore 撤销文件工作区的修改">git restore 撤销文件工作区的修改</a></h6><p>  命令：git restore --worktree &lt;path&gt;<br>  举例：git restore --worktree test2.txt<br>  tips：如果暂存区有该文件的修改，恢复到和暂存区一致；如果暂存区没有该文件，会将工作区的文件恢复到和最近的提交的一致。--worktree 也可以省掉，即：git restore &lt;path&gt;</p>
+<h6 id="git restore 撤销工作区所有文件的修改"><a href="#git restore 撤销工作区所有文件的修改">git restore 撤销工作区所有文件的修改</a></h6><p>    命令：git restore .</p>
+<h6 id="git restore 撤销暂存区的修改，将文件恢复到工作区去"><a href="#git restore 撤销暂存区的修改，将文件恢复到工作区去">git restore 撤销暂存区的修改，将文件恢复到工作区去</a></h6><p>  命令：git restore --staged &lt;path&gt;<br>  举例：git restore --staged test2.txt</p>
+<p>  举例2：git restore --staged '*.txt'<br>  tips：git restore 撤销暂存区某些文件的修改，将这些文件恢复到工作区去</p>
+<h6 id="git restore 将工作区内容切换到上个 commit 版本"><a href="#git restore 将工作区内容切换到上个 commit 版本">git restore 将工作区内容切换到上个 commit 版本</a></h6><p>  命令：git restore --source=HEAD~1 .</p>
+<h6 id="git restore 将工作区内容切换到某个版本库去"><a href="#git restore 将工作区内容切换到某个版本库去">git restore 将工作区内容切换到某个版本库去</a></h6><p>  命令：git restore --source=&lt;commit&gt; .<br>  举例：git restore --source=6271090 .<br>  tips：这个命令是将当前工作区的内容都恢复到了版本6271090，但是不会改变历史记录，如果有提示需要有删除的文件等，可以使用git add，然后提交生成新的提交记录，这点和revert有些类似，但是也有不同，revert可能会生成多个重做的记录，但是restore不会生成新的记录，如果有文件增删改动可能需要自己做add和commit操作。</p>
+<p>参考资料：<br><a href="https://git-scm.com/docs/git-restore">https://git-scm.com/docs/git-restore</a></p>

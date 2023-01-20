@@ -1,0 +1,22 @@
+<p>  在js里面，我们通常通过new关键字来从一个函数创建一个新的对象。在下根据自己的使用总结了下new的原理。代码实现和注释如下：</p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-keyword">function</span> <span class="hljs-title function_">New</span>(<span class="hljs-params">constructorFun</span>){
+    <span class="hljs-comment">//如果传入的第一个参数不是函数，那么就报错</span>
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span> constructorFun!==<span class="hljs-string">'function'</span>){
+        <span class="hljs-keyword">throw</span> <span class="hljs-title class_">TypeError</span>(<span class="hljs-string">`<span class="hljs-subst">${constructorFun}</span> is not a constructor`</span>);
+    }
+    <span class="hljs-comment">//新建一个临时对象</span>
+    <span class="hljs-keyword">let</span> tmpObj={};
+    <span class="hljs-comment">//把这个新建的对象的原型指向构造函数的prototype对象</span>
+    tmpObj.<span class="hljs-property">__proto__</span>=constructorFun.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>;
+    <span class="hljs-keyword">let</span> params=<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(<span class="hljs-variable language_">arguments</span>);
+    <span class="hljs-comment">//获取传给构造函数的参数，我们这里模拟的时候，第一个参数是构造函数，所以把第一个参数去掉</span>
+    params.<span class="hljs-title function_">shift</span>();
+    <span class="hljs-comment">//使用apply执行构造函数，并且修改this指向tmpObj</span>
+    <span class="hljs-keyword">let</span> constructorReturnValue=constructorFun.<span class="hljs-title function_">apply</span>(tmpObj,params);
+    <span class="hljs-comment">/*
+        如果构造函数内返回了一个对象，那么new就会返回这个对象；
+        如果构造函数内没有返回对象，那么new就返回我们新建的临时对象
+    */</span>
+    <span class="hljs-keyword">return</span> (<span class="hljs-keyword">typeof</span> constructorReturnValue===<span class="hljs-string">'object'</span> || <span class="hljs-keyword">typeof</span> constructorReturnValue===<span class="hljs-string">'function'</span>)?<span class="hljs-attr">constructorReturnValue</span>:tmpObj;
+}</span>
+</code><span class="copy-button">复制代码</span></pre>

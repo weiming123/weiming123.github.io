@@ -1,0 +1,93 @@
+<p>这里，我们先列下会学到用到canvas的属性和方法：</p>
+<ol>
+<li>fillStyle:设置或返回用于填充绘画的颜色、渐变或模式。</li><li>strokeStyle:设置或返回用于笔触的颜色、渐变或模式。</li><li>lineCap:设置或返回线条末端线帽的样式。属性值可取：butt (默认。向线条的每个末端添加平直的边缘),round(向线条的每个末端添加圆形线帽),square(向线条的每个末端添加正方形线帽)。注意："round" 和 "square" 值会使线条略微变长。</li><li>lineJoin:设置或返回所创建边角的类型，当两条线交汇时。属性值可取：bevel(创建斜角),round(创建圆角),miter(默认。创建尖角)。注意："miter" 值受 miterLimit 属性的影响。</li><li>miterLimit:设置或返回最大斜接长度。斜接长度指的是在两条线交汇处内角和外角之间的距离。只有当 lineJoin 属性为 "miter" 时，miterLimit 才有效。如果斜接长度超过 miterLimit 的值，边角会以 lineJoin 的 "bevel" 类型来显示。</li><li>lineWidth:设置或返回当前线条的宽度，以像素计。属性值为number类型，不带单位。</li><li>beginPath:方法开始一条路径，或重置当前的路径。</li><li>closePath:方法创建从当前点到开始点的路径。</li><li>moveTo:方法把路径移动到画布中的指定点，不创建线条。moveTo(x,y),x,y分别是指定点的x,y坐标。</li><li>lineTo:方法添加一个新点，然后创建从该点到画布中最后指定点的线条（该方法并不会创建线条）。lineTo(x,y),x,y分别是新点的x,y坐标。</li><li>fill：方法填充当前的图像（路径）。默认颜色是黑色，可以使用 fillStyle 属性来填充另一种颜色/渐变。注意：如果路径未关闭，那么 fill() 方法会从路径结束点到开始点之间添加一条线，以关闭该路径（正如 closePath() 一样），然后填充该路径。</li><li>save：方法保存当前环境的状态。</li><li>restore：方法返回之前保存过的路径状态和属性。</li><li>stroke:方法会实际地绘制出通过 moveTo() 和 lineTo() 方法定义的路径。默认颜色是黑色，可以使用 strokeStyle 属性来绘制另一种颜色/渐变。<br>另外canvas画布的左上角为笛卡尔坐标系的原点，且y轴的正方向向下，x轴的正方向向右。</li></ol>
+<h4 id="结合实例，讲解要领"><a href="#结合实例，讲解要领">结合实例，讲解要领</a></h4><p>现在，我们开始一边写实例，一边讲解怎么用上面的属性和方法，这里所给出的都是部分代码，完整代码请见<a href="https://gitee.com/liu_yong/study/blob/master/html5/canvas/views/linesegment.ejs">https://gitee.com/liu_yong/study/blob/master/html5/canvas/views/linesegment.ejs</a> 。</p>
+<ul>
+<li>我们先来画一条普通的线段：</li></ul>
+<pre><code class="language-javascript"><span class="code-block">        cxt.<span class="hljs-title function_">moveTo</span>(<span class="hljs-number">10</span>,<span class="hljs-number">5</span>);
+        cxt.<span class="hljs-title function_">lineTo</span>(<span class="hljs-number">100</span>,<span class="hljs-number">5</span>);
+        cxt.<span class="hljs-title function_">stroke</span>();</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>这样，一条最普通的线段就画出来了。我们先设定我们的行为：使用moveTo先将画笔移动到(10,5)点，然后再落笔画到(100,5)这个点，通过两个点就确定了一条线段，这样就设定好了我们画画的过程和一切细节，然后就调用stroke()真正的画了。如果你也练习了这段代码，可以看到画出了一条线段，建议自己练习下，不然编程这种事情看终究还是很难掌握的。</p>
+<ul>
+<li>我们接着来画一条粗线段</li></ul>
+<pre><code class="language-javascript"><span class="code-block">        cxt.<span class="hljs-title function_">moveTo</span>(<span class="hljs-number">110</span>,<span class="hljs-number">5</span>);
+        cxt.<span class="hljs-title function_">lineTo</span>(<span class="hljs-number">210</span>,<span class="hljs-number">5</span>);
+        cxt.<span class="hljs-property">lineWidth</span>=<span class="hljs-number">10</span>;
+        cxt.<span class="hljs-title function_">stroke</span>();</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>此时，我们发现，在我们的canvas画布上又多了一条粗的线段，不过让我们意外的是，第一条线段也变粗了。<br>原来，canvas是基于状态的绘制，在每次绘制的时候就会把之前设置的状态再绘制一次。所以第一次调用stroke()的时候，canvas画了一条细的线段，第二次调用stroke()的时候，lineWidth已经被设置为了10px，所以第二次绘制的时候，第一条线段和第二条线段绘制出来都是宽度为10px的线段了。<br>那么要如何解决这个问题，实现我们想要画两条线段，且一细一粗呢？<br>这里我提供两种方法：</p>
+<ol>
+<li>一种是利用新开一条路径的方式，给每条路径都添加自己的属性值，代码如下：</li></ol>
+<pre><code class="language-javascript"><span class="code-block"><span class="hljs-comment">// 画一条普通的线段</span>
+        cxt.<span class="hljs-title function_">beginPath</span>();
+        cxt.<span class="hljs-title function_">moveTo</span>(<span class="hljs-number">10</span>,<span class="hljs-number">5</span>);
+        cxt.<span class="hljs-title function_">lineTo</span>(<span class="hljs-number">100</span>,<span class="hljs-number">5</span>);
+        cxt.<span class="hljs-property">lineWidth</span>=<span class="hljs-number">1</span>;
+        cxt.<span class="hljs-title function_">stroke</span>();
+
+<span class="hljs-comment">// 画一条粗线段</span>
+        cxt.<span class="hljs-title function_">beginPath</span>();
+        cxt.<span class="hljs-title function_">moveTo</span>(<span class="hljs-number">110</span>,<span class="hljs-number">5</span>);
+        cxt.<span class="hljs-title function_">lineTo</span>(<span class="hljs-number">200</span>,<span class="hljs-number">5</span>);
+        cxt.<span class="hljs-property">lineWidth</span>=<span class="hljs-number">10</span>;
+        cxt.<span class="hljs-title function_">stroke</span>();</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>这种方法绘制第二条线段的时候，其实还是会绘制第一条线段，只是通过beginPath()开始了一条新路径之后，两条路径可以设置不同的属性值，所以可以达到我们绘制一条细线段一条粗线段的目的。这里的关键点就在于：</p>
+<pre><code class="language-javascript"><span class="code-block"><span class="hljs-comment">// 画一条普通的线段</span>
+        cxt.<span class="hljs-title function_">beginPath</span>();
+        ...
+        cxt.<span class="hljs-property">lineWidth</span>=<span class="hljs-number">1</span>;
+        ...</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>2.第二种是利用save方法把当前环境状态保存起来，然后新开一条路径，在新路径上设置相关状态，画完之后再将状态还原回去，代码示例如下：</p>
+<pre><code class="language-javascript"><span class="code-block">        <span class="hljs-comment">// 画一条普通的线段</span>
+        cxt.<span class="hljs-title function_">save</span>();
+        cxt.<span class="hljs-title function_">beginPath</span>();
+        cxt.<span class="hljs-title function_">moveTo</span>(<span class="hljs-number">10</span>,<span class="hljs-number">5</span>);
+        cxt.<span class="hljs-title function_">lineTo</span>(<span class="hljs-number">100</span>,<span class="hljs-number">5</span>);
+        cxt.<span class="hljs-title function_">stroke</span>();
+        cxt.<span class="hljs-title function_">closePath</span>();
+        cxt.<span class="hljs-title function_">restore</span>();
+        <span class="hljs-comment">// 画一条粗线段</span>
+        cxt.<span class="hljs-title function_">save</span>();
+        cxt.<span class="hljs-title function_">beginPath</span>();
+        cxt.<span class="hljs-title function_">moveTo</span>(<span class="hljs-number">110</span>,<span class="hljs-number">5</span>);
+        cxt.<span class="hljs-title function_">lineTo</span>(<span class="hljs-number">200</span>,<span class="hljs-number">5</span>);
+        cxt.<span class="hljs-property">lineWidth</span>=<span class="hljs-number">10</span>;
+        cxt.<span class="hljs-title function_">stroke</span>();
+        cxt.<span class="hljs-title function_">closePath</span>();
+        cxt.<span class="hljs-title function_">restore</span>();</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>这种办法的好处是能尽量减少对其他部分绘制的影响，我们后面举例的时候会尽量采用这种方式来绘制。关键代码：</p>
+<pre><code class="language-javascript"><span class="code-block">        <span class="hljs-comment">// 画一条普通的线段</span>
+        cxt.<span class="hljs-title function_">save</span>();
+        cxt.<span class="hljs-title function_">beginPath</span>();
+        ...
+        cxt.<span class="hljs-title function_">closePath</span>();
+        cxt.<span class="hljs-title function_">restore</span>();</span>
+</code><span class="copy-button">复制代码</span></pre>
+<ul>
+<li>我们再来画一个正方形，代码如下：</li></ul>
+<pre><code class="language-javascript"><span class="code-block"> <span class="hljs-keyword">let</span> lineSegment=<span class="hljs-keyword">function</span>(<span class="hljs-params">cxt,{mov=[<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],lineto=[[<span class="hljs-number">0</span>,<span class="hljs-number">0</span>]],lineWidth=<span class="hljs-number">1</span>,strokeStyle=<span class="hljs-string">'#000'</span>,lineCap=<span class="hljs-string">'butt'</span>,lineJoin=<span class="hljs-string">'miter'</span>,miterLimit=<span class="hljs-number">10</span>}={}</span>){
+        cxt.<span class="hljs-title function_">save</span>();
+        cxt.<span class="hljs-title function_">beginPath</span>();
+        cxt.<span class="hljs-title function_">moveTo</span>(mov[<span class="hljs-number">0</span>],mov[<span class="hljs-number">1</span>]);
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>,len=lineto.<span class="hljs-property">length</span>;i&lt;len;i++){
+            cxt.<span class="hljs-title function_">lineTo</span>(lineto[i][<span class="hljs-number">0</span>],lineto[i][<span class="hljs-number">1</span>]);
+        }
+        cxt.<span class="hljs-property">lineWidth</span>=lineWidth;
+        cxt.<span class="hljs-property">strokeStyle</span>=strokeStyle;
+        cxt.<span class="hljs-property">lineJoin</span>=lineJoin;
+        cxt.<span class="hljs-property">miterLimit</span>=miterLimit;
+        cxt.<span class="hljs-property">lineCap</span>=lineCap;
+        cxt.<span class="hljs-title function_">stroke</span>();
+        cxt.<span class="hljs-title function_">closePath</span>();
+        cxt.<span class="hljs-title function_">restore</span>();
+    };
+<span class="hljs-title function_">lineSegment</span>(cxt,{
+            <span class="hljs-attr">mov</span>:[<span class="hljs-number">50</span>,<span class="hljs-number">50</span>],
+            <span class="hljs-attr">lineto</span>:[[<span class="hljs-number">250</span>,<span class="hljs-number">50</span>],[<span class="hljs-number">250</span>,<span class="hljs-number">250</span>],[<span class="hljs-number">50</span>,<span class="hljs-number">250</span>]],
+            <span class="hljs-attr">lineWidth</span>:<span class="hljs-number">10</span>
+        })</span>
+</code><span class="copy-button">复制代码</span></pre>

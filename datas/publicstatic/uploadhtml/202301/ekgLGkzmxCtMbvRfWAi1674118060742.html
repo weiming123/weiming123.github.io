@@ -1,0 +1,255 @@
+<h4 id="Storage 是什么？">  Storage 是什么？</h4><p>  作为 Web Storage API 的接口，Storage 提供了访问特定域名下的会话存储或本地存储的功能，例如，可以添加、修改或删除存储的数据项。</p>
+<h4 id="sessionStorage 是什么？">  sessionStorage 是什么？</h4><p>  浏览器提供的操作一个域名的会话存储的对象，允许你访问一个对应当前源的 session Storage 对象。存储在 sessionStorage 里面的数据在页面会话结束时会被清除。</p>
+<h4 id="localStorage 是什么？">  localStorage 是什么？</h4><p>  浏览器提供的操作一个域名的本地存储的对象，允许你访问一个Document 源（origin）的对象 Storage；存储的数据将保存在浏览器会话中。localStorage 类似 sessionStorage，但其区别在于：存储在 localStorage 的数据可以长期保留。</p>
+<h4 id="为什么要有 localStorage 和 sessionStorage ？">  为什么要有 localStorage 和 sessionStorage ？</h4><p>  localStorage 和 sessionStorage 是HTML5新增的web前端存储数据的方法，在这之前，我们常用cookie来作为前端存储数据的方法。但是cookie相对于 localStorage 和 sessionStorage 来说有如下几个缺点：<br>1、使用不方便，没有对应的方法可以方便的存取存储的数据，需要我们自己去封装对应方法。<br>2、存储空间大小太小，通常为4KB，具体大小和浏览器自己实现有关。<br>3、存储的数据条数有限制，具体数量各个浏览器也可能不同。<br>4、与服务器端通信时，每次都会把此时域名、路径下相应cookie放在HTTP 请求头 Cookie 上，本次请求不需要的数据也可能会被带上，浪费了带宽和流量。<br>tips:了解更多关于Cookie 的知识可以查看:<a href="https://liu_yong.gitee.io/blogs/88/">https://liu_yong.gitee.io/blogs/88/</a></p>
+<p>  因此在HTML5中推出了新的前端存储数据的方式，就是 localStorage 和 sessionStorage。</p>
+<h4 id="localStorage 和 sessionStorage 数据的格式是什么样的？">  localStorage 和 sessionStorage 数据的格式是什么样的？</h4><p>  它们都是以 key/value 键值对的方式存储的，键和值始终是字符串（与对象一样，整数键将自动转换为字符串）。</p>
+<h4 id="sessionStorage 和 localStorage 有什么区别">  sessionStorage 和 localStorage 有什么区别</h4><p>  1、<strong>生命周期</strong>：localStorage生命周期是永久，这意味着除非用户显示在浏览器提供的UI上清除localStorage信息，否则这些信息将永远存在。sessionStorage生命周期为当前窗口或标签页，一旦窗口或标签页被永久关闭了，那么所有通过sessionStorage存储的数据也就被清空了。<br>  2、<strong>同一浏览器同源的不同标签页面之间的数据共享</strong>：同一浏览器同源的不同标签页面之间的数据,localStorage 是可以共享的，也就是说我们在一个标签页设置了某个属性值，那么在另一个标签页也是可以获取到的；但是sessionStorage 在一个标签页设置了某个属性值，那么在另一个标签页也是获取不到的。</p>
+<h4 id="sessionStorage 有什么特点？">  sessionStorage 有什么特点？</h4><p>1、页面会话在浏览器打开期间一直保持，并且重新加载或恢复页面仍会保持原来的页面会话。<br>2、在新标签或窗口打开一个页面时会复制顶级浏览会话的上下文作为新会话的上下文，这点和 session cookies 的运行方式不同。<br>3、打开多个相同的URL的Tabs页面，会创建各自的sessionStorage。<br>4、关闭对应浏览器tab，会清除对应的sessionStorage。<br>5、js字符串是以 UTF-16 编码存储的</p>
+<h4 id="sessionStorage 和 localStorage 有什么相同点？">  sessionStorage 和 localStorage 有什么相同点？</h4><p>  1、一个源的 localStorage 和 sessionStorage 容量上限可能因为浏览器的不同而有所不同，目前如谷歌浏览器上限是5-10M，是包括了key和value加在一起的。在下测试的时候发现谷歌和火狐 key和value加在一起 都恰好存了5M的字符，但是按照js 字符串是使用 UTF-16 编码的，测试使用的“的”这个字符，一个字符应该占了两个字节，这么算下来的话，存储空间的上限应该是10MB。<br>  2、localStorage 理论上是只要用户和js不去删除存储数据就不会被清理，但是iOS从 5.1之后，移动端的Safari将localStorage数据存储在cache文件中，在操作系统的要求下，会偶尔进行清除，特别是空间不足时；其他的系统也可能会有被清理的时候，所以理论上是无法完全保证数据不会被清理的。</p>
+<h4 id="浏览器端js如何使用设置 localStorage 和 sessionStorage ？">  浏览器端js如何使用设置 localStorage 和 sessionStorage ？</h4><p>  localStorage 和 sessionStorage 都提供了 setItem 方法，可以新建或设置一条数据，使用方法：<br>  storage.setItem(key,value);<br>  key、value 都是字符串</p>
+<h4 id="浏览器端js如何获取 localStorage 和 sessionStorage ？">  浏览器端js如何获取 localStorage 和 sessionStorage ？</h4><p>  localStorage 和 sessionStorage 都提供了 setItem 方法，可以新建或设置一条数据，使用方法：<br>  storage.getItem(key);<br>  key是字符串，返回null或value字符串</p>
+<h4 id="localStorage 和 sessionStorage 有哪些常用的方法和属性？">  localStorage 和 sessionStorage 有哪些常用的方法和属性？</h4><p>  setItem、getItem、removeItem、clear</p>
+<h3 id="localStorage 实现在同一浏览器同源的不同标签页面之间的互相通信功能、注意事项(多个页面之间的通信)：">  localStorage 实现在同一浏览器同源的不同标签页面之间的互相通信功能、注意事项(多个页面之间的通信)：</h3><p>  可以在window上面注册storage事件，同一浏览器同源的不同于当前标签页面进行localStorage.setItem\removeItem\clear操作时，就会触发当前页面的storage事件,需要注意的是：<br>1、当前页面localStorage 操作不会触发当前页面的storage事件<br>2、其他页面使用 setItem 方法设置localStorage 数据值时，如果value和之前的是一样的，那么也不会触发当前页面的storage 事件<br>3、删除一个根本就不存在的存储项也不会触发当前页面的storage 事件</p>
+<p>代码示例：</p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-variable language_">window</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'storage'</span>,<span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>){
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'---------------------'</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(event);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'================'</span>);
+})</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>event 对象的主要的属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>是否只读</th>
+<th>数据类型</th>
+<th>属性描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>target</td>
+<td>是</td>
+<td>EventTarget</td>
+<td>事件目标(DOM 树中的最大目标)</td>
+</tr>
+<tr>
+<td>type</td>
+<td>是</td>
+<td>DOMString</td>
+<td>事件的类型</td>
+</tr>
+<tr>
+<td>bubbles</td>
+<td>是</td>
+<td>Boolean</td>
+<td>事件通常是否会出现冒泡</td>
+</tr>
+<tr>
+<td>cancelable</td>
+<td>是</td>
+<td>Boolean</td>
+<td>事件是否可取消</td>
+</tr>
+<tr>
+<td>key</td>
+<td>是</td>
+<td>DOMString (string)</td>
+<td>键更改时</td>
+</tr>
+<tr>
+<td>oldValue</td>
+<td>是</td>
+<td>DOMString (string)</td>
+<td>正在更改键的旧值</td>
+</tr>
+<tr>
+<td>newValue</td>
+<td>是</td>
+<td>DOMString (string)</td>
+<td>正在更改键的新值</td>
+</tr>
+<tr>
+<td>url</td>
+<td>是</td>
+<td>DOMString (string)</td>
+<td>键更改的文档的地址</td>
+</tr>
+<tr>
+<td>storageArea</td>
+<td>是</td>
+<td>Storage</td>
+<td>受影响的存储对象</td>
+</tr>
+</tbody></table>
+<h4 id="下面我们来封装一个浏览器端js操作 localStorage 的工具：">  下面我们来封装一个浏览器端js操作 localStorage 的工具：</h4><p>tips:为什么封装localStorage 而不封装sessionStorage ？因为sessionStorage 功能比较全了，而localStorage 在使用的时候，如果希望设置过期时间等，原生并未提供，所以我们这里做一下localStorage 的封装。</p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@description</span>
+ * <span class="hljs-doctag">@author</span> <span class="hljs-variable">liuyong</span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StorageLocal</span> {
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">type = <span class="hljs-string">"localStorage"</span>, <span class="hljs-variable language_">global</span> = <span class="hljs-variable language_">window</span></span>) {
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">global</span> = <span class="hljs-variable language_">global</span>;
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">type</span> = type;
+        <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">this</span>.<span class="hljs-property">storageAvailable</span>[type]) {
+            <span class="hljs-keyword">return</span> <span class="hljs-string">`您的浏览器还不支持 <span class="hljs-subst">${type}</span>,建议您使用最新的谷歌或火狐浏览器查看`</span>;
+        }
+    }
+
+    <span class="hljs-comment">/**
+     * <span class="hljs-doctag">@description</span> 获取前端缓存的值
+     * <span class="hljs-doctag">@param</span> {<span class="hljs-type">string</span>} key storage缓存的key
+     * <span class="hljs-doctag">@param</span> {<span class="hljs-type">string</span>} type "localStorage"或"sessionStorage"
+     * <span class="hljs-doctag">@return</span> 如果key的value已经过期或者key不存在返回null，
+     *          如果存在返回value，如果存的是js对象，那么返回的也是一个新的js对象
+     */</span>
+    <span class="hljs-title function_">getItem</span>(<span class="hljs-params">key, type</span>) {
+        <span class="hljs-keyword">let</span> _type = type || <span class="hljs-variable language_">this</span>.<span class="hljs-property">type</span>;
+        <span class="hljs-keyword">let</span> _value = <span class="hljs-variable language_">this</span>.<span class="hljs-property">global</span>[_type].<span class="hljs-title function_">getItem</span>(key);
+        <span class="hljs-keyword">if</span> (_value) {
+            <span class="hljs-keyword">try</span> {
+                <span class="hljs-keyword">let</span> _val = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(_value);
+                <span class="hljs-keyword">if</span> (!_val.<span class="hljs-property">time</span> || _val.<span class="hljs-property">time</span> + _val.<span class="hljs-property">maxAge</span> &gt;= <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>()) {
+                    <span class="hljs-keyword">return</span> _val.<span class="hljs-property">value</span>;
+                } <span class="hljs-keyword">else</span> {
+                    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">removeItem</span>(key, _type);
+                }
+            } <span class="hljs-keyword">catch</span> (e) {
+                <span class="hljs-keyword">return</span> _value;
+            }
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">removeItem</span>(key, _type);
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    }
+
+    <span class="hljs-comment">/**
+     * <span class="hljs-doctag">@description</span> 设置前端缓存的值
+     * <span class="hljs-doctag">@param</span> {<span class="hljs-type">string</span>} key storage缓存的key
+     * <span class="hljs-doctag">@param</span> {<span class="hljs-type">string | boolean | number | Object | Array</span>} value storage缓存的值
+     * <span class="hljs-doctag">@param</span> {<span class="hljs-type">Object</span>} options 如：
+     *      {maxAge: 3153600000000},maxAge代表最大缓存时间，默认一百年
+     *      {clearAll: false},当存储的时候空间不够的时候，默认清理了过期缓存后空间仍然不够，
+     *                        是否要清理之前的所有的缓存来存储当前这条数据缓存，默认为true
+     * <span class="hljs-doctag">@param</span> {<span class="hljs-type">string</span>} type "localStorage"或"sessionStorage"
+     * <span class="hljs-doctag">@return</span> 如果设置成功了返回true，
+     *          如果失败了返回null
+     */</span>
+    <span class="hljs-title function_">setItem</span>(<span class="hljs-params">key, value, options = {}, type</span>) {
+        <span class="hljs-keyword">let</span> valStr = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(
+            <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">assign</span>(
+                {
+                    value,
+                    <span class="hljs-attr">time</span>: <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>(),
+                    <span class="hljs-attr">maxAge</span>: <span class="hljs-number">3153600000000</span>,
+                    <span class="hljs-attr">clearAll</span>: <span class="hljs-literal">true</span>
+                },
+                options
+            )
+        );
+        <span class="hljs-keyword">let</span> _type = type || <span class="hljs-variable language_">this</span>.<span class="hljs-property">type</span>;
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-variable language_">this</span>.<span class="hljs-property">global</span>[_type].<span class="hljs-title function_">setItem</span>(key, valStr);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        } <span class="hljs-keyword">catch</span> (e) {
+            <span class="hljs-keyword">if</span> (e.<span class="hljs-property">code</span> === <span class="hljs-number">22</span> || e.<span class="hljs-property">name</span> === <span class="hljs-string">"QuotaExceededError"</span>) {
+                <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(e);
+                <span class="hljs-keyword">try</span> {
+                    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">clearOverDue</span>(_type);
+                    <span class="hljs-variable language_">this</span>.<span class="hljs-property">global</span>[_type].<span class="hljs-title function_">setItem</span>(key, valStr);
+                    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+                } <span class="hljs-keyword">catch</span> (e) {
+                    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(e);
+                    <span class="hljs-keyword">if</span> (options.<span class="hljs-property">clearAll</span>) {
+                        <span class="hljs-keyword">try</span> {
+                            <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">clear</span>(_type);
+                            <span class="hljs-variable language_">this</span>.<span class="hljs-property">global</span>[_type].<span class="hljs-title function_">setItem</span>(key, valStr);
+                            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+                        } <span class="hljs-keyword">catch</span> (e) {
+                            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(e);
+                            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+                        }
+                    } <span class="hljs-keyword">else</span> {
+                        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+                    }
+                }
+            }
+            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(e);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+        }
+    }
+
+    <span class="hljs-comment">/**
+     * <span class="hljs-doctag">@description</span> 清除掉过期的缓存
+     * <span class="hljs-doctag">@param</span> {<span class="hljs-type">string</span>} type  "localStorage"或"sessionStorage"
+     */</span>
+    <span class="hljs-title function_">clearOverDue</span>(<span class="hljs-params">type</span>) {
+        <span class="hljs-keyword">let</span> _type = type || <span class="hljs-variable language_">this</span>.<span class="hljs-property">type</span>;
+        <span class="hljs-keyword">let</span> keys = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">global</span>[_type]);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, len = keys.<span class="hljs-property">length</span>; i &lt; len; i++) {
+            <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getItem</span>(keys[i], _type);
+        }
+    }
+    <span class="hljs-title function_">clear</span>(<span class="hljs-params">type</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">global</span>[type || <span class="hljs-variable language_">this</span>.<span class="hljs-property">type</span>].<span class="hljs-title function_">clear</span>();
+    }
+    <span class="hljs-title function_">removeItem</span>(<span class="hljs-params">key, type</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">global</span>[type || <span class="hljs-variable language_">this</span>.<span class="hljs-property">type</span>].<span class="hljs-title function_">removeItem</span>(key);
+    }
+
+    <span class="hljs-comment">/**
+     * <span class="hljs-doctag">@description</span> 获取原始的"localStorage"或"sessionStorage"浏览器内置js对象
+     * <span class="hljs-doctag">@param</span> {<span class="hljs-type">string</span>} type  "localStorage"或"sessionStorage"
+     */</span>
+    <span class="hljs-title function_">getOrigin</span>(<span class="hljs-params">type</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">global</span>[type || <span class="hljs-variable language_">this</span>.<span class="hljs-property">type</span>];
+    }
+
+    <span class="hljs-comment">/**
+     * <span class="hljs-doctag">@description</span> 判断前端是否能使用"localStorage"或"sessionStorage"
+     * <span class="hljs-doctag">@param</span> {<span class="hljs-type">string</span>} type  "localStorage"或"sessionStorage"
+     */</span>
+    <span class="hljs-title function_">storageAvailable</span>(<span class="hljs-params">type</span>) {
+        <span class="hljs-keyword">var</span> storage;
+        <span class="hljs-keyword">try</span> {
+            storage = <span class="hljs-variable language_">this</span>.<span class="hljs-property">global</span>[type];
+            <span class="hljs-keyword">var</span> x = <span class="hljs-string">"__storage_test__"</span>;
+            storage.<span class="hljs-title function_">setItem</span>(x, x);
+            storage.<span class="hljs-title function_">removeItem</span>(x);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        } <span class="hljs-keyword">catch</span> (e) {
+            <span class="hljs-keyword">return</span> (
+                e <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">DOMException</span> &amp;&amp;
+                (e.<span class="hljs-property">code</span> === <span class="hljs-number">22</span> ||
+                    e.<span class="hljs-property">code</span> === <span class="hljs-number">1014</span> ||
+                    e.<span class="hljs-property">name</span> === <span class="hljs-string">"QuotaExceededError"</span> ||
+                    e.<span class="hljs-property">name</span> === <span class="hljs-string">"NS_ERROR_DOM_QUOTA_REACHED"</span>) &amp;&amp;
+                storage &amp;&amp;
+                storage.<span class="hljs-property">length</span> !== <span class="hljs-number">0</span>
+            );
+        }
+    }
+}
+
+
+
+
+<span class="hljs-comment">// 使用示例</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">StorageLocal</span> <span class="hljs-keyword">from</span> <span class="hljs-string">"@assets/js/storageLocal.js"</span>;
+
+<span class="hljs-keyword">let</span> storageLocal = <span class="hljs-keyword">new</span> <span class="hljs-title class_">StorageLocal</span>();
+storageLocal.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">"test1"</span>, <span class="hljs-string">"sdfasfasfwerkjfj"</span>);
+storageLocal.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">"test2"</span>, <span class="hljs-string">"sdfasfasfwerkjfj"</span>, {
+    <span class="hljs-attr">maxAge</span>: <span class="hljs-number">1200000</span>
+});
+storageLocal.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">"test2"</span>, <span class="hljs-string">"sdfasfasfwerkjfj"</span>, {
+    <span class="hljs-attr">maxAge</span>: <span class="hljs-number">120</span>,
+    <span class="hljs-attr">clearAll</span>: <span class="hljs-literal">false</span>
+});
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+    storageLocal.<span class="hljs-title function_">clearOverDue</span>();
+}, <span class="hljs-number">3000</span>);</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>其他：<br><a href="https://liu_yong.gitee.io/blogs/96/">浏览器同源策略</a><br><a href="https://liu_yong.gitee.io/blogs/88/">web前端存储之cookie</a></p>
+<p>参考资料：<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/storage_event">https://developer.mozilla.org/zh-CN/docs/Web/API/Window/storage_event</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API">https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/sessionStorage">https://developer.mozilla.org/zh-CN/docs/Web/API/Window/sessionStorage</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/localStorage">https://developer.mozilla.org/zh-CN/docs/Web/API/Window/localStorage</a></p>

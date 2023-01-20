@@ -1,0 +1,190 @@
+#### 浏览器的主要组成部分是什么？
+&emsp;&emsp;用户界面 - 包括地址栏、前进/后退按钮、书签菜单等。除了浏览器主窗口显示的您请求的页面外，其他显示的各个部分都属于用户界面。
+&emsp;&emsp;浏览器引擎 - 在用户界面和呈现引擎之间传送指令。
+&emsp;&emsp;呈现引擎 - 负责显示请求的内容。如果请求的内容是 HTML，它就负责解析 HTML 和 CSS 内容，并将解析后的内容显示在屏幕上。
+&emsp;&emsp;网络 - 用于网络调用，比如 HTTP 请求。其接口与平台无关，并为所有平台提供底层实现。
+&emsp;&emsp;用户界面后端 - 用于绘制基本的窗口小部件，比如组合框和窗口。其公开了与平台无关的通用接口，而在底层使用操作系统的用户界面方法。
+&emsp;&emsp;JavaScript 解释器。用于解析和执行 JavaScript 代码。
+&emsp;&emsp;数据存储。这是持久层。浏览器需要在硬盘上保存各种数据，例如 Cookie。新的 HTML 规范 (HTML5) 定义了“网络数据库”，这是一个完整（但是轻便）的浏览器内数据库。
+&emsp;&emsp;值得注意的是，和大多数浏览器不同，Chrome 浏览器的每个标签页都分别对应一个呈现引擎实例。每个标签页都是一个独立的进程。
+
+#### Chrome 打开一个页面需要启动多少进程？分别有哪些进程？
+&emsp;&emsp;打开 1 个页面至少需要 1 个网络进程、1 个浏览器进程、1 个 GPU 进程以及 1 个渲染进程，共 4 个；
+&emsp;&emsp;最新的 Chrome 浏览器包括：1 个浏览器（Browser）主进程、1 个 GPU 进程、1 个网络（NetWork）进程、多个渲染进程和多个插件进程。
+&emsp;&emsp;**浏览器进程**：主要负责界面显示、用户交互、子进程管理，同时提供存储等功能。
+&emsp;&emsp;**渲染进程**：核心任务是将 HTML、CSS 和 JavaScript 转换为用户可以与之交互的网页，排版引擎 Blink 和 JavaScript 引擎 V8 都是运行在该进程中，默认情况下，Chrome 会为每个 Tab 标签创建一个渲染进程。出于安全考虑，渲染进程都是运行在沙箱模式下。
+&emsp;&emsp;**GPU 进程**：其实，Chrome 刚开始发布的时候是没有 GPU 进程的。而 GPU 的使用初衷是为了实现 3D CSS 的效果，只是随后网页、Chrome 的 UI 界面都选择采用 GPU 来绘制，这使得 GPU 成为浏览器普遍的需求。最后，Chrome 在其多进程架构上也引入了 GPU 进程。
+&emsp;&emsp;**网络进程**：主要负责页面的网络资源加载，之前是作为一个模块运行在浏览器进程里面的，直至最近才独立出来，成为一个单独的进程。
+&emsp;&emsp;**插件进程**：主要是负责插件的运行，因插件易崩溃，所以需要通过插件进程来隔离，以保证插件进程崩溃不会对浏览器和页面造成影响。
+
+#### 浏览器渲染过程是怎样的？
+&emsp;&emsp;按照渲染的时间顺序，流水线可分为如下几个子阶段：构建 DOM 树、样式计算、布局阶段、分层、栅格化和显示。
+&emsp;&emsp;渲染进程将 HTML 内容转换为能够读懂DOM 树结构。
+&emsp;&emsp;渲染引擎将 CSS 样式表转化为浏览器可以理解的styleSheets，计算出 DOM 节点的样式。
+&emsp;&emsp;创建布局树，并计算元素的布局信息。
+&emsp;&emsp;对布局树进行分层，并生成分层树。
+&emsp;&emsp;为每个图层生成绘制列表，并将其提交到合成线程。合成线程将图层分图块，并栅格化将图块转换成位图。
+&emsp;&emsp;合成线程发送绘制图块命令给浏览器进程。浏览器进程根据指令生成页面，并显示到显示器上。
+&emsp;&emsp;浏览器从网络或硬盘中获得HTML字节数据后会经过一个流程将字节解析为DOM树,先将HTML的原始字节数据转换为文件指定编码的字符,然后浏览器会根据HTML规范来将字符串转换成各种令牌标签，如html、body等。最终解析成一个树状的对象模型，就是dom树；
+&emsp;&emsp;获取css，获取style标签内的css、或者内嵌的css,或者当HTML代码遇见标签时，浏览器会发送请求获得该标签中标记的CSS，当渲染引擎接收到 CSS 文本时，会执行一个转换操作，将 CSS 文本转换为浏览器可以理解的styleSheets
+&emsp;&emsp;创建布局树，遍历 DOM 树中的所有可见节点，并把这些节点加到布局中；而不可见的节点会被布局树忽略掉，如 head 标签下面的全部内容，再比如 body.p.span 这个元素，因为它的属性包含 dispaly:none，所以这个元素也没有被包进布局树。最后计算 DOM 元素的布局信息，使其都保存在布局树中。布局完成过程中，如果有js操作或者其他操作，对元素的颜色，背景等作出改变就会引起重绘，如果有对元素的大小、定位等有改变则会引起回流。
+&emsp;&emsp;因为页面中有很多复杂的效果，如一些复杂的 3D 变换、页面滚动，或者使用 z-indexing 做 z 轴排序等，为了更加方便地实现这些效果，渲染引擎还需要为特定的节点生成专用的图层，并生成一棵对应的图层树。
+&emsp;&emsp;渲染引擎实现图层的绘制，把一个图层的绘制拆分成很多小的绘制指令然后再把这些指令按照顺序组成一个待绘制列表，当图层的绘制列表准备好之后，主线程会把该绘制列表提交给合成线程，合成线程会将图层划分为图块，然后按照视口附近的图块来优先生成位图(实际生成位图的操作是由栅格化来执行的。所谓栅格化，是指将图块转换为位图)
+&emsp;&emsp;一旦所有图块都被光栅化，合成线程就会生成一个绘制图块的命令，然后将该命令提交给浏览器进程,浏览器最后进行显示。
+
+#### 如何保证页面文件能被完整送达浏览器？
+&emsp;&emsp;互联网中的数据是通过数据包来传输的。数据包要在互联网上进行传输，就要符合网际协议(IP)，互联网上不同的在线设备都有唯一的地址，地址只是一个数字，只要知道这个具体的地址，就可以往这里发送信息。
+&emsp;&emsp;如果要想把一个数据包从主机 A 发送给主机 B，那么在传输之前，数据包上会被附加上主机 B 的 IP 地址信息，这样在传输过程中才能正确寻址。额外地，数据包上还会附加上主机 A 本身的 IP 地址，有了这些信息主机 B 才可以回复信息给主机 A。这些附加的信息会被装进一个叫 IP 头的数据结构里。IP 头是 IP 数据包开头的信息，包含 IP 版本、源 IP 地址、目标 IP 地址、生存时间等信息。
+&emsp;&emsp;IP 是非常底层的协议，只负责把数据包传送到对方电脑，但是对方电脑并不知道把数据包交给哪个程序，是交给浏览器还是交给王者荣耀？因此，需要基于 IP 之上开发能和应用打交道的协议，最常见的是用户数据包协议（User Datagram Protocol)，简称UDP和传输控制协议（Transmission Control Protocol）,简称TCP.
+基本传输过程为：
+&emsp;&emsp;上层将数据包交给传输层
+&emsp;&emsp;传输层会在数据包前面附加上UDP 头，组成新的 UDP 数据包，再将新的 UDP 数据包交给网络层
+&emsp;&emsp;网络层再将 IP 头附加到数据包上，组成新的 IP 数据包，并交给底层
+&emsp;&emsp;数据包被传输到主机 B 的网络层，在这里主机 B 拆开 IP 头信息，并将拆开来的数据部分交给传输层
+&emsp;&emsp;在传输层，数据包中的 UDP 头会被拆开，并根据 UDP 中所提供的端口号，把数据部分交给上层的应用程序
+&emsp;&emsp;最终，数据包就发送到了主机 B 上层应用程序这里。
+
+#### 常见的浏览器内核主要有哪些？
+Blink内核：新版 Chrome、新版 Opera
+Webkit内核：Safari、原Chrome
+Gecko内核：FireFox、Netscape6及以上版本
+Trident内核（又称MSHTML内核）：IE、国产浏览器
+EdgeHTML：Edge
+Presto内核：原Opera7及以上
+
+#### 介绍一下你对浏览器内核的理解？
+&emsp;&emsp;主要分成两部分：渲染引擎(layout engineer或Rendering Engine)和JS引擎。
+&emsp;&emsp;渲染引擎：负责取得网页的内容（HTML、XML、图像等等）、整理讯息（例如加入CSS等），以及计算网页的显示方式，然后会输出至显示器或打印机。浏览器的内核的不同对于网页的语法解释会有不同，所以渲染的效果也不相同。所有网页浏览器、电子邮件客户端以及其它需要编辑、显示网络内容的应用程序都需要内核。
+&emsp;&emsp;JS引擎：解析和执行javascript来实现网页的动态效果。
+&emsp;&emsp;最开始渲染引擎和JS引擎并没有区分的很明确，后来JS引擎越来越独立，内核就倾向于只指渲染引擎。
+
+#### 浏览器是如何渲染UI的？
+&emsp;&emsp;浏览器获取HTML文件，然后对文件进行解析，形成DOM Tree
+&emsp;&emsp;与此同时，进行CSS解析，生成Style Rules
+&emsp;&emsp;接着将DOM Tree与Style Rules合成为 Render Tree
+&emsp;&emsp;接着进入布局（Layout）阶段，也就是为每个节点分配一个应出现在屏幕上的确切坐标
+&emsp;&emsp;随后调用GPU进行绘制（Paint），遍历Render Tree的节点，并将元素呈现出来
+
+#### 重排与重绘
+&emsp;&emsp;重排reflow（回流）
+&emsp;&emsp;当浏览器发现某个部分发生了变化影响了布局，需要倒回去重新渲染。如：
+&emsp;&emsp;添加、删除可见的DOM元素
+&emsp;&emsp;元素位置改变、尺寸改变、内容改变
+&emsp;&emsp;页面初始化、resize事件等
+
+&emsp;&emsp;重绘repaint
+&emsp;&emsp;改变某个元素的背景色、文字颜色、边框颜色等影响周围或内部布局的属性时，屏幕的一部分要重画，但元素的几何尺寸不变
+注意：
+&emsp;&emsp;回流必定引起重绘，而重绘不一定会引起回流
+&emsp;&emsp;display: none;的节点不会被加入渲染树，而visibility: hidden;会被加入渲染树
+&emsp;&emsp;display:none;会触发回流；visibility: hidden;会触发重绘
+
+#### 浏览器如何解析css选择器？
+&emsp;&emsp;浏览器会『从右往左』解析CSS选择器。
+&emsp;&emsp;DOM Tree与Style Rules合成为 Render Tree，实际上是需要将Style Rules附着到DOM Tree上，因此需要根据选择器提供的信息对DOM Tree进行遍历，才能将样式附着到对应的DOM元素上。
+
+#### 什么是浏览器同源策略？
+&emsp;&emsp;同源策略限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的重要安全机制。
+&emsp;&emsp;同源是指"协议+域名+端口" 都相同，即便两个不同的域名指向同一个ip地址，也非同源。
+&emsp;&emsp;浏览器中的大部分内容都是受同源策略限制的，以下是可能嵌入跨源的资源的一些示例：
+&emsp;&emsp;script标签嵌入跨域脚本。语法错误信息只能在同源脚本中捕捉到。
+&emsp;&emsp;link标签嵌入CSS。由于CSS的松散的语法规则，CSS的跨域需要一个设置正确的Content-Type 消息头。不同浏览器有不同的限制： IE, Firefox, Chrome, Safari (跳至CVE-2010-0051)部分 和 Opera。
+&emsp;&emsp;img嵌入图片。支持的图片格式包括PNG,JPEG,GIF,BMP,SVG,...
+&emsp;&emsp;video 和 audio嵌入多媒体资源。
+&emsp;&emsp;object, embed 和 applet 的插件。
+&emsp;&emsp;@font-face 引入的字体。一些浏览器允许跨域字体（ cross-origin fonts），一些需要同源字体（same-origin fonts）。
+&emsp;&emsp;frame 和 iframe 载入的任何资源。站点可以使用X-Frame-Options消息头来阻止这种形式的跨域交互。
+
+#### 如何实现跨域？
+&emsp;&emsp;目前最流行的方案是HTML5的 cors 了，也是在下用得最多的。跨域资源共享(CORS) 是一种机制，它使用额外的 HTTP 头来告诉浏览器 让运行在一个 origin (domain) 上的Web应用被准许访问来自不同源服务器上的指定的资源。当一个资源从与该资源本身所在的服务器不同的域、协议或端口请求一个资源时，资源会发起一个跨域 HTTP 请求。需要注意的是，当浏览器发起跨域请求时，会先发送一个OPTIONS的请求，查询对应站点是否允许当前页面跨域访问资源，如果允许，需要返回允许跨域访问的method类型，所以对应站点需要支持OPTIONS访问接口；另外，浏览器每次发起跨域请求时都会先发送OPTIONS的请求，可以在HTTP响应头设置预检缓存时间，如：Access-Control-Max-Age:3600000。
+&emsp;&emsp;还可以利用服务器端来跨域，浏览器又同源策略限制，但是服务器端可没有，所以前端可以访问自己页面对应的服务器，由服务器来转发相应的请求响应，这样对于前端而言就没有跨域了，前端只是发起了自己想要某个资源的请求而已，而由服务器去获取对应站点的资源。如使用nginx来代理：
+```nginx
+location ~/interface/.*.(png|jpg|jpeg)$ {
+    proxy_pass http://www.test.com;
+}
+```
+&emsp;&emsp;**jsonp**。jsonp本质上是一个Hack，它利用 script 标签不受同源策略限制的特性进行跨域操作。
+jsonp优点：
+&emsp;&emsp;实现简单
+&emsp;&emsp;兼容性非常好
+jsonp的缺点：
+&emsp;&emsp;只支持get请求（因为script标签只能get）
+&emsp;&emsp;有安全性问题，容易遭受xss攻击
+&emsp;&emsp;需要服务端配合jsonp进行一定程度的改造
+其他的现在比较少用了，这里也不多介绍了，大家可以自行百度。
+
+#### 内容安全策略（CSP）
+&emsp;&emsp;内容安全策略 (CSP) 是一个额外的安全层，用于检测并削弱某些特定类型的攻击，包括跨站脚本 (XSS) 和数据注入攻击等。无论是数据盗取、网站内容污染还是散发恶意软件，这些攻击都是主要的手段。
+&emsp;&emsp;配置内容安全策略涉及到添加 Content-Security-Policy  HTTP头部到一个页面，并配置相应的值，以控制用户代理（浏览器等）可以为该页面获取哪些资源。比如一个可以上传文件和显示图片页面，应该允许图片来自任何地方，但限制表单的action属性只可以赋值为指定的端点。一个经过恰当设计的内容安全策略应该可以有效的保护页面免受跨站脚本攻击。如：
+```http
+Content-Security-Policy:default-src 'self';script-src hm.baidu.com 'self'
+//表示script脚本只能加载从hm.baidu.com和当前站点同源的脚本
+//其他资源类型只能加载当前站点同源的资源
+```
+
+#### 为什么很多站点第二次打开速度会很快？
+&emsp;&emsp;主要原因是第一次加载页面过程中，缓存了一些耗时的数据。
+&emsp;&emsp;那么，哪些数据会被缓存呢？
+**DNS缓存**
+&emsp;&emsp;主要就是在浏览器本地把对应的 IP 和域名关联起来，这样在进行DNS解析的时候就很快。
+**MemoryCache**
+&emsp;&emsp;是指存在内存中的缓存。从优先级上来说，它是浏览器最先尝试去命中的一种缓存。从效率上来说，它是响应速度最快的一种缓存。
+&emsp;&emsp;内存缓存是快的，也是“短命”的。它和渲染进程“生死相依”，当进程结束后，也就是 tab 关闭以后，内存里的数据也将不复存在。
+**浏览器缓存**
+&emsp;&emsp;先看一张经典的流程图，结合理解
+&emsp;&emsp;浏览器缓存，也称Http缓存，分为强缓存和协商缓存。优先级较高的是强缓存，在命中强缓存失败的情况下，才会走协商缓存。
+**强缓存**
+&emsp;&emsp;强缓存是利用 http 头中的 Expires 和 Cache-Control 两个字段来控制的。强缓存中，当请求再次发出时，浏览器会根据其中的 expires 和 cache-control 判断目标资源是否“命中”强缓存，若命中则直接从缓存中获取资源，不会再与服务端发生通信。
+&emsp;&emsp;实现强缓存，过去我们一直用expires。当服务器返回响应时，在 Response Headers 中将过期时间写入 expires 字段。像这样
+expires: Wed, 12  Sep  2019  06:12:18  GMT
+&emsp;&emsp;可以看到，expires 是一个时间戳，接下来如果我们试图再次向服务器请求资源，浏览器就会先对比本地时间和 expires 的时间戳，如果本地时间小于 expires 设定的过期时间，那么就直接去缓存中取这个资源。
+&emsp;&emsp;从这样的描述中大家也不难猜测，expires 是有问题的，它最大的问题在于对“本地时间”的依赖。如果服务端和客户端的时间设置可能不同，或者我直接手动去把客户端的时间改掉，那么 expires 将无法达到我们的预期。
+&emsp;&emsp;考虑到 expires 的局限性，HTTP1.1 新增了Cache-Control字段来完成 expires 的任务。expires 能做的事情，Cache-Control 都能做；expires 完成不了的事情，Cache-Control 也能做。因此，Cache-Control 可以视作是 expires 的完全替代方案。在当下的前端实践里，我们继续使用 expires 的唯一目的就是向下兼容。
+cache-control: max-age=31536000
+&emsp;&emsp;在 Cache-Control 中，我们通过max-age来控制资源的有效期。max-age 不是一个时间戳，而是一个时间长度。在本例中，max-age 是 31536000 秒，它意味着该资源在 31536000 秒以内都是有效的，完美地规避了时间戳带来的潜在问题。
+Cache-Control 相对于 expires 更加准确，它的优先级也更高。当 Cache-Control 与 expires 同时出现时，我们以 Cache-Control 为准。
+**协商缓存**
+&emsp;&emsp;协商缓存依赖于服务端与浏览器之间的通信。协商缓存机制下，浏览器需要向服务器去询问缓存的相关信息，进而判断是重新发起请求、下载完整的响应，还是从本地获取缓存的资源。如果服务端提示缓存资源未改动（Not Modified），资源会被重定向到浏览器缓存，这种情况下网络请求对应的状态码是 304。
+&emsp;&emsp;协商缓存的实现,从 Last-Modified 到 Etag,Last-Modified 是一个时间戳，如果我们启用了协商缓存，它会在首次请求时随着 Response Headers 返回：
+Last-Modified: Fri, 27  Oct  2017  06:35:57  GMT
+&emsp;&emsp;随后我们每次请求时，会带上一个叫 If-Modified-Since 的时间戳字段，它的值正是上一次 response 返回给它的 last-modified 值：
+If-Modified-Since: Fri, 27  Oct  2017  06:35:57  GMT
+&emsp;&emsp;服务器接收到这个时间戳后，会比对该时间戳和资源在服务器上的最后修改时间是否一致，从而判断资源是否发生了变化。如果发生了变化，就会返回一个完整的响应内容，并在 Response Headers 中添加新的 Last-Modified 值；否则，返回如上图的 304 响应，Response Headers 不会再添加 Last-Modified 字段。
+&emsp;&emsp;使用 Last-Modified 存在一些弊端，这其中最常见的就是这样两个场景：
+&emsp;&emsp;我们编辑了文件，但文件的内容没有改变。服务端并不清楚我们是否真正改变了文件，它仍然通过最后编辑时间进行判断。因此这个资源在再次被请求时，会被当做新资源，进而引发一次完整的响应——不该重新请求的时候，也会重新请求。
+&emsp;&emsp;当我们修改文件的速度过快时（比如花了 100ms 完成了改动），由于 If-Modified-Since 只能检查到以秒为最小计量单位的时间差，所以它是感知不到这个改动的——该重新请求的时候，反而没有重新请求了。
+&emsp;&emsp;这两个场景其实指向了同一个 bug——服务器并没有正确感知文件的变化。为了解决这样的问题，Etag 作为 Last-Modified 的补充出现了。
+&emsp;&emsp;Etag 是由服务器为每个资源生成的唯一的标识字符串，这个标识字符串可以是基于文件内容编码的，只要文件内容不同，它们对应的 Etag 就是不同的，反之亦然。因此 Etag 能够精准地感知文件的变化。
+&emsp;&emsp;Etag 的生成过程需要服务器额外付出开销，会影响服务端的性能，这是它的弊端。因此启用 Etag 需要我们审时度势。正如我们刚刚所提到的——Etag 并不能替代 Last-Modified，它只能作为 Last-Modified 的补充和强化存在。
+&emsp;&emsp;Etag 在感知文件变化上比 Last-Modified 更加准确，优先级也更高。当 Etag 和 Last-Modified 同时存在时，以 Etag 为准。
+**Service Worker Cache**
+&emsp;&emsp;Service Worker 是一种独立于主线程之外的 Javascript 线程。它脱离于浏览器窗体，因此无法直接访问 DOM。这样独立的个性使得 Service Worker 的“个人行为”无法干扰页面的性能，这个“幕后工作者”可以帮我们实现离线缓存、消息推送和网络代理等功能。我们借助 Service worker 实现的离线缓存就称为 Service Worker Cache。
+&emsp;&emsp;Service Worker 的生命周期包括 install、active、working 三个阶段。一旦 Service Worker 被 install，它将始终存在，只会在 active 与 working 之间切换，除非我们主动终止它。这是它可以用来实现离线存储的重要先决条件.
+**Push Cache**
+&emsp;&emsp;Push Cache 是指 HTTP2 在 server push 阶段存在的缓存。这块的知识比较新，应用也还处于萌芽阶段，应用范围有限不代表不重要——HTTP2 是趋势、是未来。在它还未被推而广之的此时此刻，我仍希望大家能对 Push Cache 的关键特性有所了解：
+&emsp;&emsp;Push Cache 是缓存的最后一道防线。浏览器只有在 Memory Cache、HTTP Cache 和 Service Worker Cache 均未命中的情况下才会去询问 Push Cache。
+&emsp;&emsp;Push Cache 是一种存在于会话阶段的缓存，当 session 终止时，缓存也随之释放。
+&emsp;&emsp;不同的页面只要共享了同一个 HTTP2 连接，那么它们就可以共享同一个 Push Cache。
+
+
+#### 浏览器缓存读取规则
+详细如下：
+&emsp;&emsp;浏览器判定是否有缓存
+&emsp;&emsp;缓存是否过期
+&emsp;&emsp;跟服务器协商是否使用缓存
+&emsp;&emsp;协商缓存
+强缓存
+&emsp;&emsp;用户发送的请求，直接从客户端缓存中获取，不发送请求到服务器，不与服务器发生交互行为。
+协商缓存
+&emsp;&emsp;用户发送的请求，发送到服务器后，由服务器判定是否从缓存中获取资源。
+两者共同点：客户端获得的数据最后都是从客户端缓存中获得。
+两者的区别：从名字就可以看出，强缓存不与服务器交互，而协商缓存则需要与服务器交互。
+
+
+&emsp;
+参考文章：
+[https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy](https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy)
+[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP)
+[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy/default-src](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy/default-src)
+[http://www.imooc.com/article/293392?block_id=tuijian_wz](http://www.imooc.com/article/293392?block_id=tuijian_wz)
+[https://segmentfault.com/a/1190000020475900?utm_source=tag-newest](https://segmentfault.com/a/1190000020475900?utm_source=tag-newest)

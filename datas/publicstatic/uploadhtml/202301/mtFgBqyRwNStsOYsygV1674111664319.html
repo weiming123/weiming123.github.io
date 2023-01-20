@@ -1,0 +1,49 @@
+<p>  FIFO（First Input First Output），先进先出是缓存算法中比较简单的了，就是：先进行缓存的数据先淘汰掉。<br>  用在不同的场景的时候，我们也可以有不同的实现，比如如果我们缓存的是任务的id，那么可以直接用一个数组来保存需要缓存或者说现在需要清理掉的任务；又比如如果我们缓存的是具体值，那么也可以用 key-value 的方式来作为缓存方式。<br>  这里我们用代码来实现下缓存 key-value 的方式的数据：</p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/*
+ * @Author: liuyong
+ * @Description: FIFO队列算法实现缓存
+ */</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">FIFOCache</span>{
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">maxCacheNum=<span class="hljs-number">10</span></span>){
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">maxCacheNum</span> = maxCacheNum;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">cache</span> = {};
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">keys</span> = [];
+  }
+  <span class="hljs-title function_">set</span>(<span class="hljs-params">key,value</span>){
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span> value === <span class="hljs-string">'undefined'</span>){
+      <span class="hljs-keyword">throw</span> <span class="hljs-title class_">TypeError</span>(<span class="hljs-string">'value must be not undefined'</span>);
+    }
+    <span class="hljs-keyword">let</span> cache = <span class="hljs-variable language_">this</span>.<span class="hljs-property">cache</span>;
+    <span class="hljs-keyword">let</span> keys = <span class="hljs-variable language_">this</span>.<span class="hljs-property">keys</span>;
+    <span class="hljs-keyword">if</span>(keys.<span class="hljs-title function_">indexOf</span>(key) &gt; -<span class="hljs-number">1</span>){
+      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">delete</span>(key);
+    }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (keys.<span class="hljs-property">length</span> === <span class="hljs-variable language_">this</span>.<span class="hljs-property">maxCacheNum</span>) {
+      <span class="hljs-keyword">delete</span> cache[keys.<span class="hljs-title function_">shift</span>()];
+    }
+    cache[key] = value;
+    keys.<span class="hljs-title function_">push</span>(key);
+  }
+  <span class="hljs-title function_">delete</span>(<span class="hljs-params">key</span>){
+    <span class="hljs-keyword">let</span> cache = <span class="hljs-variable language_">this</span>.<span class="hljs-property">cache</span>;
+    <span class="hljs-keyword">let</span> keys = <span class="hljs-variable language_">this</span>.<span class="hljs-property">keys</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>,len=keys.<span class="hljs-property">length</span>;i&lt;len;i++){
+      <span class="hljs-keyword">if</span>(keys[i]===key){
+        <span class="hljs-keyword">delete</span> cache[keys.<span class="hljs-title function_">splice</span>(i,<span class="hljs-number">1</span>)[<span class="hljs-number">0</span>]];
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+  <span class="hljs-title function_">get</span>(<span class="hljs-params">key</span>){
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">cache</span>[key];
+  }
+  <span class="hljs-title function_">clear</span>(<span class="hljs-params"></span>){
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">cache</span>={};
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">keys</span>.<span class="hljs-property">length</span>=<span class="hljs-number">0</span>;
+  }
+  <span class="hljs-title function_">getAllKeys</span>(<span class="hljs-params"></span>){
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">keys</span>.<span class="hljs-title function_">concat</span>();
+  }
+}</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  程序员嘛，不求源码就求那什么码，看到源码相信大家就已经明白大概是怎么回事了，其中值得注意的有这么几个地方：<br>1、在set方法里面，如果value是undefined那么就不再缓存了，毕竟缓存个undefined也没有意义。还要如果缓存的key已经存在了，那么需要验证下，我这里是把已经存在的删除了再新存，这样做的好处是新添加的会放到后面来，后面再超出缓存限制后不会删除这个新增加的，哪怕他在新增之前其实已经缓存过了。<br>2、delete方法有返回值，可以让你判断是否删除成功，或者说缓存里面是否还有对于这个key的缓存值。<br>3、getAllKeys方法返回的数组是和对象内的数组不是同一个数组了(我们这里存的可以默认是以字符串作为key的)，因为数组是引用数据类型，我们不希望在对返回的数组做某些修改的时候影响到了我们这个缓存对象里面的数组，所以getAllKeys方法返回的数组是一个新的数组了。</p>

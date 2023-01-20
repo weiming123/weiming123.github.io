@@ -1,0 +1,102 @@
+<p>  &lt;meta&gt; 标签位于文档的头部，不包含任何内容，是html语言head区的一个辅助性标签。<meta> 元素可提供有关页面的元信息，比如针对搜索引擎和更新频度的描述和关键词。</p>
+<p>  html5中meta标签共有四个属性，它们分别是charset、content、http-equiv、name属性。meta标签的作用有：搜索引擎优化（SEO），响应式设计，定义页面使用语言，自动刷新并指向新的页面，实现网页转换时的动态效果，控制页面缓存等。</p>
+<h4 id="一、charset属性：">  一、charset属性：</h4><p>  在html4中设定页面使用的字符集:</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"content-type"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"text/html; charset=utf-8"</span>&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  html5中设定页面使用的字符集：</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<h4 id="二、content属性：">  二、content属性：</h4><p>  这个属性定义与http-equiv属性或者name属性相关的元信息。</p>
+<h4 id="三、name属性：">  三、name属性：</h4><p>  (1) keywords (关键字)：keywords用来告诉搜索引擎你网页的关键字是什么，虽然现在权重越来越低，但是再低都是有权重的。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"keywords"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"关键字"</span>&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  (2) description (网页内容描述) ：description用来告诉搜索引擎你的网站主要内容。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"description"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"你的网页的内容"</span>&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  (3) author (作者) ：标注网页的作者。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"author"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"网页作者"</span>&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  (4) generator (软件制作) ：代表说明网站的采用的什么软件制作。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"generator"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"信息参数"</span>/&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  (5) revised (定义页面的最新版本) </p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"revised"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"weiming, 2016/7/9/"</span> /&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  (6) copyright (网站版权信息) ：代表说明网站版权信息。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"copyright"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">""</span> /&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  (7) revisit-after (网站重访) ：告诉搜索引擎多少天来收录一次数据</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"revisit-after"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"5days"</span> /&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  (8) robots (机器人向导) ：robots用来告诉搜索机器人哪些页面需要索引，哪些页面不需要索引。比如我们有的后台管理系统就不需要搜索引擎收录。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"robots"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"none"</span>&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>content具体参数如下：<br>all：文件将被检索，且页面上的链接可以被查询；<br>none：文件将不被检索，且页面上的链接不可以被查询；<br>index：文件将被检索；<br>follow：页面上的链接可以被查询；<br>noindex：文件将不被检索，但页面上的链接可以被查询；<br>nofollow：文件将被检索，但页面上的链接不可以被查询。</p>
+<p>  (9) format-detection (格式检测) ：检测html里的一些格式。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"format-detection"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"telephone=no"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"format-detection"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"telephone=no,email=no,adress=no"</span> /&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>content具体参数如下：<br>telephone，禁止了把数字转化为拨号链接，默认开启；<br>email，禁止作为邮箱地址，默认开启；<br>adress，禁止跳转至地图，默认开启。</p>
+<p>  (10) X-UA-Compatible ：如果用户有你设置的浏览器,优先使用设置的浏览器来渲染页面。如下，优先使用ie最新的版本或chrome内核渲染页面。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"X-UA-Compatible"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"IE=edge,chrome=1"</span> /&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  (11) renderer (浏览器内核控制) ：控制浏览器选择何种内核渲染。如下，优先使用webkit内核渲染页面。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"renderer"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"webkit|ie-comp|ie-stand"</span> /&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  (12) viewport (视窗) ：设置视窗布局。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">”viewport”</span> <span class="hljs-attr">content</span>=<span class="hljs-string">”width</span>=<span class="hljs-string">device-width,initial-scale</span>=<span class="hljs-string">1″</span> /&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>content具体参数如下：<br>width：控制 viewport 的大小，可以指定的一个值，如果 600，或者特殊的值，如 device-width 为设备的宽度（单位为缩放为 100% 时的 CSS 的像素）；<br>height：和 width 相对应，指定高度；<br>initial-scale：初始缩放比例，也即是当页面第一次 load 的时候缩放比例；<br>maximum-scale：允许用户缩放到的最大比例；<br>minimum-scale：允许用户缩放到的最小比例；<br>user-scalable：用户是否可以手动缩放，值为"yes"或"no"。</p>
+<h4 id="四、http-equiv属性：">  四、http-equiv属性：</h4><p>  (1) expires (期限) ：可以用于设定网页的到期时间。一旦网页过期，必须到服务器上重新传输。必须使用GMT的时间格式，或直接设为0(数字表示多少时间后过期)。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"expires"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"Fri,12 Jan 2001 18:18:18 GMT"</span>&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  (2) refresh (刷新) ：自动刷新并指向新页面。如下，停留3秒后，自动刷新到百度。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"Refresh"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"3;URL=http://www.baidu.com"</span>&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  (3) set-cookie (cookie设定) ：设置cookie过期时间，如果cookie过期，那么存盘的cookie将被删除。必须使用GMT的时间格式。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">Meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"Set-Cookie"</span> <span class="hljs-attr">Content</span>=<span class="hljs-string">"cookievalue=xxx; expires=Mon,12 August 20016 00:00:00 GMT&gt;</span></span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  (4) pragma (cache模式) ：禁止浏览器从本地计算机的缓存中访问页面内容。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"Pragma"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"no-cache"</span>&gt;</span> </span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  (5) window-target (显示窗口的设定) ：强制页面在当前窗口以独立页面显示。如下：防止别人在框架里调用自己的页面。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"Window-target"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"_top"</span>&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>content具体参数如下：<br>_blank 在新窗口显示 ；<br>_top 当前整个窗口显示 ；<br>_parent 父容器显示，比如框架嵌套 ；<br>_self 当前容器显示，比如框架嵌套。</p>
+<p>  (6) Cache-Control (缓存机制) ：指定请求和响应遵循的缓存机制。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"Cache-Control"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"no-cache"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"Cache-Control"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"no-siteapp"</span> /&gt;</span>避免转码</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>content具体参数如下：<br>no-cache指示请求或响应消息不能缓存；<br>no-store用于防止重要的信息被无意的发布。在请求消息中发送将使得请求和响应消息都不使用缓存；<br>max-age指示客户机可以接收生存期不大于指定时间（以秒为单位）的响应；<br>min-fresh指示客户机可以接收响应时间小于当前时间加上指定时间的响应；<br>max-stale指示客户机可以接收超出超时期间的响应消息。如果指定max-stale消息的值，那么客户机可以接收超出超时期指定值之内的响应消息。</p>
+<p>  (7) Page-Enter、Page-Exit (进入与退出) ：页面被载入和调出时的一些特效，但是所加网页不能是一个Frame页</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"Page-Enter"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"revealTrans(duration=0.5,transition=10)"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"Page-Exit"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"revealTrans(duration=0.5,transition=10)"</span> /&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>content具体参数如下：<br>duration表示滤镜特效的持续时间（单位：秒）。<br>transition滤镜类型。表示使用哪种特效，取值为0-23:</p>
+<p>0矩形缩小</p>
+<p>1矩形扩大</p>
+<p>2 圆形缩小</p>
+<p>3 圆形扩大</p>
+<p>4 下到上刷新</p>
+<p>5 上到下刷新</p>
+<p>6 左到右刷新</p>
+<p>7 右到左刷新</p>
+<p>8 竖百叶窗</p>
+<p>9 横百叶窗</p>
+<p>10 错位横百叶窗</p>
+<p>11 错位竖百叶窗</p>
+<p>12 点扩散</p>
+<p>13 左右到中间刷新</p>
+<p>14 中间到左右刷新</p>
+<p>15 中间到上下</p>
+<p>16 上下到中间</p>
+<p>17 右下到左上</p>
+<p>18 右上到左下</p>
+<p>19 左上到右下</p>
+<p>20 左下到右上</p>
+<p>21 横条</p>
+<p>22 竖条</p>
+<p>23 以上22种随机选择一种</p>
+<p>  (8) imagetoolbar (图片工具栏) ：指定是否显示图片工具栏。当为false代表不显示，当为true代表显示。</p>
+<pre><code class="language-html"><span class="code-block"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"imagetoolbar"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"false"</span> /&gt;</span></span>
+</code><span class="copy-button">复制代码</span></pre>

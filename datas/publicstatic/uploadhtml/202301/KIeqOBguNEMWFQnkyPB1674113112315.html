@@ -1,0 +1,34 @@
+<p>  多个计算机互相连接、通信，就组成了一个网络，一个有限范围内的网络通常称为局域网或城域网，而连接多个不同地区的远程网络我们就称为广域网。<br>  既然网络中的设备那么多，那么要保持通信，自然就需要能标识通信的目标才行了。<br>  IP地址就是用来标识当前主机的地址的，就像我们的邮件地址、门牌号、手机号一样，有了这些标识，我们就能根据一定规则找到对应的设备了。<br>  <strong>IP地址</strong>是用来识别网络上的设备的，因此，IP地址是由<strong>网络地址</strong>与<strong>主机地址</strong>两部分所组成。网络地址可用来识别设备所在的网络，网络地址位于IP地址的前段。主机地址位于IP地址的后段，用来识别网络上设备。同一网络上的设备都会有相同的网络地址，而各设备之间则是以主机地址来区别。在设计IP时，着眼于路由与管理上的需求，因此制定了5种IP地址的等级。我们这里要说的属于是特殊IP地址。</p>
+<p><strong>0.0.0.0</strong>：本主机地址，网络上任何一个指向当前主机的IP。具体应用如：127.0.0.1、192.168.*.*、公网里的ip、局域网里的IP、平时用localhost访问本地的方式等。<br>  网络号为0的IP地址是指本网络上的某台主机。例如如果一台主机(IP地址为202.112.7.13)接收到一个IP报文，它的目的地址中网络号部分为0，而主机号部分与它自己的地址匹配(即IP地址为0.0.0.13)，则接收方把该IP地址解释成为本网络的主机地址，并接收该IP数据报。<br>  0.0.0.0代表本主机所有IP地址。网络上任何主机都可以用它来表示自己。<br>应用到的案例：<br>1、刚开始的时候我开发的自己的博客系统上线后，发现自己在公网IP访问不了自己的web服务，但是本地服务器又是启动起来了的，在自己电脑上开发的时候也是可以通过127.0.0.1或者localhost的方式访问的，但是就是在自己购买的云服务器上没法通过公网IP访问。排查之后发现，原来服务器监听的网络IP是127.0.0.1，这种方式就只能通过127.0.0.1的IP或者指向127.0.0.1的localhost域名来访问，通过局域网IP或是公网IP都无法访问的。所以把监听的网络IP改成0.0.0.0就好了，这样服务器就可以同时监听127.0.0.1、局域网指向自己的IP、公网IP了，因为0.0.0.0代表的就算本主机地址，所有指向它的都能接收。<br>2、朋友A在做vue开发的时候，遇到个问题：自己的项目只能通过127.0.0.1的方式访问，通过局域网IP都无法访问，但是同一局域网内其他主机ping他的主机地址的时候又能ping通，排除防火墙的问题，但是其他主机不能通过内网ip加端口访问他主机上的服务器，他也能ping通局域网内其他人的主机。就是因为vue起的node服务器是监听的127.0.0.1地址，改成0.0.0.0就可以了。</p>
+<p><strong>127.0.0.1</strong>：任何一个以数字127开头的IP地址(127.x.x.x)都叫做回送地址。它是一个保留地址，最常见的表示形式为127.0.0.1。 在每个主机上对应于IP地址127.0.0.1有个接口，称为回送接口。IP协议规定，当任何程序用回送地址作为目的地址时，计算机上的协议软件不会把该数据报向网络上发送，而是把数据直接返回给本主机。因此网络号等于127的数据报文不能出现于任何网络上，主机和路由器不能为该地址广播任何寻径信息。回送地址的用途是，可以实现对本机网络协议的测试或实现本地进程间的通信。</p>
+<p><strong>localhost</strong>：localhost也叫local，意为本地服务器，是给回路网络接口（loopback）的一个标准主机名，相对应的IP地址为127.0.0.1（IPv4）和[::1]（IPv6）。从这里我们也可以看到localhost是一个域名，只是系统默认将他指向了127.0.0.1，也就是本机。<br>  需要注意的是localhot是不经网卡传输，它不受网络防火墙和网卡相关的的限制。而127.0.0.1是通过网卡传输，依赖网卡，并受到网络防火墙和网卡相关的限制，像用户权限之类的限制。</p>
+<p><strong>内网IP</strong>：内网IP也就是局域网IP地址，是我们自己都可以通过网关或路由器以及多个计算机组成一个局域网，在这个局域网内给每台设备分配一个局域网ip地址，同一个局域网同网段内的计算机可以通过这个局域网ip互相访问。</p>
+<p><strong>公网IP</strong>：公网IP也就是广域网IP地址，广域网的计算机和Internet上的其他计算机可通过公网ip互相访问。在百度里面输入ip就可以去查“本机ip”，也是通过网站ip138.com查询的。当然这个IP地址更可能是我们的代理服务器的IP，毕竟现在IPv4的地址已经不够用了，不可能给普通用户分配一个真正的IP，通常是多个设备共用一个IP，然后内部通过NAT协议来转换内网和外网的连接、通信。</p>
+<p>  内网IP、公网IP要说起来是很复杂的，我们这里其实也只是简单的说了下而已。<br>  下面我们还是来尝试看看是个什么样子的：</p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">//node.js</span>
+<span class="hljs-keyword">let</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>);
+http.<span class="hljs-title function_">createServer</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">request, response</span>) {
+    response.<span class="hljs-title function_">writeHead</span>(<span class="hljs-number">200</span>, {<span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'text/plain'</span>});
+    response.<span class="hljs-title function_">end</span>(<span class="hljs-string">'Hello World\n'</span>);
+}).<span class="hljs-title function_">listen</span>(<span class="hljs-number">80</span>);
+
+<span class="hljs-comment">//hosts</span>
+<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> www.<span class="hljs-property">test</span>.<span class="hljs-property">com</span>
+<span class="hljs-number">120.27</span><span class="hljs-number">.26</span><span class="hljs-number">.105</span> localhost
+
+<span class="hljs-comment">//先查了下自己的局域网IP是：192.168.0.103</span>
+<span class="hljs-comment">//公网ip是：36.170.34.39</span>
+
+<span class="hljs-comment">//测试能正常访问到的地址是：</span>
+<span class="hljs-attr">http</span>:<span class="hljs-comment">//127.0.0.1/</span>
+<span class="hljs-attr">http</span>:<span class="hljs-comment">//localhost/</span>
+<span class="hljs-attr">http</span>:<span class="hljs-comment">//www.test.com/</span>
+<span class="hljs-attr">http</span>:<span class="hljs-comment">//192.168.0.103/</span>
+
+<span class="hljs-comment">//测试不能正常访问到的地址是：</span>
+<span class="hljs-attr">http</span>:<span class="hljs-comment">//0.0.0.0/</span>
+<span class="hljs-attr">http</span>:<span class="hljs-comment">//36.170.34.39/</span>
+
+<span class="hljs-comment">//那么大家自己去猜想吧。。。</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>参考文章：<br><a href="https://baike.baidu.com/item/IP/224599?fr=aladdin">https://baike.baidu.com/item/IP/224599?fr=aladdin</a></p>

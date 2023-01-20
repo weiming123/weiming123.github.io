@@ -1,0 +1,54 @@
+<p>  前面网站上有个复制、粘贴的控制，就是在你复制网页上面的内容的时候，在复制的内容下面加一个如下的提示：</p>
+<pre><code class="language-JavaScript"><span class="code-block">————————————————
+版权声明:原文出自 [ 爱生活爱编程 ] 转载请注明出处并保留原文链接。
+原文链接:<span class="hljs-attr">https</span>:<span class="hljs-comment">//liu_yong.gitee.io/blogs/98/</span></span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  其实这个对于复制者也没多少限制，但是朋友说有这个东西感觉不方便复制了，所以就决定去掉这个功能了，下面把实现的代码给贴出来，如果有需要的朋友可以看看，如果发现不好的地方欢迎指出、交流，邮箱：<a href="mailto:liuyongfov@163.com">liuyongfov@163.com</a></p>
+<p><strong>js 实现复制、粘贴功能：</strong></p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-keyword">function</span> <span class="hljs-title function_">addCopyRight</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> _body = <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>,
+        selection = <span class="hljs-variable language_">window</span>.<span class="hljs-property">getSelection</span> ? <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">getSelection</span>() : <span class="hljs-variable language_">document</span>.<span class="hljs-property">selection</span>.<span class="hljs-title function_">createRange</span>().<span class="hljs-property">text</span>,
+        blogName = <span class="hljs-string">'[ 爱生活爱编程 ]'</span>;
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">window</span>.<span class="hljs-property">clipboardData</span>) {
+        <span class="hljs-comment">//兼容ie</span>
+        <span class="hljs-keyword">let</span> pagelink =<span class="hljs-string">"\r\n————————————————\r\n版权声明:原文出自 "</span>+blogName+<span class="hljs-string">" 转载请注明出处并保留原文链接。\r\n原文链接:"</span>+<span class="hljs-variable language_">document</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span>,
+            copyText = selection + pagelink;
+        <span class="hljs-variable language_">window</span>.<span class="hljs-property">clipboardData</span>.<span class="hljs-property">setData</span> (<span class="hljs-string">"Text"</span>, copyText);
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">let</span> pagelink =<span class="hljs-string">"&lt;br /&gt;————————————————&lt;br /&gt;版权声明:原文出自 "</span>+blogName+<span class="hljs-string">" 转载请注明出处并保留原文链接。&lt;br /&gt;原文链接:"</span>+<span class="hljs-variable language_">document</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span>,
+            copyText = selection + pagelink,
+            newDiv = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">'div'</span>);
+        newDiv.<span class="hljs-property">style</span>.<span class="hljs-property">cssText</span>=<span class="hljs-string">';position=absolute;left:-99999px;'</span>;
+        _body.<span class="hljs-title function_">appendChild</span>(newDiv);
+        newDiv.<span class="hljs-property">innerHTML</span> = copyText;
+        selection.<span class="hljs-title function_">selectAllChildren</span>(newDiv);
+        <span class="hljs-variable language_">window</span>.<span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+            _body.<span class="hljs-title function_">removeChild</span>(newDiv);
+        },<span class="hljs-number">0</span>);
+    }
+}
+
+
+<span class="hljs-comment">// 使用</span>
+<span class="hljs-variable language_">document</span>.<span class="hljs-property">oncopy</span> = addCopyRight;</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>另外，在页面上<strong>按F12、Ctrl+Shift+C、鼠标右键 等方式不能打开浏览器开发者模式</strong>，是用的下面的代码控制的，有需要的朋友也可以看看，同样，如果发现不好的地方欢迎指出、交流，邮箱：<a href="mailto:liuyongfov@163.com">liuyongfov@163.com</a></p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-title function_">copyrightProtect</span>(<span class="hljs-params"></span>){
+    <span class="hljs-variable language_">document</span>.<span class="hljs-property">onkeydown</span>=<span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>){
+        <span class="hljs-keyword">var</span> e = e || <span class="hljs-variable language_">window</span>.<span class="hljs-property">event</span>;
+        <span class="hljs-keyword">if</span>(e.<span class="hljs-property">keyCode</span>==<span class="hljs-number">123</span>){
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>((e.<span class="hljs-property">ctrlKey</span>)&amp;&amp;(e.<span class="hljs-property">shiftKey</span>)&amp;&amp;(e.<span class="hljs-property">keyCode</span>==<span class="hljs-number">73</span>)){
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>((e.<span class="hljs-property">ctrlKey</span>)&amp;&amp;(e.<span class="hljs-property">keyCode</span>==<span class="hljs-number">85</span>)){
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>((e.<span class="hljs-property">ctrlKey</span>)&amp;&amp;(e.<span class="hljs-property">keyCode</span>==<span class="hljs-number">83</span>)){
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+    }
+    <span class="hljs-variable language_">document</span>.<span class="hljs-property">oncontextmenu</span>=<span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>){
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+}</span>
+</code><span class="copy-button">复制代码</span></pre>

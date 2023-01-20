@@ -1,0 +1,49 @@
+&emsp;&emsp;git cherry-pick 命令的作用就是把指定的提交的更改应用进来，如把本地其他分支的某些提交应用到当前分支来，更改当前分支的提交记录和工作区、暂存区。也可以说是把其他本地的commit的修改复制到目标分支上去。
+&emsp;&emsp;下面我们总结下git cherry-pick 常用的命令。
+
+##### git cherry-pick 将某次commit应用于当前分支
+&emsp;&emsp;命令：git cherry-pick &lt;commit&gt;
+&emsp;&emsp;举例：git cherry-pick aeb9654
+
+tips：
+1、commit可以是其他分支的，也可以是本分支的，比如被reset掉的commit。
+2、如果工作区或暂存区还有修改未提交，需要先提交或清空未commit的修改，否则执行 git cherry-pick &lt;commit&gt; 会报错，会提示：
+error: your local changes would be overwritten by cherry-pick.
+hint: commit your changes or stash them to proceed.
+fatal: cherry-pick failed
+3、被应用的commit生成新的commit后，两个commit的id是不一样的，这就类似于复制过来的修改，以后两个commit的修改就互不影响了，如果修改commit的备注等可以互不影响了。
+4、如果发生了冲突，会提示冲突并暂停复制，等到解决冲突后，可以使用 git add 提交修改冲突后的文件，然后使用 **git cherry-pick --continu**e 继续复制；也可以使用 **git cherry-pick --abort** 停止复制并恢复到执行 git cherry-pick &lt;commit&gt; 之前的状态；也可以使用 **git cherry-pick --quit** 停止复制但不恢复到执行 git cherry-pick &lt;commit&gt; 之前的状态。
+5、这里的commit是普通的commit提交记录，如果是merge的commit请继续看下面。
+
+##### git cherry-pick 将多次commit应用于当前分支
+&emsp;&emsp;命令：git cherry-pick &lt;commit1&gt; &lt;commit2&gt; &lt;commit3&gt; ...
+&emsp;&emsp;举例：git cherry-pick aeb9654 ea42b88 c487c1c
+
+##### git cherry-pick 将多次连续的commit应用于当前分支
+&emsp;&emsp;命令：git cherry-pick &lt;commit1&gt;...&lt;commit2&gt;
+&emsp;&emsp;举例：git cherry-pick aeb9654...c487c1c
+&emsp;&emsp;tips：这里复制的commit里面 不包含第一个commit，包含第二个commit
+
+tips：上面的将多次的commit应用于当前分支的方式会在当前分支也生成多个commit，并且新生成的commit和原commit的id是不一样的
+
+##### git cherry-pick 复制其他commit的修改，只更新当前分支的工作区和暂存区，不产生新的提交。
+&emsp;&emsp;命令：git cherry-pick -n &lt;commit1&gt; &lt;commit2&gt; ...
+&emsp;&emsp;举例：git cherry-pick -n aeb9654 c487c1c
+&emsp;&emsp;tips：这里复制了多个commit的修改，但是只更新了本分支的工作区和暂存区，后面我们再提交一次就可以生成新的提交了，这样的好处就是复制了多个其他的commit但是可能只需要在当前分支生成一个新的commit，当然究竟是好是坏还得根据具体情况而定。
+
+##### git cherry-pick 复制其他commit的修改，并且新生成的commit每个在提交信息的末尾追加一行 cherry picked from commit 。。。  的信息
+&emsp;&emsp;命令：git cherry-pick -x &lt;commit1&gt;...&lt;commit2&gt;
+&emsp;&emsp;举例：git cherry-pick -x aeb9654...c487c1c
+&emsp;&emsp;tips：提交信息的末尾追加l一行类似: (cherry picked from commit b9e356c768864b64fa17723b5726d9c4026090d0) 的信息，以后可以方便的查到这个提交是如何产生的。
+
+##### git cherry-pick 复制的commit是merge的commit
+&emsp;&emsp;命令：git cherry-pick -m [parent-number] &lt;commit&gt;
+&emsp;&emsp;举例：git cherry-pick -m 2 5c86e25
+&emsp;&emsp;tips：
+1、如果我们直接使用 git cherry-pick 5c86e25 来复制一个merge的commit是会报错的，如：
+error: commit 5c86e25ad401ba5ad78282d37cd1f07fcdd50ff5 is a merge but no -m option was given.
+fatal: cherry-pick failed
+2、我们使用 git show 5c86e25 命令可以看到这个commit的信息有这么一行：Merge: 72032b7 9c4f74e，这就是它从哪里合并来的，72032b7 就是 1，9c4f74e 就是 2，我们这里的两个commit id就是merge的那两个分支未merge前的最新的commit id，我们使用的1，2就是代表了我们选择哪一条线的commit来应用。
+
+参考资料：
+[https://git-scm.com/docs/git-cherry-pick](https://git-scm.com/docs/git-cherry-pick)

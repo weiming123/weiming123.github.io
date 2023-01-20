@@ -1,0 +1,43 @@
+<p>环境：vue2.x,vant2.x</p>
+<p>咱也不废话，先说说解决办法：用一个div把van-popup包裹起来。</p>
+<p>下面说说过程(废话)：</p>
+<p>项目内使用到了vant的van-popup组件，而使用的人为了组件内的配置、方法内重用，于是在自己项目内单独封装了一个组件，这个组件内就只有一个van-popup以及van-popup弹层内的内容，代码示例如下：<br>组件testComponent.vue:</p>
+<pre><code class="language-javascript"><span class="code-block">&lt;template&gt;
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">van-popup</span>
+    <span class="hljs-attr">v-model</span>=<span class="hljs-string">"show"</span>
+    <span class="hljs-attr">:lazy-render</span>=<span class="hljs-string">"false"</span>
+    <span class="hljs-attr">class</span>=<span class="hljs-string">"protocol-popup"</span>
+    <span class="hljs-attr">position</span>=<span class="hljs-string">"right"</span>
+    <span class="hljs-attr">get-container</span>=<span class="hljs-string">"body"</span>
+  &gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>我是一句测试的话<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">van-popup</span>&gt;</span></span>
+&lt;/template&gt;</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>当然，真正的代码不可能是这样的，这里只是为了方便大家看，这么简化了而已。<br>然后在页面上引入了这个testComponent组件，传show参数控制弹层显示隐藏，然而在隐藏的时候缺报了个错，错误提示如下：</p>
+<pre><code class="language-shell"><span class="code-block">[Vue warn]:Error in beforeDestroy hook:"HierarchyRequestError:Failed to execute 'appendChild' on 'Node':The new child element contains the parent."  ...
+DOMException{stack:"Error:Failed to execute 'a...</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>虽然这个错误不影响到我们主要效果的实现，但是作为一个有代码洁癖的程序猿，不可能在这么明显报错的情况下还视而不见吧，于是在下跟踪了下错误。。。<br>发现在vant的源代码一个文件里面有这么一句话，<br>文件相对位置：node_modules\vant\es\mixins\popup\index.js<br>代码：</p>
+<pre><code class="language-javascript"><span class="code-block"><span class="hljs-attr">beforeDestroy</span>: <span class="hljs-keyword">function</span> <span class="hljs-title function_">beforeDestroy</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">close</span>();
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">getContainer</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">$parent</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">$parent</span>.<span class="hljs-property">$el</span>) {
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">$parent</span>.<span class="hljs-property">$el</span>.<span class="hljs-title function_">appendChild</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">$el</span>);
+    }
+  },</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>如果你在mounted里面去打印这几个参数的话，就会发现：<br>this.getContainer其实是：body<br>this.$parent其实是：testComponent组件实例<br>this.<span class="md-editor-katex-inline" data-processed=""><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>a</mi><mi>r</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">parent.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8095em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal">re</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mord">.</span></span></span></span></span>el 其实是：组件的根元素对象，这里就是van-popup<br>this.$el 其实是：van-popup实例<br>于是我们发现，这里的this.<span class="md-editor-katex-inline" data-processed=""><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>a</mi><mi>r</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">parent.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8095em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal">re</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mord">.</span></span></span></span></span>el.appendChild(this.$el);其实就是自己appendChild了自己，这就是为什么会发生DOM报错了，那么解决问题其实也简单，就是在testComponent组件不要直接用van-popup，加个div包裹起来就可以了。如：</p>
+<pre><code class="language-javascript"><span class="code-block">&lt;template&gt;
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">van-popup</span>
+      <span class="hljs-attr">v-model</span>=<span class="hljs-string">"show"</span>
+      <span class="hljs-attr">:lazy-render</span>=<span class="hljs-string">"false"</span>
+      <span class="hljs-attr">class</span>=<span class="hljs-string">"protocol-popup"</span>
+      <span class="hljs-attr">position</span>=<span class="hljs-string">"right"</span>
+      <span class="hljs-attr">get-container</span>=<span class="hljs-string">"body"</span>
+    &gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>我是一句测试的话<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">van-popup</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+&lt;/template&gt;</span>
+</code><span class="copy-button">复制代码</span></pre>

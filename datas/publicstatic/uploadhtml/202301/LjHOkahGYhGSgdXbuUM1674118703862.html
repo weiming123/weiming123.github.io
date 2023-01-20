@@ -1,0 +1,34 @@
+<h4 id="为什么要给URL编码？">  为什么要给URL编码？</h4><p>  作为一个 前端er，对于URL是再熟悉不过了，我们知道URL主要由协议、主机、端口、路径、参数、锚点等组成，而这些都是有标识符的，比如参数部分由 "?" 和 "#" 分割出的部分，而每对参数之间以 &amp; 符合分割，一对参数的key 、 value又以 = 分割，那么如果我们现在想在参数中传一个value是一个URL的参数呢？如：</p>
+<pre><code class="language-HTTP"><span class="code-block"><span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/liu_yong.gitee.io/blogs</span><span class="hljs-regexp">/93/</span><span class="hljs-string">?s</span>hareurl=<span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/liu_yong.gitee.io/</span><span class="hljs-string">?p</span>ageNo=<span class="hljs-number">1</span>&amp;routeLabelids=<span class="hljs-number">1</span>&amp;mytarget=mobile&amp;source=pc</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>如上URL，我们想传三个参数：<br>  分享链接：shareurl=<a href="https://liu_yong.gitee.io/?pageNo=1&amp;routeLabelids=1">https://liu_yong.gitee.io/?pageNo=1&amp;routeLabelids=1</a><br>  分享目标：mytarget=mobile<br>  来源平台：source=pc</p>
+<p>  但是，我们发现，我们的链接中的参数shareurl的value本身是一个连接，而这个连接又带了参数，就这样传递的话难免会被理解为原连接的参数，或者干脆傻傻分不清楚究竟哪些是value的，哪些是原链接的参数对了。<br>  另外，URL的编码格式采用的是ASCII码，如果我们的链接中带了中午或者非ASCII码表中的字符怎么办，浏览器是丢弃还是怎么办。。。<br>  编程我们就要尽量严谨，这样不但不会浪费我们的时间，还有可能因此减少很多意外的bug和减少很意外的损失，让我们的系统更加稳定、安全、强大、易于维护和扩展。。。</p>
+<h3 id="js如何给URL编码？">  js如何给URL编码？</h3><p>  我们给URL编码通常是用在传参数的时候给参数的key、value编码，域名和路径我们一般不会用不符合URL规范的字符。<br>  这里，我们先来看看js编码、解码的几个方法：encodeURIComponent、encodeURI、escape、decodeURIComponent、decodeURI、unescape。这些方法又有什么区别？</p>
+<p><strong>encodeURIComponent</strong>: 把字符串作为 URI 组件进行编码。 该方法不会对 ASCII 字母和数字进行编码，也不会对这些 ASCII 标点符号进行编码： - _ . ! ~ * ' ( ) 。 其他字符（比如 ：;/?: @&amp;=+$,# 这些用于分隔 URI 组件的标点符号），都是由一个或多个十六进制的转义序列替换的。<br><strong>decodeURIComponent()</strong> 函数可对 encodeURIComponent() 函数编码的 URI 进行解码。</p>
+<p><strong>encodeURI</strong>: 把字符串作为 URI 进行编码。 该方法不会对 ASCII 字母和数字进行编码，也不会对下面这些 ASCII 标点符号进行编码： , / ? : @ &amp; = + $ # 。<br><strong>decodeURI()</strong> 函数可对 encodeURI() 函数编码过的 URI 进行解码。</p>
+<p><strong>escape</strong>: 可对字符串进行编码（ Unicode格式 ）。该方法不会对 ASCII 字母和数字进行编码，也不会对下面这些 ASCII 标点符号进行编码： * @ - _ + . / 。其他所有的字符都会被转义序列替换。escape 已经从 Web 标准中删除，虽然一些浏览器目前仍然支持它，但也许会在未来的某个时间停止支持，尽量不要使用他。<br><strong>unescape()</strong> 函数可对通过 escape() 编码的字符串进行解码。 unescape 方法不应用于解码“统一资源标识符”(URI)。</p>
+<p>下面我们来写下设置、获取URL参数的方法：</p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-keyword">function</span> <span class="hljs-title function_">setURLParams</span>(<span class="hljs-params">params</span>){
+    <span class="hljs-keyword">let</span> searchs=<span class="hljs-string">''</span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i <span class="hljs-keyword">in</span> params){
+        searchs += <span class="hljs-built_in">encodeURIComponent</span>(i)+<span class="hljs-string">'='</span>+<span class="hljs-built_in">encodeURIComponent</span>(params[i])+<span class="hljs-string">'&amp;'</span>
+    }
+    <span class="hljs-keyword">return</span> searchs.<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>)
+}
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">getURLParams</span>(<span class="hljs-params">key,search</span>){
+    <span class="hljs-keyword">let</span> searchs=search.<span class="hljs-title function_">split</span>(<span class="hljs-string">'&amp;'</span>)
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>,len = searchs.<span class="hljs-property">length</span>;i&lt;len;i++){
+        <span class="hljs-keyword">let</span> vals=searchs[i].<span class="hljs-title function_">split</span>(<span class="hljs-string">'='</span>)
+        <span class="hljs-keyword">let</span> _tmpkey=<span class="hljs-built_in">decodeURIComponent</span>(vals[<span class="hljs-number">0</span>])
+        <span class="hljs-keyword">if</span>(_tmpkey==key){
+            <span class="hljs-keyword">return</span> <span class="hljs-built_in">decodeURIComponent</span>(vals[<span class="hljs-number">1</span>])
+        }
+    }
+}
+
+<span class="hljs-comment">// 测试：</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">getURLParams</span>(<span class="hljs-string">'wd'</span>,location.<span class="hljs-property">search</span>.<span class="hljs-title function_">slice</span>(<span class="hljs-number">1</span>)))
+<span class="hljs-title function_">setURLParams</span>({<span class="hljs-attr">target</span>:<span class="hljs-string">'pc'</span>,<span class="hljs-string">'myName'</span>:<span class="hljs-string">'未知的名人'</span>,<span class="hljs-string">'sdfs&amp;fds'</span>:<span class="hljs-string">'*fs1-&amp;fds'</span>})</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>其他：<br><a href="https://liu_yong.gitee.io/blogs/93/">认识 HTTP URL 及用js操作URL</a><br><a href="https://liu_yong.gitee.io/blogs/94/">URI、URL、URN之间的区别和联系是什么</a></p>
+<p>参考资料：<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent">encodeURIComponent</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/encodeURI">encodeURI</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/escape">escape</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent">decodeURIComponent</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/decodeURI">decodeURI</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/unescape">unescape</a><br><a href="https://www.ietf.org/rfc/rfc1738.txt">RFC1738文档</a><br><a href="https://www.ietf.org/rfc/rfc3986.txt">RFC3986文档</a></p>

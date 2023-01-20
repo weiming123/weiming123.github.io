@@ -1,0 +1,53 @@
+<p>  快速排序由C. A. R. Hoare在1960年提出。它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。<br>  废话不多说，上代码：</p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@description</span>: 对象、数组的两个key交换值
+ * <span class="hljs-doctag">@param</span> {<span class="hljs-type">Object,i,j</span>} 
+ * <span class="hljs-doctag">@return</span>: void
+ */</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">exchangeArray</span>(<span class="hljs-params">obj,i,j</span>){
+    <span class="hljs-keyword">let</span> tmp=obj[i];
+    obj[i] = obj[j];
+    obj[j]=tmp;
+}
+
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@description</span>: 快速排序-升序,快速排序算法是不稳定的算法
+ * <span class="hljs-doctag">@param</span> {<span class="hljs-type">Array</span>} 
+ * <span class="hljs-doctag">@return</span>: Array
+ */</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">quickSortAsc</span>(<span class="hljs-params">arr</span>) {
+    <span class="hljs-keyword">let</span> sort=<span class="hljs-keyword">function</span>(<span class="hljs-params">sarr, left=<span class="hljs-number">0</span>, right=arr.length-<span class="hljs-number">1</span></span>){
+        <span class="hljs-keyword">if</span>(left&lt;right &amp;&amp; sarr.<span class="hljs-property">length</span>&gt;<span class="hljs-number">1</span>){
+            <span class="hljs-comment">//左边的索引小于右边的索引时，说明还需要排序，不然就是已经整理完了</span>
+            <span class="hljs-keyword">let</span> _left=left,
+                _right=right+<span class="hljs-number">1</span>,
+                mid=<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>((left+right)/<span class="hljs-number">2</span>),
+                pivot = sarr[mid];
+            <span class="hljs-comment">//取无序数组中间一个数为基准，这里是取的Math.floor((left+right)/2)</span>
+            <span class="hljs-comment">//主要是如果数组本身就是有序的，那么取中间一个数做基准是最恰当的</span>
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=left;i&lt;_right;i++){
+                <span class="hljs-keyword">if</span>(sarr[i]&lt;pivot){
+                    <span class="hljs-comment">//把所有小于等于基准的数都放到数组前面去</span>
+                    _left!=i &amp;&amp; <span class="hljs-title function_">exchangeArray</span>(sarr,_left,i);
+                    <span class="hljs-comment">//移动pivot的索引，方便后面放到_left位置去</span>
+                    <span class="hljs-keyword">if</span>(_left==mid){
+                        mid=i;
+                    }
+                    ++_left;
+                }
+            }
+            <span class="hljs-comment">//把所有小于基准的数都放到数组_left前面去了</span>
+            <span class="hljs-comment">//现在把基准放到数组_left的位置处</span>
+            <span class="hljs-title function_">exchangeArray</span>(sarr,_left,mid);
+            <span class="hljs-comment">//接下来递归排序基准左右两边的数组</span>
+            <span class="hljs-title function_">sort</span>(sarr, left, _left-<span class="hljs-number">1</span>);
+            <span class="hljs-title function_">sort</span>(sarr, _left+<span class="hljs-number">1</span>, right);
+        }
+    }
+    <span class="hljs-comment">//复制一个新的数组，后面返回排序过的新数组</span>
+    <span class="hljs-keyword">let</span> _arr=arr.<span class="hljs-title function_">concat</span>();
+    <span class="hljs-title function_">sort</span>(_arr);
+    <span class="hljs-keyword">return</span> _arr;
+}</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  从快速排序算法的思想和代码也可以看出，快速排序是不稳定的算法，也就是两个相等的数在经过快速排序之后他们的前后位置可能和排序之前不一样了。<br>  算法只是思想而已，但是实现算法可能各又不同，有的算法的实现可能耗费的时间和需要占用的空间是不一样的。<br>  这里quickSortAsc的实现，最坏的情况是，每次所选的中间数是当前序列中的最大或最小元素，这使得每次划分所得的子表中一个为空表，另一子表的长度为原表的长度-1。这样，长度为n的数据表的快速排序需要经过n趟划分，使得整个排序算法的时间复杂度为O(n2)。<br>  快速排序的平均时间复杂度是O(nlogn)，最好情况是O(nlogn)，最坏情况是O(n*n)；空间复杂度为O(logn))。<br>  代码请见于：<a href="https://gitee.com/liu_yong/study/tree/master/vuees/src/assets/js/sort.js">https://gitee.com/liu_yong/study/tree/master/vuees/src/assets/js/sort.js</a></p>

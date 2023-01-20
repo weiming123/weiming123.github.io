@@ -1,0 +1,32 @@
+<p>  <strong>冒泡排序</strong>是一种比较简单的排序算法，这种算法是让越小或者越大的元素经由交换慢慢“浮”到数列的顶端，就像水里面的泡泡向上浮动一样，所以叫“冒泡排序”。<br>冒泡排序算法的原理如下：<br>  1、比较相邻的元素。如果第一个比第二个大，就交换他们两个。<br>  2、对每一对相邻元素做同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。<br>  3、针对所有的元素重复以上的步骤，除了最后一个。<br>  4、持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</p>
+<p>废话不多说，上代码：</p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@description</span>: 冒泡排序-升序,冒泡排序算法是稳定的算法
+ * <span class="hljs-doctag">@param</span> {<span class="hljs-type">Array</span>}
+ * <span class="hljs-doctag">@return</span>: Array
+ */</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">bubbleSortAsc</span>(<span class="hljs-params">arr</span>) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(arr)) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-title class_">TypeError</span>(<span class="hljs-string">"param must be a Array"</span>);
+    }
+    <span class="hljs-keyword">let</span> _arr = arr.<span class="hljs-title function_">concat</span>();
+    <span class="hljs-keyword">let</span> arrLength = _arr.<span class="hljs-property">length</span>;
+    <span class="hljs-keyword">if</span> (arrLength &lt; <span class="hljs-number">2</span>) {
+        <span class="hljs-keyword">return</span> _arr;
+    }
+    <span class="hljs-comment">//循环整个数组，每一次找到一个最大值，由于最后交换时是前后两个交换，所以其实之需要arrLength - 2 次外层循环</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, ilen = arrLength - <span class="hljs-number">1</span>; i &lt; ilen; i++) {
+    <span class="hljs-comment">//把0至arrLength - i - 1再循环一次，找出这个子集里面最大的数，并移动到这个子集的最后一个位置上去，</span>
+    <span class="hljs-comment">//arrLength - i - 1之后的集合其实就是已经排好序了的了，因为每一次内层循环都会把当前子集最大的数移到最后一位</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; arrLength - i - <span class="hljs-number">1</span>; j++) {
+            <span class="hljs-keyword">if</span> (_arr[j] &gt; _arr[j + <span class="hljs-number">1</span>]) {
+                <span class="hljs-keyword">let</span> temp = _arr[j];
+                _arr[j] = _arr[j + <span class="hljs-number">1</span>];
+                _arr[j + <span class="hljs-number">1</span>] = temp;
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> _arr;
+}</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  从冒泡排序算法的思想和我们这里实现的代码来也可以看出，冒泡排序是稳定的算法，即两个相等的数在经过冒泡排序之后他们的前后位置排序之前是一样的；它的平均时间复杂度是O(n* n)，最好情况是O(n)，最坏情况是O(n*n)；空间复杂度是O(1)。<br>  我在自己电脑上测试的时候，对一个五万个随机数字的数组排序，冒泡排序算法需要253ms，快速排序只需要7ms，数组长度越大，差距就越明显。<br>  代码请见于：<a href="https://gitee.com/liu_yong/study/tree/master/vuees/src/assets/js/sort.js">https://gitee.com/liu_yong/study/tree/master/vuees/src/assets/js/sort.js</a></p>

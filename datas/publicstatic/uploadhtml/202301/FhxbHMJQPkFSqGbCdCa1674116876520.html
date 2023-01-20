@@ -1,0 +1,12 @@
+<p>  git使用ssh链接远程仓库的时候，我们需要生成一个密钥，也就是一对公钥和私钥，这里我们说下怎么生成git的密钥以及如何查看自己的密钥。<br>这里我们假设你已经安装好了git，没有安装的话可以下载git安装即可。</p>
+<h4 id="git生成密钥步骤："><a href="#git生成密钥步骤：">git生成密钥步骤：</a></h4><p>1、打开git bash<br>2、执行如下命令：</p>
+<pre><code class="language-shell"><span class="code-block">ssh-keygen -t rsa -C "test@xxx.com" </span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>这里的邮箱<a href="mailto:test@xxx.com">test@xxx.com</a>是你自己的git用的邮箱，执行命令行一路enter回车就可以了。</p>
+<p>如此两步就生成了我们自己的密钥了。下面我们再来看下怎么查看git生成的密钥，其实有些童鞋已经生成过git密钥了，但是忘了是多少了，可以直接像下面这样查看git密钥就可以了。</p>
+<h4 id="git查看密钥："><a href="#git查看密钥：">git查看密钥：</a></h4><p>1、在git bash里面执行如下命令：</p>
+<pre><code class="language-shell"><span class="code-block">cat ~/.ssh/id_rsa.pub</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>上面的命令就是查看我们git的公钥的命令了，我们要建立ssh连接，就是需要把公钥填到远程仓库里面的公钥里面去。</p>
+<p>比如gitee，在网站的 设置-&gt;ssh公钥 里面就可以添加公钥，标题可以取一个自己记得住或者说容易记起是哪台机器的名称，然后把公钥填进去，确定就可以了。</p>
+<p>参考资料：<br><a href="https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5">https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5</a></p>

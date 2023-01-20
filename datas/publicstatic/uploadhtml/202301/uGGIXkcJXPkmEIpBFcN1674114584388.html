@@ -1,0 +1,113 @@
+<p>  使用npm的时候，当我们希望用淘宝镜像加速下载的时候我们希望npm源使用淘宝镜像；当我们有的时候下载的包发现始终不对的时候，又想用npm本来的源，看看是不是包不对的问题；当我们自己搭建了npm源的时候，可能又希望有的时候用自己搭建的npm源。。。<br>  如果你也希望能方便、简单的切换、管理npm源的话，那么你可以看看nrm能不能满足你的需求！</p>
+<h5 id="一、安装nrm"><a href="#一、安装nrm">一、安装nrm</a></h5><p>使用全局安装nrm就可以了，如下：</p>
+<pre><code class="language-shell"><span class="code-block">npm install -g nrm</span>
+</code><span class="copy-button">复制代码</span></pre>
+<h5 id="二、使用nrm"><a href="#二、使用nrm">二、使用nrm</a></h5><p>  1、查看nrm管理的源：</p>
+<pre><code class="language-shell"><span class="code-block">nrm ls
+
+* npm -----  https://registry.npmjs.org/
+  yarn ----- https://registry.yarnpkg.com
+  cnpm ----  http://r.cnpmjs.org/
+  taobao --  https://registry.npm.taobao.org/
+  nj ------  https://registry.nodejitsu.com/
+  skimdb -- https://skimdb.npmjs.com/registry</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  2、设置npm使用哪个源：</p>
+<pre><code class="language-shell"><span class="code-block">nrm use cnpm  //switch registry to cnpm
+
+    Registry has been set to: http://r.cnpmjs.org/</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  3、添加源：</p>
+<pre><code class="language-shell"><span class="code-block">nrm add &lt;registry&gt; &lt;url&gt; [home]</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  更多nrm用法可以使用 <strong>nrm -h</strong> 命令查看，这里就不赘述了，也可以查看nrm官方文档<a href="https://www.npmjs.com/package/nrm">https://www.npmjs.com/package/nrm</a>、<a href="https://github.com/Pana/nrm">https://github.com/Pana/nrm</a></p>
+<p>  我目前是在Windows10上面使用的nrm，说说可能遇到的问题吧：</p>
+<p>  一、<strong>安装时报错了</strong>：</p>
+<pre><code class="language-shell"><span class="code-block">C:\Users\Administrator&gt;npm install -g nrm
+npm WARN deprecated request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
+npm WARN deprecated mkdirp@0.3.5: Legacy versions of mkdirp are no longer supported. Please update to mkdirp 1.x. (Note that the API surface has changed to use Promises in 1.x.)
+npm WARN deprecated coffee-script@1.7.1: CoffeeScript on NPM has moved to "coffeescript" (no hyphen)
+npm WARN deprecated har-validator@5.1.5: this library is no longer supported
+npm ERR! code EPERM
+npm ERR! syscall rename
+npm ERR! path C:\Users\Administrator\AppData\Roaming\npm\node_modules\nrm\node_modules\jsprim\package.json.916894108
+npm ERR! dest C:\Users\Administrator\AppData\Roaming\npm\node_modules\nrm\node_modules\jsprim\package.json
+npm ERR! errno -4048
+npm ERR! Error: EPERM: operation not permitted, rename 'C:\Users\Administrator\AppData\Roaming\npm\node_modules\nrm\node_modules\jsprim\package.json.916894108' -&gt; 'C:\Users\Administrator\AppData\Roaming\npm\node_modules\nrm\node_modules\jsprim\package.json'
+npm ERR!  [OperationalError: EPERM: operation not permitted, rename 'C:\Users\Administrator\AppData\Roaming\npm\node_modules\nrm\node_modules\jsprim\package.json.916894108' -&gt; 'C:\Users\Administrator\AppData\Roaming\npm\node_modules\nrm\node_modules\jsprim\package.json'] {
+npm ERR!   cause: [Error: EPERM: operation not permitted, rename 'C:\Users\Administrator\AppData\Roaming\npm\node_modules\nrm\node_modules\jsprim\package.json.916894108' -&gt; 'C:\Users\Administrator\AppData\Roaming\npm\node_modules\nrm\node_modules\jsprim\package.json'] {
+npm ERR!     errno: -4048,
+npm ERR!     code: 'EPERM',
+npm ERR!     syscall: 'rename',
+npm ERR!     path: 'C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\nrm\\node_modules\\jsprim\\package.json.916894108',
+npm ERR!     dest: 'C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\nrm\\node_modules\\jsprim\\package.json'
+npm ERR!   },
+npm ERR!   errno: -4048,
+npm ERR!   code: 'EPERM',
+npm ERR!   syscall: 'rename',
+npm ERR!   path: 'C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\nrm\\node_modules\\jsprim\\package.json.916894108',
+npm ERR!   dest: 'C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\nrm\\node_modules\\jsprim\\package.json',
+npm ERR!   parent: 'nrm'
+npm ERR! }
+npm ERR!
+npm ERR! The operation was rejected by your operating system.
+npm ERR! It's possible that the file was already in use (by a text editor or antivirus),
+npm ERR! or that you lack permissions to access it.
+npm ERR!
+npm ERR! If you believe this might be a permissions issue, please double-check the
+npm ERR! permissions of the file and its containing directories, or try running
+npm ERR! the command again as root/Administrator.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     C:\Users\Administrator\AppData\Roaming\npm-cache\_logs\2021-03-07T09_36_12_254Z-debug.log</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  安装居然报错了，从报错来看像是因为被操作系统拒绝了操作，像是没有权限或者是要修改的文件正在被使用，于是尝试了以管理员的身份来运行，结果还是不行，于是尝试清理缓存，看看是不是有资源被占用着，如下：</p>
+<pre><code class="language-shell"><span class="code-block">C:\Users\Administrator&gt; npm cache clean -force
+npm WARN using --force I sure hope you know what you are doing.</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  随后再次安装，结果还是报上面的错，突然想起自己还安装了杀毒软件的呢，于是先尝试把360杀毒关了(我电脑上还有个360安全卫士和腾讯的电脑管家没关)，此时再次尝试安装，成功了！哈哈(Ｔ▽Ｔ)</p>
+<p>  二、<strong>使用时报错了</strong>：</p>
+<pre><code class="language-shell"><span class="code-block">C:\Users\Administrator&gt;nrm ls
+internal/validators.js:124
+    throw new ERR_INVALID_ARG_TYPE(name, 'string', value);
+    ^
+
+[TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+  at validateString (internal/validators.js:124:11)
+  at Object.join (path.js:375:7)
+  at Object.&lt;anonymous&gt; (C:\Users\Administrator\AppData\Roaming\npm\node_modules\nrm\cli.js:17:20)
+  at Module._compile (internal/modules/cjs/loader.js:1063:30)
+  at Object.Module._extensions..js (internal/modules/cjs/loader.js:1092:10)
+  at Module.load (internal/modules/cjs/loader.js:928:32)
+  at Function.Module._load (internal/modules/cjs/loader.js:769:14)
+  at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:72:12)
+  at internal/main/run_main_module.js:17:47
+] {
+  code: 'ERR_INVALID_ARG_TYPE'
+}</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  如上，使用 <strong>nrm ls</strong> 命令报错了，不仅仅是nrm ls命令报错，nrm -h 、nrm add 等命令也报了上面那样的错。其实从上面报的错，我们就可以看出他是什么意思：<br>path方法的参数必须是字符串类型，但是接收到了一个undefined，然后从上面的报错信息，我们找到了“at Object.<anonymous> (C:\Users\Administrator\AppData\Roaming\npm\node_modules\nrm\cli.js:17:20)”这个文件，按照路径打开，找到17行20列，我们可以看到如下代码：</anonymous></p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">NRMRC</span> = path.<span class="hljs-title function_">join</span>(process.<span class="hljs-property">env</span>.<span class="hljs-property">HOME</span>, <span class="hljs-string">'.nrmrc'</span>);</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p><strong>说说原因：</strong> 我的操作系统是windows10 64位,node.js v14.16.0，我想可能和操作系统有关吧，你也可以把process.env打印出来，就会发现process.env.HOME是undefined的，他这里其实是要找到nrm的配置文件：.nrmrc，我在自己操作系统找了下，在“C:\Users\Administrator”下找到了.nrmrc文件，而“process.env.HOME”应该是node获取用户的home路径，但是在win10上面该用USERPROFILE，即process.env.USERPROFILE，USERPROFILE用于存储用户的应用程序和操作系统配置文件和个性化设置.</p>
+<p><strong>解决方法：</strong></p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/*
+C:\Users\Administrator\AppData\Roaming\npm\node_modules\nrm\cli.js:17:20
+第17行代码原本是这样的：
+const NRMRC = path.join(process.env.HOME, '.nrmrc');
+但是，win10上面process.env.HOME 是undefined，所以我们可以改成如下代码：
+*/</span>
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">NRMRC</span> = path.<span class="hljs-title function_">join</span>(process.<span class="hljs-property">env</span>.<span class="hljs-property">USERPROFILE</span> || process.<span class="hljs-property">env</span>.<span class="hljs-property">HOME</span>, <span class="hljs-string">'.nrmrc'</span>);</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  改完之后，我们就可以再使用命令行看下效果啦：</p>
+<pre><code class="language-shell"><span class="code-block">C:\Users\Administrator&gt;nrm ls
+
+  npm -------- https://registry.npmjs.org/
+  yarn ------- https://registry.yarnpkg.com/
+  cnpm ------- http://r.cnpmjs.org/
+* taobao ----- https://registry.npm.taobao.org/
+  nj --------- https://registry.nodejitsu.com/
+  npmMirror -- https://skimdb.npmjs.com/registry/
+  edunpm ----- http://registry.enpmjs.org/</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>  我们看到，已经OK啦！</p>

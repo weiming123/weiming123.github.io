@@ -1,0 +1,77 @@
+<p>  看前端的面试题的时候，发现了一道LazyMan的面试题，感觉挺有意思，这里给出下自己的实现。<br>  首先，看下需求是什么：</p>
+<pre><code><span class="code-block">    实现一个LazyMan，可以按照以下方式调用:
+
+    <span class="hljs-built_in">LazyMan</span>(<span class="hljs-string">'Hank'</span>);输出:
+    Hi! This is Hank!
+
+    <span class="hljs-built_in">LazyMan</span>(<span class="hljs-string">'Hank'</span>).<span class="hljs-built_in">sleep</span>(<span class="hljs-number">10</span>).<span class="hljs-built_in">eat</span>(<span class="hljs-string">'dinner'</span>);输出:
+    Hi! This is Hank!
+    //等待<span class="hljs-number">10</span>秒..
+    Wake up after <span class="hljs-number">10s</span>!
+    Eat dinner~
+
+    <span class="hljs-built_in">LazyMan</span>(<span class="hljs-string">'Hank'</span>).<span class="hljs-built_in">eat</span>(<span class="hljs-string">'dinner'</span>).<span class="hljs-built_in">eat</span>(<span class="hljs-string">'supper'</span>);输出:
+    Hi This is Hank!
+    Eat dinner~
+    Eat supper~
+
+    <span class="hljs-built_in">LazyMan</span>(<span class="hljs-string">'Hank'</span>).<span class="hljs-built_in">sleepFirst</span>(<span class="hljs-number">5</span>).<span class="hljs-built_in">eat</span>(<span class="hljs-string">'supper'</span>);输出:
+    //等待<span class="hljs-number">5</span>秒
+    Wake up after <span class="hljs-number">5</span>
+    Hi This is Hank!
+    Eat supper~
+
+    以此类推。 </span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>代码如下：</p>
+<pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-keyword">function</span> <span class="hljs-title function_">LazyMan</span>(<span class="hljs-params">uname</span>){
+  <span class="hljs-keyword">class</span> <span class="hljs-title class_">_lazyMan</span>{
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">uname</span>){
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">tasks</span>=[];
+      <span class="hljs-keyword">let</span> <span class="hljs-title function_">fn</span>=(<span class="hljs-params"></span>)=&gt;{
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Hi! This is "</span> + uname + <span class="hljs-string">"!"</span>);
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">next</span>()
+      }
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">tasks</span>.<span class="hljs-title function_">push</span>(fn);
+      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">()=&gt;</span>{
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">next</span>();
+      }, <span class="hljs-number">0</span>);
+    }
+    <span class="hljs-title function_">next</span>(<span class="hljs-params"></span>){
+      <span class="hljs-keyword">let</span> fn=<span class="hljs-variable language_">this</span>.<span class="hljs-property">tasks</span>.<span class="hljs-title function_">shift</span>();
+      <span class="hljs-keyword">typeof</span> fn==<span class="hljs-string">'function'</span> &amp;&amp; <span class="hljs-title function_">fn</span>();
+    }
+
+    <span class="hljs-title function_">eat</span>(<span class="hljs-params">something</span>){
+      <span class="hljs-keyword">let</span> <span class="hljs-title function_">fn</span>=(<span class="hljs-params"></span>)=&gt;{
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Eat "</span> + something + <span class="hljs-string">"~"</span>);
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">next</span>()
+      }
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">tasks</span>.<span class="hljs-title function_">push</span>(fn);
+      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>;
+    }
+    <span class="hljs-title function_">sleep</span>(<span class="hljs-params">time</span>){
+      <span class="hljs-keyword">let</span> <span class="hljs-title function_">fn</span>=(<span class="hljs-params"></span>)=&gt;{
+        <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">()=&gt;</span>{
+          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Wake up after "</span> + time + <span class="hljs-string">"s!"</span>);
+          <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">next</span>();
+        }, time * <span class="hljs-number">1000</span>);
+      }
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">tasks</span>.<span class="hljs-title function_">push</span>(fn);
+      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>;
+    }
+    <span class="hljs-title function_">sleepFirst</span>(<span class="hljs-params">time</span>){
+      <span class="hljs-keyword">let</span> <span class="hljs-title function_">fn</span>=(<span class="hljs-params"></span>)=&gt;{
+        <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">()=&gt;</span>{
+          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Wake up after "</span> + time + <span class="hljs-string">"s!"</span>);
+          <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">next</span>();
+        }, time * <span class="hljs-number">1000</span>);
+      }
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">tasks</span>.<span class="hljs-title function_">unshift</span>(fn);
+      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>;
+    }
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title function_">_lazyMan</span>(uname);
+}</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>分析：根据需求来看的话，最主要的是这么几个功能：<br>  1、可以链式调用，这个其实还可以用promise实现的，不过自己在方法内返回当前对象也可以实现链式调用。<br>  2、按顺序执行链式调用的方法，即使链式调用的方法其中有些有异步的操作，这也是为什么用了一个类似函数调用栈的东西，通过循环执行调用栈里面的方法来保证执行的顺序。<br>  3、sleepFirst方法可以插队，也就是执行了sleepFirst方法后，sleepFirst内的回调函数要先执行。因为我们使用了一个数组来存我们的回调函数，同时保证按照数组内的顺序来执行，那么只要把sleepFirst内的回调函数放到数组第一位去其实就可以了。<br>  4、在constructor里面的回调函数为什么要放到setTimeout里面去呢？因为如果不放到任务队列里面去，就会先执行constructor里面的回调函数了，那么我们调用sleepFirst的时候就不能先延迟再执行constructor的回调函数了。</p>

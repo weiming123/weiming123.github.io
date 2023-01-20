@@ -1,0 +1,24 @@
+<p>  Git 可以说是目前最流行的分布式版本控制系统了，或许现在使用各种可视化工具的童鞋比较多，甚至可能忘了大部分命令了都有可能，不过通过学习、熟悉git的各种命令，也能让我们更好的来了解和使用git，所以了解下git的各种命令还是很有用的，这里我们来说说branch命令常用的用法。</p>
+<h4 id="git branch 查看本地分支，列出本地所有分支，在当前分支前加*"><a href="#git branch 查看本地分支，列出本地所有分支，在当前分支前加*">git branch 查看本地分支，列出本地所有分支，在当前分支前加*</a></h4><p>  命令：git branch<br>  运行结果示例：</p>
+<pre><code class="language-shell"><span class="code-block"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git branch</span>
+* master
+  test1</span>
+</code><span class="copy-button">复制代码</span></pre>
+<h4 id="git branch -r 列出远程分支"><a href="#git branch -r 列出远程分支">git branch -r 列出远程分支</a></h4><p>  命令：git branch -r<br>  运行结果示例：</p>
+<pre><code class="language-shell"><span class="code-block"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git branch -r</span>
+  origin/HEAD -&gt; origin/master
+  origin/master</span>
+</code><span class="copy-button">复制代码</span></pre>
+<h4 id="git branch -a 列出本地分支和远程分支"><a href="#git branch -a 列出本地分支和远程分支">git branch -a 列出本地分支和远程分支</a></h4><p>  命令：git branch -a<br>  运行结果示例：</p>
+<pre><code class="language-shell"><span class="code-block"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git branch -a</span>
+* master
+  test1
+  remotes/origin/HEAD -&gt; origin/master
+  remotes/origin/master</span>
+</code><span class="copy-button">复制代码</span></pre>
+<p>tips:如果有远程的分支没有显示出来，可以使用命令：<strong>git fetch origin</strong> 或 <strong>git pull</strong> 命令拉取远程信息更新本地</p>
+<h4 id="git branch branchname 创建分支命令">git branch &lt;branchname&gt; 创建分支命令</h4><p>  命令：git branch &lt;branchname&gt;<br>  举例：git branch testbranch<br>  tips:如果创建的分支名在本地已经存在会提示：fatal: A branch named 't1' already exists. 并且创建失败</p>
+<h4 id="git branch -d branchname 删除分支命令">git branch -d &lt;branchname&gt; 删除分支命令</h4><p>  命令：git branch -d &lt;branchname&gt;<br>  举例：git branch -d testbranch<br>  tips:如果要删除的分支有新的提交没有被合并过，那么会提示：error: The branch 't1' is not fully merged. 并且删除失败，如果要删除有新提交没有被合并过的分支，可以使用命令：  <strong>git branch -D &lt;branchname&gt;</strong> 命令强制删除，如：git branch -D testbranch</p>
+<h4 id="git branch -m oldName newName 修改分支名称命令">git branch -m &lt;oldName&gt; &lt;newName&gt; 修改分支名称命令</h4><p>  命令：git branch -m &lt;oldName&gt; &lt;newName&gt;<br>  举例：git branch -m testbranch testbranch222<br>  tips：如果是修改当前分支名称，可以省略分支原名称，即：git branch -m testbranch222 ，如果是修改其他分支名称则需要分支原名称。 分支原名称必须是本地已经存在的分支，修改后的名称必须是本地不存在的分支。</p>
+<p>其他：<br><a href="https://liu_yong.gitee.io/blogs/79/">switch 切换分支、根据远程分支切换新分支等</a><br><a href="https://liu_yong.gitee.io/blogs/80/">checkout 切换分支、根据远程分支切换新分支等</a></p>
+<p>参考资料：<br><a href="https://git-scm.com/docs/git-branch">https://git-scm.com/docs/git-branch</a></p>
