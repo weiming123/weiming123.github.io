@@ -1,6 +1,6 @@
 &emsp;&emsp;**redeclare**
 重新声明;重新定义
-&emsp;&emsp;Redeclare the Backgrounds of Ecological Politics and Harmonious Social System(对生态政治与和谐社会系统背景的再明确 )
+&emsp;&emsp;Redeclare the Backgrounds of Ecological Politics and Harmonious Social System
 &emsp;&emsp; And that's fine, because inside of curly braces can you redeclare variables with the same name if you intend to quote unquote shadow the previous variable.(那是可以的，因为，在花括号里面，你可以重新定义一个，相同名字的变量，如果你想引用之前的变量。)
 &emsp;&emsp;**algorithm**
 &emsp;&emsp;n.算法;计算程序
@@ -30,8 +30,8 @@ v.审计;稽核;旁听(大学课程)
 &emsp;&emsp; Event auditing and reporting.(事件审计和报告)
 &emsp;&emsp;**back-end**
 adj.结束的;结尾的;后端的，后台的(指不归用户直接使用，而由程序或电脑使用)
-&emsp;&emsp;Now that you have back-end and proxy functions, you can develop the portlets themselves.（现在有了后端和代理函数，可以开发portlet本身了。）
-&emsp;&emsp;Each back-end system or business application requires a specific adapter.（每个后端系统或者业务应用程序都需要一个特定的适配器。） 
+&emsp;&emsp;Now that you have back-end and proxy functions, you can develop the portlets themselves.（现在有了后端和代理函数，可以开发 portlet 本身了。）
+&emsp;&emsp;Each back-end system or business application requires a specific adapter.（每个后端系统或者业务应用程序都需要一个特定的适配器。）
 &emsp;&emsp;**border**
 n.国界;边界;边疆;边界地区;镶边;包边;(草坪边等的)狭长花坛
 v.和…毗邻;与…接壤;沿…的边;环绕…;给…镶边
@@ -45,10 +45,10 @@ n.易碎的东西;易破的东西
 
 &emsp;&emsp;**documentation**
 n.必备资料;证明文件;文件记载;文献记录;归档
-如： 
+如：
 &emsp;&emsp;Passengers must carry proper documentation. (旅客必须携带有效证件.)
 &emsp;&emsp;Further investigation was hindered by the loss of all documentation on the case. (由于案件卷宗全部丢失致使进一步的调查受阻)
-&emsp;&emsp;The OpenSSL website provides downloads and documentation on this software.( OpenSSL网站提供关于这个软件的下载和文档。 )
+&emsp;&emsp;The OpenSSL website provides downloads and documentation on this software.( OpenSSL 网站提供关于这个软件的下载和文档。 )
 &emsp;&emsp;**some of**
 中的一些;其中一些;其中的一些
 &emsp;&emsp;Some of the houses nearest the bridge were on fire(离桥最近的一些房屋着火了.)
@@ -79,7 +79,7 @@ adj.彻底的;完全的;深入的;细致的;仔细周到;工作缜密;十足的;
 &emsp;&emsp; We are making a thorough investigation(我们正在进行彻底调查。)
 &emsp;&emsp;**effective**
 adj.产生预期结果的;有效的;实际的;事实上的;生效的;起作用的
-n.[军]现役兵额;有生力量;精兵
+n.
 &emsp;&emsp;The project looks at how we could be more effective in encouraging students to enter teacher training(该项目着眼于我们如何能够更加有效地鼓励学生参与教师培训。)
 &emsp;&emsp;**consistent**
 adj.一致的;始终如一的;连续的;持续的;与…一致的;相符的;符合的;不矛盾的
@@ -107,12 +107,12 @@ n.实例;例证;例子;典型;范例;样品;榜样;楷模;模范
 &emsp;&emsp;**comprehensive**
 adj.全部的;所有的;(几乎)无所不包的;详尽的;综合性的(接收各种资质的学生)
 n.(英国为各种资质的学生设立的)综合中学
-&emsp;&emsp;For the last 20 years, I have been an unquestioning supporter of comprehensive schools.(在过去的20年中，我一直都是综合性学校的坚决支持者。)
+&emsp;&emsp;For the last 20 years, I have been an unquestioning supporter of comprehensive schools.(在过去的 20 年中，我一直都是综合性学校的坚决支持者。)
 &emsp;&emsp;Within the compass of a normal sized book such a comprehensive survey was not practicable.(在通常一本书的篇幅中要作如此全面的调查不太实际。)
 &emsp;&emsp;**operator**
 n.操作人员;技工;电话员;接线员;(某企业的)经营者，专业公司
 &emsp;&emsp;The operator has to be able to carry out routine maintenance of the machine.(操作员必须能对机器进行日常维护。)
-&emsp;&emsp;I became a ham radio operator at the age of eleven.(我在11岁时成了一名业余无线电操作员。)
+&emsp;&emsp;I became a ham radio operator at the age of eleven.(我在 11 岁时成了一名业余无线电操作员。)
 &emsp;&emsp;**assumption**
 n.假定;假设;(责任的)承担;担任;(权力的)获得
 &emsp;&emsp;Economists are working on the assumption of an interest rate cut.(经济学家正在研究降低利率的假设。)
@@ -132,5 +132,5 @@ n.推断的结果;结论;推断;推理;推论
 &emsp;&emsp;The inference I've drawn from his lateness is he overslept.（从他来晚我得出的结论是他睡过头了。）
 &emsp;&emsp;**Control Flow Statements**
 流程控制语句;控制流语句
-&emsp;&emsp;Provide alternate paths through logic by using control flow statements such as if/ else and while.(使用if/else和while这些控制流语句，通过逻辑选择不同的执行路径。)
-&emsp;&emsp;Dart supports the usual control flow statements(Dart支持常用的控制流语句)
+&emsp;&emsp;Provide alternate paths through logic by using control flow statements such as if/ else and while.(使用 if/else 和 while 这些控制流语句，通过逻辑选择不同的执行路径。)
+&emsp;&emsp;Dart supports the usual control flow statements(Dart 支持常用的控制流语句)
