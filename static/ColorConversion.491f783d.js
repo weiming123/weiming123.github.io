@@ -1,0 +1,1 @@
+import{d as e,h as s,c as t,x as a,L as n,E as _,G as c,j as r,_ as d}from"./index.6553bf72.js";const i=o=>(_("data-v-b91890d3"),o=o(),c(),o),p={class:"container"},l=i(()=>r("div",{class:"midlistContainer"},"ColorConversion",-1)),v=e({__name:"ColorConversion",setup(o){return(C,m)=>(a(),s("div",p,[t(n),l]))}});const f=d(v,[["__scopeId","data-v-b91890d3"]]);export{f as default};
