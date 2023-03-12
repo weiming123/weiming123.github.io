@@ -1,6 +1,3 @@
-&emsp;&emsp;git cherry-pick 命令的作用就是把指定的提交的更改应用进来，如把本地其他分支的某些提交应用到当前分支来，更改当前分支的提交记录和工作区、暂存区。也可以说是把其他本地的commit的修改复制到目标分支上去。
-&emsp;&emsp;下面我们总结下git cherry-pick 常用的命令。
-
 ##### git cherry-pick 将某次commit应用于当前分支
 &emsp;&emsp;命令：git cherry-pick &lt;commit&gt;
 &emsp;&emsp;举例：git cherry-pick aeb9654

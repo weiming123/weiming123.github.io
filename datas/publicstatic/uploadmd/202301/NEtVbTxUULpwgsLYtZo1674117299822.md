@@ -1,7 +1,3 @@
-&emsp;&emsp;**git stash命令的作用总结来说就是**：将工作区的修改保存到一个特定的空间去，然后将工作区的修改撤销掉。需要注意的是，只能保存git已经跟踪的文件，新建文件并且没有commit过的就无法保存了，而 git stash 暂存起来的修改是可以应用到当前或者其他分支上面去的。
-
-下面，我们就来说说 git stash 常用的命令：
-
 ##### git stash 暂存工作区git已跟踪的文件修改
 &emsp;&emsp;命令：git stash [save message]
 &emsp;&emsp;举例1：git stash

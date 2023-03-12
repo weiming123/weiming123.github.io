@@ -1,5 +1,3 @@
-&emsp;&emsp;git 2.23 版本新增了switch、restore命令，因为git checkout 命令职责较多、不够明确，而switch命令则专门用来切换分支、创建并切换分支等，我们这里来总结下git switch 命令的一些常用的用法。另外，这个命令在2.27.0版本还是实验性的，将来行为可能会改变。
-
 ###### git switch 切换分支
 &emsp;&emsp;命令：git switch &lt;branchName&gt;
 &emsp;&emsp;举例：git switch testBranch

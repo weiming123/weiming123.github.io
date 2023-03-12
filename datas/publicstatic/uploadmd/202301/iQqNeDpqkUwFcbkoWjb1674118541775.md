@@ -1,4 +1,3 @@
-&emsp;&emsp;有的东西看着挺常见的，但是如果不去归纳总结一下，一时半会还真未必就能全想起来。就像有时一个很熟悉的人，甚至熟得不能再熟了，突然想给别人介绍他的名字的时候，却突然想不起来他叫什么名字呢？！
 &emsp;&emsp;前面我们总结了下js遍历数组的方法,在这里，我们来总结下，js遍历对象都有些什么方法。
 我们还是先声明一个对象，用于测试，如下：
 ```JavaScript
@@ -79,4 +78,4 @@ Reflect.ownKeys(testObj);
 Object.entries(testObj);
 //Array(6) [["username","testname"],[ "age", 28 ],[ "sort", 100 ],[ "address", "test address" ],[ "testFunction", testFunction() ],[ "tmpObj", {…} ]]
 ```
-&emsp;&emsp;我们看到，有不少方法是将对象属性或值转换为数组返回，而后我们可以按照数组的方式来遍历对象了，至于遍历数组的方法大家可以查看前面的 [js遍历数组的常用方法](https://liu_yong.gitee.io/blogs/17/)
+&emsp;&emsp;我们看到，有不少方法是将对象属性或值转换为数组返回，而后我们可以按照数组的方式来遍历对象了

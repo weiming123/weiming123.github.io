@@ -1,4 +1,3 @@
-&emsp;&emsp;所谓深拷贝也只有针对引用数据类型才会有的，这里我们这里来讲下js如何深拷贝吧。
 &emsp;&emsp;以前常用的一种方式是使用js的内置对象JSON提供的parse和stringify配合来做的，但是对于现在而言，有一些场景可能就不太能满足我们的需求了。下面结合代码来说。
 ```JavaScript
 let s1=Symbol('s1');

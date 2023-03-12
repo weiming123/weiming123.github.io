@@ -1,4 +1,3 @@
-&emsp;&emsp;写js的童鞋恐怕现在都用过Promise了吧，我也觉得现在Promise这个东西经常用到，但是如果没有好好的去总结下，总是感觉自己没掌握好的样子呢，所以这里写下个人对Promise的认识和使用总结，如果哪里写得不好的欢迎轻拍。
 &emsp;&emsp;Promise是js里面的一个构造函数，主要是为了用来解决以前使用回调函数嵌套多层之后导致代码难以维护和理解的问题。
 &emsp;&emsp;Promise的原型上主要有then、catch、finally方法，静态方法主要有resolve,reject,race,all,allSettled。
 
@@ -155,5 +154,3 @@ let p3=Promise.all([p2,p1]).then(data=>{
 p1 11
 allthen (2) [22, 13]
 ```
-
-&emsp;&emsp;这里就是关于Promise主要方法的总结了，如果有什么写得不对或者不好的欢迎提点哦。由于某些原因，网站就不开通评论了，邮箱 [liuyongfov@163.com](mailto:liuyongfov@163.com)

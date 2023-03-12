@@ -1,4 +1,4 @@
-&emsp;&emsp;前面在下写了下 [Promise的使用总结](https://liu_yong.gitee.io/blogs/12/) ，在那里主要是总结了下Promise的使用方法，或许有写得不够清楚的，欢迎提点，这里本来在下想写个用es5来实现Promise的代码的，不过我发现 [promise-polyfill](https://github.com/taylorhakes/promise-polyfill) 已经写得很好了，至少比自己要好些(ε=ε=ε=┏(゜ロ゜;)┛) 。所以就不把自己的代码拿出来献丑了，我们来看下人家是怎么实现的吧(为了直接在页面测试代码，对源码整合了下，有所改动，建议可以阅读源码比对)。
+&emsp;&emsp;这里本来在下想写个用es5来实现Promise的代码的，不过我发现 [promise-polyfill](https://github.com/taylorhakes/promise-polyfill) 已经写得很好了，至少比自己要好些(ε=ε=ε=┏(゜ロ゜;)┛) 。所以就不把自己的代码拿出来献丑了，我们来看下人家是怎么实现的吧(为了直接在页面测试代码，对源码整合了下，有所改动，建议可以阅读源码比对)。
 ```JavaScript
 <script>
 'use strict';
@@ -396,5 +396,4 @@ const globalNS = (function() {
 
 &emsp;&emsp;这里就是在下对promise-polyfill的理解分析了，主要都写道注释里面了，本来画个流程图应该更清晰的，不过奈何，小编也懒啊。。。哈哈，要是有分析得不到位的或者写得不对的地方欢迎指出来。
 &emsp;&emsp;allSettled是新标准中promise的方法,目前promise-polyfill没有实现该方法, 在下自己加了个,写得不好或者有什么问题也欢迎指点。
-&emsp;&emsp;你还可以注释掉if(global.Promise){这里的判断，然后结合咱们前面在 [Promise的使用总结](https://liu_yong.gitee.io/blogs/12/) 里面讲的代码运行，你会发现执行打印出来的结果和原生的不一样。这是因为真正的promise里面链式调用的回调函数是加入道微任务队列里面执行的，而这里的模仿只能加入道宏任务队列里面。这也再一次告诉我们，不要太过于依赖语法糖提供给咱们的东西
-我的邮箱 [liuyongfov@163.com](mailto:liuyongfov@163.com) 。
+&emsp;&emsp;你还可以注释掉if(global.Promise){这里的判断，然后结合咱们前面在 【Promise的使用总结】里面讲的代码运行，你会发现执行打印出来的结果和原生的不一样。这是因为真正的promise里面链式调用的回调函数是加入道微任务队列里面执行的，而这里的模仿只能加入道宏任务队列里面。这也再一次告诉我们，不要太过于依赖语法糖提供给咱们的东西 。

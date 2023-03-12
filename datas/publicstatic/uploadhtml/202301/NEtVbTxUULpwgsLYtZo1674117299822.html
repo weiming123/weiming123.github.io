@@ -1,5 +1,3 @@
-<p>  <strong>git stash命令的作用总结来说就是</strong>：将工作区的修改保存到一个特定的空间去，然后将工作区的修改撤销掉。需要注意的是，只能保存git已经跟踪的文件，新建文件并且没有commit过的就无法保存了，而 git stash 暂存起来的修改是可以应用到当前或者其他分支上面去的。</p>
-<p>下面，我们就来说说 git stash 常用的命令：</p>
 <h5 id="git stash 暂存工作区git已跟踪的文件修改"><a href="#git stash 暂存工作区git已跟踪的文件修改">git stash 暂存工作区git已跟踪的文件修改</a></h5><p>  命令：git stash [save message]<br>  举例1：git stash<br>  举例2：git stash save "test stash command"<br>  tips：git stash 后跟 save "test stash command" ，可以给我们暂存的内容加个备注，如果不是暂存后立即使用并且很快就删除的暂存内容，我们建议都加上备注内容，方便我们以后自己回忆起为何要暂存、暂存的是什么等。</p>
 <h5 id="git stash list 查看所有暂存条目"><a href="#git stash list 查看所有暂存条目">git stash list 查看所有暂存条目</a></h5><p>  命令：git stash list<br>  tips：查看的是当前还存在的，不管是在哪个分支上建立的stash 暂存，都可以查看，stash 暂存也可以应用于任何分支</p>
 <h5 id="git stash show 查看某条目修改情况"><a href="#git stash show 查看某条目修改情况">git stash show 查看某条目修改情况</a></h5><p>  命令：git stash show [options] [stash]</p>

@@ -1,4 +1,4 @@
-<p>  所谓深拷贝也只有针对引用数据类型才会有的，这里我们这里来讲下js如何深拷贝吧。<br>  以前常用的一种方式是使用js的内置对象JSON提供的parse和stringify配合来做的，但是对于现在而言，有一些场景可能就不太能满足我们的需求了。下面结合代码来说。</p>
+<p>  以前常用的一种方式是使用js的内置对象JSON提供的parse和stringify配合来做的，但是对于现在而言，有一些场景可能就不太能满足我们的需求了。下面结合代码来说。</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-keyword">let</span> s1=<span class="hljs-title class_">Symbol</span>(<span class="hljs-string">'s1'</span>);
 <span class="hljs-keyword">let</span> s2=<span class="hljs-title class_">Symbol</span>(<span class="hljs-string">'s2'</span>);
 <span class="hljs-keyword">let</span> o1={

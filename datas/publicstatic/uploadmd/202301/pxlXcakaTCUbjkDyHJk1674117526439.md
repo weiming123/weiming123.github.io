@@ -1,6 +1,3 @@
-&emsp;&emsp;git 2.23 版本新增了switch、restore命令，因为git checkout 命令职责较多、不够明确，而restore命令则专门用来还原、撤销修改等，我们这里来总结下git restore 命令的一些常用的用法。另外，这个命令在2.27.0版本还是实验性的，将来行为可能会改变。
-&emsp;&emsp;查看switch常用用法，可以去这里查看：[https://liu_yong.gitee.io/blogs/79/](https://liu_yong.gitee.io/blogs/79/)
-
 ###### git restore 撤销文件工作区的修改
 &emsp;&emsp;命令：git restore --worktree &lt;path&gt;
 &emsp;&emsp;举例：git restore --worktree test2.txt

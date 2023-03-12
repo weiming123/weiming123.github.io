@@ -1,4 +1,3 @@
-&emsp;&emsp;Fisher–Yates shuffle是对有限序列生成一个随机排列的算法，所有的排列是等概率的，该算法是无偏的、高效的，算法的时间正比于乱序的数组。
 &emsp;&emsp;我们先来看代码：
 ```JavaScript
 function fyShuffle(arr){

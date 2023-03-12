@@ -1,12 +1,10 @@
-&emsp;&emsp;在我们使用git的操作中，遇到需要回滚代码的情况几乎是难以避免的，而git重置功能也是非常实用的功能，所以掌握好他们是很有必要的。有的童鞋害怕把自己代码搞乱甚至搞丢了，但是不要去害怕，我们要去掌握好他们，利用好他们。
-
 &emsp;&emsp;git reset 常用的功能就是将当前分支头重置为&lt;commit&gt;​并可能根据&lt;mode&gt;​（模式）更新暂存区（将其重置为&lt;commit&gt;​的树）和工作树。这里&lt;commit&gt;​既可以是以前的某次提交，也可以是当前的提交记录，也可以是在我们前面的提交。如果省略&lt;mode&gt;，则默认为--mixed。
 
 &emsp;&emsp;&lt;mode&gt;必须是这五种之一：hard、soft、mixed、merged、keep。默认模式是mixed。
 &emsp;&emsp;常用的有hard、soft、mixed模式：
-&emsp;&emsp;一、**- -soft** ：重置 HEAD ，保留工作区和暂存区中的修改，并将重置 HEAD 所带来的差异放进暂存区。
-&emsp;&emsp;二、**- -mixed** ：重置 HEAD ，保留工作区的修改，并将暂存区的修改放进工作区，重置 HEAD 所带来的差异也放进工作区。
-&emsp;&emsp;三、**- -hard** ：重置 HEAD ，并将当前工作区、暂存区更改为重置后的HEAD的内容，原来工作区和暂存区的修改将不会被保留，且git无法恢复没有追踪过的修改，即工作区的未add的修改就只能祭天了，当然可以试试还有没有其他工具能找到( * ^ _ ^ * )。
+&emsp;&emsp;一、--soft ：重置 HEAD ，保留工作区和暂存区中的修改，并将重置 HEAD 所带来的差异放进暂存区。
+&emsp;&emsp;二、--mixed ：重置 HEAD ，保留工作区的修改，并将暂存区的修改放进工作区，重置 HEAD 所带来的差异也放进工作区。
+&emsp;&emsp;三、--hard：重置 HEAD ，并将当前工作区、暂存区更改为重置后的HEAD的内容，原来工作区和暂存区的修改将不会被保留，且git无法恢复没有追踪过的修改，即工作区的未add的修改就只能祭天了，当然可以试试还有没有其他工具能找到( * ^ _ ^ * )。
 
 &emsp;&emsp;下面我们来说说git reset 的一些常用命令的用法。
 
@@ -17,7 +15,7 @@
 
 &emsp;&emsp;命令2：git reset -p -- test1.txt
 &emsp;&emsp;tips：将文件 test1.txt 在暂存区的修改恢复到工作区去
-tips：这和git restore --staged 命令有些相似，restore命令可以查看：[git restore 命令的一些常用的用法](https://liu_yong.gitee.io/blogs/78/)
+tips：这和git restore --staged 命令有些相似。
 
 ##### git reset 放弃工作区和暂存区的修改
 &emsp;&emsp;命令：git reset --hard HEAD

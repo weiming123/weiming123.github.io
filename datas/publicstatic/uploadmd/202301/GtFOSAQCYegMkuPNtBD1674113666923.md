@@ -1,4 +1,4 @@
-&emsp;&emsp;在js里面，我们通常通过new关键字来从一个函数创建一个新的对象。在下根据自己的使用总结了下new的原理。代码实现和注释如下：
+&emsp;&emsp;在下根据自己的使用总结了下new的原理。代码实现和注释如下：
 ```JavaScript
 function New(constructorFun){
     //如果传入的第一个参数不是函数，那么就报错

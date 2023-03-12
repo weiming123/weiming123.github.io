@@ -1,5 +1,3 @@
-&emsp;&emsp;在我们使用git的操作中，遇到需要回滚代码的情况几乎是难以避免的，而 git revert 功能也是非常实用的功能，掌握好 revert 的常用用法是很有必要的。
-
 ##### git revert 移除某次提交的修改
 &emsp;&emsp;命令：git revert &lt;commit&gt;
 &emsp;&emsp;举例：git revert bc64f61

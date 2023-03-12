@@ -11,8 +11,6 @@
 &emsp;&emsp;URI可以分为URL、URN或同时具备locators 和names特性的一个东西。URN作用就好像一个人的身份证，URL就像一个人的地址。换句话说：URN确定了东西的身份，URL提供了找到它的方式。
 
 
-其他：
-[https://liu_yong.gitee.io/blogs/93/](https://liu_yong.gitee.io/blogs/93/)
 
 参考资料：
 [https://baike.baidu.com/item/URI/2901761?fr=aladdin](https://baike.baidu.com/item/URI/2901761?fr=aladdin)

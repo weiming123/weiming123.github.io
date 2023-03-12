@@ -1,5 +1,4 @@
-<h4 id="问题：求 100 之内的素数">  问题：求 100 之内的素数</h4><p>tips:</p>
-<h5 id="什么是素数？">  什么是素数？</h5><p>  素数又称质数，一个大于 1 的自然数，除了 1 和它自身外，不能被其他自然数整除的数叫做质数；否则称为合数。</p>
+<h3 id="问题：求 100 之内的素数"><a href="#问题：求 100 之内的素数">问题：求 100 之内的素数</a></h3><h5 id="什么是素数？">  什么是素数？</h5><p>  素数又称质数，一个大于 1 的自然数，除了 1 和它自身外，不能被其他自然数整除的数叫做质数；否则称为合数。</p>
 <h5 id="如何判断一个数是不是素数？">  如何判断一个数是不是素数？</h5><p>  在一般领域，对正整数 n，如果用 2 到这个数的平方根<br>之间的所有整数去除，均无法整除，则 n 为质数。<br>  质数大于等于 2 不能被它本身和 1 以外的数整除</p>
 <p>  实现代码:</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
@@ -44,7 +43,7 @@
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`100之内的素数有：<span class="hljs-subst">${rangeNumPrime(<span class="hljs-number">2</span>,<span class="hljs-number">100</span>).toString()}</span>`</span>)
 <span class="hljs-comment">// 100之内的素数有：3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：对10个数进行排序">  问题：对10个数进行排序</h4><p>  实现代码:</p>
+<h3 id="问题：对10个数进行排序"><a href="#问题：对10个数进行排序">问题：对10个数进行排序</a></h3><p>  实现代码:</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 插入排序
  * <span class="hljs-doctag">@params</span>: number[]
@@ -93,7 +92,7 @@
 <span class="hljs-comment">// 1,45,564,234,45,234,2342,765,234,213 排序后的顺序是1,45,45,213,234,234,234,564,765,2342</span></span>
 </code><span class="copy-button">复制代码</span></pre>
 <p>这里题目说的是对10个数排序，所以我们选择了插入排序法来完成</p>
-<h4 id="问题：有一个已经排好序的数组。现输入一个数，要求按原来的规律将它插入数组中。">  问题：有一个已经排好序的数组。现输入一个数，要求按原来的规律将它插入数组中。</h4><p>  实现代码:</p>
+<h3 id="问题：有一个已经排好序的数组。现输入一个数，要求按原来的规律将它插入数组中。"><a href="#问题：有一个已经排好序的数组。现输入一个数，要求按原来的规律将它插入数组中。">问题：有一个已经排好序的数组。现输入一个数，要求按原来的规律将它插入数组中。</a></h3><p>  实现代码:</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 对一个已经排好序的数组，现输入一个数，要求按原来的规律将它插入数组中
  * <span class="hljs-doctag">@params</span>: number[]
@@ -141,7 +140,7 @@
 <span class="hljs-comment">// 4534533,453345,3453,3,1 插入后结果是：4534533,453345,3453,10,3,1</span></span>
 </code><span class="copy-button">复制代码</span></pre>
 <p>我们这里是遍历的方式来找出适合我们插入的数字的位置的，你还可以试下用二分法的思想来插入，如果数组长度非常大的话，二分法的效率可能会高很多</p>
-<h4 id="问题：一个5位数，判断它是不是回文数。即12321是回文数，个位与万位相同，十位与千位相同。">  问题：一个5位数，判断它是不是回文数。即12321是回文数，个位与万位相同，十位与千位相同。</h4><p>  实现代码:</p>
+<h3 id="问题：一个5位数，判断它是不是回文数。即12321是回文数，个位与万位相同，十位与千位相同。"><a href="#问题：一个5位数，判断它是不是回文数。即12321是回文数，个位与万位相同，十位与千位相同。">问题：一个5位数，判断它是不是回文数。即12321是回文数，个位与万位相同，十位与千位相同。</a></h3><p>  实现代码:</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 判断一个数字是否是回文数
  * <span class="hljs-doctag">@params</span>: number
@@ -171,8 +170,7 @@
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">palindromenumber</span>(<span class="hljs-number">123</span>))
 <span class="hljs-comment">// false</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<p>  <strong>问题</strong>：判断101-200之间有多少个素数，并输出所有素数。</p>
-<p>tips:</p>
+<h3 id="问题：判断101-200之间有多少个素数，并输出所有素数。"><strong>问题</strong>：判断101-200之间有多少个素数，并输出所有素数。</h3><p>tips:</p>
 <h5 id="什么是素数？">  什么是素数？</h5><p>  素数又称质数，一个大于1的自然数，除了1和它自身外，不能被其他自然数整除的数叫做质数；否则称为合数。</p>
 <h5 id="如何判断一个数是不是素数？">  如何判断一个数是不是素数？</h5><p>  在一般领域，对正整数n，如果用2到这个数的平方根<br>之间的所有整数去除，均无法整除，则n为质数。<br>  质数大于等于2 不能被它本身和1以外的数整除</p>
 <p>  实现代码：</p>
@@ -226,7 +224,7 @@
   <span class="hljs-number">199</span>
 ]</span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：一球从100米高度自由落下，每次落地后反跳回原高度的一半；再落下，求它在 第10次落地时，共经过多少米？第10次反弹多高？">  问题：一球从100米高度自由落下，每次落地后反跳回原高度的一半；再落下，求它在 第10次落地时，共经过多少米？第10次反弹多高？</h4><p>  实现代码：</p>
+<h4 id="问题：一球从100米高度自由落下，每次落地后反跳回原高度的一半；再落下，求它在 第10次落地时，共经过多少米？第10次反弹多高？"><a href="#问题：一球从100米高度自由落下，每次落地后反跳回原高度的一半；再落下，求它在 第10次落地时，共经过多少米？第10次反弹多高？">问题：一球从100米高度自由落下，每次落地后反跳回原高度的一半；再落下，求它在 第10次落地时，共经过多少米？第10次反弹多高？</a></h4><p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 经过times次反弹后，算出经过了多少距离和当次高度
  * <span class="hljs-doctag">@params</span>: (number)初始高度
@@ -253,7 +251,7 @@
 
 <span class="hljs-comment">// 从100米高度自由落下，每次落地后反跳回原高度的一半；再落下，它在 第10次落地时，共经过299.70703125米,第10次反弹0.09765625米？</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：输入三个整数x,y,z，请把这三个数由小到大输出">  问题：输入三个整数x,y,z，请把这三个数由小到大输出</h4><p>  tips:最简单的办法就是直接排序就可以了，我们这里使用js自带的sort排序就可以了，代码比较简单，</p>
+<h3 id="问题：输入三个整数x,y,z，请把这三个数由小到大输出"><a href="#问题：输入三个整数x,y,z，请把这三个数由小到大输出">问题：输入三个整数x,y,z，请把这三个数由小到大输出</a></h3><p>  tips:最简单的办法就是直接排序就可以了，我们这里使用js自带的sort排序就可以了，代码比较简单，</p>
 <p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 传入三个整数x,y,z，把这三个数由小到大输出
@@ -274,8 +272,7 @@
 <span class="hljs-title function_">printSortNum</span>(<span class="hljs-number">2</span>,<span class="hljs-number">546</span>,<span class="hljs-number">23</span>)
 <span class="hljs-comment">// 2,23,546</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<p>  <strong>问题</strong>：输出所有的"水仙花数"</p>
-<p>tips:</p>
+<h3 id="问题：输出所有的水仙花数"><strong>问题</strong>：输出所有的"水仙花数"</h3><p>tips:</p>
 <h5 id="什么是水仙花数？">  什么是水仙花数？</h5><p>  水仙花数（Narcissistic number）也被称为超完全数字不变数（pluperfect digital invariant, PPDI）、自恋数、自幂数、阿姆斯壮数或阿姆斯特朗数（Armstrong number），水仙花数是指一个 3 位数，它的每个位上的数字的 3次幂之和等于它本身（例如：1^3 + 5^3+ 3^3 = 153）</p>
 <p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
@@ -322,7 +319,7 @@
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`五角星数： <span class="hljs-subst">${printTestNarcissisticNumber(<span class="hljs-number">10000</span>,<span class="hljs-number">100000</span>).toString()}</span>`</span>)
 五角星数： <span class="hljs-number">54748</span>,<span class="hljs-number">92727</span>,<span class="hljs-number">93084</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：两个乒乓球队进行比赛，各出三人。甲队为a,b,c三人，乙队为x,y,z三人。已抽签决定比赛名单。有人向队员打听比赛的名单。a说他不和x比，c说他不和x,z比，请编程序找出三队赛手的名单。">  问题：两个乒乓球队进行比赛，各出三人。甲队为a,b,c三人，乙队为x,y,z三人。已抽签决定比赛名单。有人向队员打听比赛的名单。a说他不和x比，c说他不和x,z比，请编程序找出三队赛手的名单。</h4><p>  实现代码：</p>
+<h3 id="问题：两个乒乓球队进行比赛，各出三人。甲队为a,b,c三人，乙队为x,y,z三人。已抽签决定比赛名单。有人向队员打听比赛的名单。a说他不和x比，c说他不和x,z比，请编程序找出三队赛手的名单。"><a href="#问题：两个乒乓球队进行比赛，各出三人。甲队为a,b,c三人，乙队为x,y,z三人。已抽签决定比赛名单。有人向队员打听比赛的名单。a说他不和x比，c说他不和x,z比，请编程序找出三队赛手的名单。">问题：两个乒乓球队进行比赛，各出三人。甲队为a,b,c三人，乙队为x,y,z三人。已抽签决定比赛名单。有人向队员打听比赛的名单。a说他不和x比，c说他不和x,z比，请编程序找出三队赛手的名单。</a></h3><p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 乒乓球队进行比赛名单问题
  * 两个乒乓球队进行比赛，各出三人。甲队为a,b,c三人，乙队为x,y,z三人。
@@ -393,7 +390,7 @@
 <span class="hljs-title function_">competitionList</span>()
 <span class="hljs-comment">// a的对手是z,b的对手是x,c的对手是y</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：取一个整数a从右端开始的4～7位。">  问题：取一个整数a从右端开始的4～7位。</h4><p>  实现代码:</p>
+<h3 id="问题：取一个整数a从右端开始的4～7位。"><a href="#问题：取一个整数a从右端开始的4～7位。">问题：取一个整数a从右端开始的4～7位。</a></h3><p>  实现代码:</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 取一个整数a从右端开始的4～7位
  * <span class="hljs-doctag">@params</span>: number
@@ -412,7 +409,7 @@
 <span class="hljs-title function_">test</span>(<span class="hljs-number">1234567</span>);
 <span class="hljs-number">1234567</span> 的从右端开始的<span class="hljs-number">4</span>～<span class="hljs-number">7</span>位是：<span class="hljs-number">123</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：猴子吃桃问题：猴子第一天摘下若干个桃子，当即吃了一半，还不瘾，又多吃了一个 第二天早上又将剩下的桃子吃掉一半，又多吃了一个。以后每天早上都吃了前一天剩下的一半零一个。到第10天早上想再吃时，见只剩下一个桃子了。求第一天共摘了多少。">  问题：猴子吃桃问题：猴子第一天摘下若干个桃子，当即吃了一半，还不瘾，又多吃了一个 第二天早上又将剩下的桃子吃掉一半，又多吃了一个。以后每天早上都吃了前一天剩下的一半零一个。到第10天早上想再吃时，见只剩下一个桃子了。求第一天共摘了多少。</h4><p>  实现代码：</p>
+<h3 id="问题：猴子吃桃问题：猴子第一天摘下若干个桃子，当即吃了一半，还不瘾，又多吃了一个 第二天早上又将剩下的桃子吃掉一半，又多吃了一个。以后每天早上都吃了前一天剩下的一半零一个。到第10天早上想再吃时，见只剩下一个桃子了。求第一天共摘了多少。"><a href="#问题：猴子吃桃问题：猴子第一天摘下若干个桃子，当即吃了一半，还不瘾，又多吃了一个 第二天早上又将剩下的桃子吃掉一半，又多吃了一个。以后每天早上都吃了前一天剩下的一半零一个。到第10天早上想再吃时，见只剩下一个桃子了。求第一天共摘了多少。">问题：猴子吃桃问题：猴子第一天摘下若干个桃子，当即吃了一半，还不瘾，又多吃了一个 第二天早上又将剩下的桃子吃掉一半，又多吃了一个。以后每天早上都吃了前一天剩下的一半零一个。到第10天早上想再吃时，见只剩下一个桃子了。求第一天共摘了多少。</a></h3><p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 猴子吃桃问题
  * <span class="hljs-doctag">@params</span>: null
@@ -430,7 +427,7 @@
 <span class="hljs-title function_">monkeyEatingPeach</span>()
 <span class="hljs-comment">// 第一天共摘了1534桃子</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：将一个正整数分解质因数。例如：输入90,打印出90=233*5。">  问题：将一个正整数分解质因数。例如：输入90,打印出90=2<em>3</em>3*5。</h4><p>tips:</p>
+<h3 id="问题：将一个正整数分解质因数。例如：输入90,打印出90=233*5。">问题：将一个正整数分解质因数。例如：输入90,打印出90=2<em>3</em>3*5。</h3><p>tips:</p>
 <h5 id="什么是正整数？">  什么是正整数？</h5><p>  和整数一样，正整数也是一个可数的无限集合。在数论中，正整数，即1、2、3……；但在集合论和计算机科学中，自然数则通常是指非负整数，即正整数与0的集合，也可以说成是除了0以外的自然数就是正整数。正整数又可分为质数，1和合数。正整数可带正号（+），也可以不带。</p>
 <h5 id="什么是质因数？">  什么是质因数？</h5><p>  质因数（素因数或质因子）在数论里是指能整除给定正整数的质数。除了1以外，两个没有其他共同质因子的正整数称为互质。因为1没有质因子，1与任何正整数（包括1本身）都是互质。正整数的因数分解可将正整数表示为一连串的质因子相乘，质因子如重复可以用指数表示。根据算术基本定理，任何正整数皆有独一无二的质因子分解式 [1]  。只有一个质因子的正整数为质数。</p>
 <p>  实现代码：</p>
@@ -483,7 +480,7 @@
 <span class="hljs-title function_">printPrimes</span>(<span class="hljs-number">900</span>)
 <span class="hljs-number">900</span>的分解质因数结果：<span class="hljs-number">900</span>=<span class="hljs-number">2</span>*<span class="hljs-number">2</span>*<span class="hljs-number">3</span>*<span class="hljs-number">3</span>*<span class="hljs-number">5</span>*<span class="hljs-number">5</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：输入两个正整数m和n，求其最大公约数和最小公倍数。">  问题：输入两个正整数m和n，求其最大公约数和最小公倍数。</h4><p>tips:</p>
+<h3 id="问题：输入两个正整数m和n，求其最大公约数和最小公倍数。"><a href="#问题：输入两个正整数m和n，求其最大公约数和最小公倍数。">问题：输入两个正整数m和n，求其最大公约数和最小公倍数。</a></h3><p>tips:</p>
 <h5 id="倍数和约数">  倍数和约数</h5><p>  如果数a能被数b整除，a就叫做b的倍数，b就叫做a的约数。约数和倍数都表示一个整数与另一个整数的关系，不能单独存在。</p>
 <h5 id="什么是最大公约数？">  什么是最大公约数？</h5><p>  几个整数中公有的约数，叫做这几个数的公约数；其中最大的一个，叫做这几个数的最大公约数。例如：12、16的公约数有1、2、4，其中最大的一个是4，4是12与16的最大公约数，一般记为（12，16）=4。12、15、18的最大公约数是3，记为（12，15，18）=3。</p>
 <h5 id="什么是最小公倍数？">  什么是最小公倍数？</h5><p>  几个自然数公有的倍数，叫做这几个数的公倍数，其中最小的一个自然数，叫做这几个数的最小公倍数。例如：4的倍数有4、8、12、16，……，6的倍数有6、12、18、24，……，4和6的公倍数有12、24，……，其中最小的是12，一般记为[4，6]=12。12、15、18的最小公倍数是180。记为[12，15，18]=180。若干个互质数的最小公倍数为它们的乘积的绝对值。</p>
@@ -605,7 +602,7 @@
 <span class="hljs-number">10</span>和<span class="hljs-number">23</span>的最大公约数是：(<span class="hljs-number">10</span>,<span class="hljs-number">23</span>)=<span class="hljs-number">1</span>
 <span class="hljs-number">10</span>和<span class="hljs-number">23</span>的最小公倍数是：[<span class="hljs-number">10</span>,<span class="hljs-number">23</span>]=<span class="hljs-number">230</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：有1、2、3、4个数字，能组成多少个互不相同且无重复数字的三位数？都是多少？">  问题：有1、2、3、4个数字，能组成多少个互不相同且无重复数字的三位数？都是多少？</h4><p>  实现代码：</p>
+<h3 id="问题：有1、2、3、4个数字，能组成多少个互不相同且无重复数字的三位数？都是多少？"><a href="#问题：有1、2、3、4个数字，能组成多少个互不相同且无重复数字的三位数？都是多少？">问题：有1、2、3、4个数字，能组成多少个互不相同且无重复数字的三位数？都是多少？</a></h3><p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 有1、2、3、4个数字，返回由互不相同且无重复数字的三位数组成的数组
  * <span class="hljs-doctag">@retrun</span>: array
@@ -634,7 +631,7 @@
 
 <span class="hljs-comment">// 有1、2、3、4个数字，能组成24个互不相同且无重复数字的三位数,是：123,124,132,134,142,143,213,214,231,234,241,243,312,314,321,324,341,342,412,413,421,423,431,432</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：分别统计出一个字符串中英文字母、空格、数字和其它字符的个数。">  问题：分别统计出一个字符串中英文字母、空格、数字和其它字符的个数。</h4><p>  实现代码：</p>
+<h3 id="问题：分别统计出一个字符串中英文字母、空格、数字和其它字符的个数。"><a href="#问题：分别统计出一个字符串中英文字母、空格、数字和其它字符的个数。">问题：分别统计出一个字符串中英文字母、空格、数字和其它字符的个数。</a></h3><p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 分别统计出一个字符串中英文字母、空格、数字和其它字符的个数
  * <span class="hljs-doctag">@params</span>: (string) str
@@ -687,7 +684,7 @@ dfqwr23
 字符 w 有 1 个
 字符 r 有 1 个</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：求s=a+aa+aaa+aaaa+aa…a的值，其中a是一个数字。例如2+22+222+2222+22222(此时共有5个数相加)">  问题：求s=a+aa+aaa+aaaa+aa…a的值，其中a是一个数字。例如2+22+222+2222+22222(此时共有5个数相加)</h4><p>  实现代码：</p>
+<h3 id="问题：求s=a+aa+aaa+aaaa+aa…a的值，其中a是一个数字。例如2+22+222+2222+22222(此时共有5个数相加)"><a href="#问题：求s=a+aa+aaa+aaaa+aa…a的值，其中a是一个数字。例如2+22+222+2222+22222(此时共有5个数相加)">问题：求s=a+aa+aaa+aaaa+aa…a的值，其中a是一个数字。例如2+22+222+2222+22222(此时共有5个数相加)</a></h3><p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 传入一个数字，计算出这个数字从一位到多为重复组成的数字的和
  * <span class="hljs-doctag">@params</span>: (number) num
@@ -712,7 +709,7 @@ dfqwr23
 <span class="hljs-number">1</span></span>
 </code><span class="copy-button">复制代码</span></pre>
 <p>  从上面的代码的实现思路其实是这样的：<br>如果要计算(2+22+222+2222+22222) 这个式子的和，那么我们看成是如下的式子的和:<br>(2<em>5+2</em>4<em>10+2</em>3<em>100+2</em>2<em>1000+2</em>1*10000)</p>
-<h4 id="问题：有一分数序列：2/1，3/2，5/3，8/5，13/8，21/13…求出这个数列的前20项之和">  问题：有一分数序列：2/1，3/2，5/3，8/5，13/8，21/13…求出这个数列的前20项之和</h4><p>  实现代码：</p>
+<h3 id="问题：有一分数序列：2/1，3/2，5/3，8/5，13/8，21/13…求出这个数列的前20项之和"><a href="#问题：有一分数序列：2/1，3/2，5/3，8/5，13/8，21/13…求出这个数列的前20项之和">问题：有一分数序列：2/1，3/2，5/3，8/5，13/8，21/13…求出这个数列的前20项之和</a></h3><p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 分数序列求和
  * <span class="hljs-doctag">@params</span>: number
@@ -739,7 +736,7 @@ dfqwr23
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`前20项之和是：<span class="hljs-subst">${sequencesSummation(<span class="hljs-number">20</span>)}</span>`</span>)
 <span class="hljs-comment">// 前20项之和是：32.66026079864164</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：求1+2!+3!+…+20!的和">  问题：求1+2!+3!+…+20!的和</h4><p>  实现代码：</p>
+<h3 id="问题：求1+2!+3!+…+20!的和"><a href="#问题：求1+2!+3!+…+20!的和">问题：求1+2!+3!+…+20!的和</a></h3><p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 累乘
  * <span class="hljs-doctag">@params</span>: number
@@ -768,7 +765,7 @@ dfqwr23
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`前20项之和是：<span class="hljs-subst">${multiply(<span class="hljs-number">20</span>)}</span>`</span>)
 <span class="hljs-comment">// 前20项之和是：2561327494111820300</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：企业发放的奖金根据利润提成。利润(I)低于或等于10万元时，奖金可提10%；利润高于10万元，低于20万元时，低于10万元的部分按10%提成，高于10万元的部分，可可提成7.5%；20万到40万之间时，高于20万元的部分，可提成5%；40万到60万之间时高于40万元的部分，可提成3%；60万到100万之间时，高于60万元的部分，可提成1.5%，高于100万元时，超过100万元的部分按1%提成，求应发放奖金总数？">  问题：企业发放的奖金根据利润提成。利润(I)低于或等于10万元时，奖金可提10%；利润高于10万元，低于20万元时，低于10万元的部分按10%提成，高于10万元的部分，可可提成7.5%；20万到40万之间时，高于20万元的部分，可提成5%；40万到60万之间时高于40万元的部分，可提成3%；60万到100万之间时，高于60万元的部分，可提成1.5%，高于100万元时，超过100万元的部分按1%提成，求应发放奖金总数？</h4><p>  实现代码：</p>
+<h3 id="问题：企业发放的奖金根据利润提成。利润(I)低于或等于10万元时，奖金可提10%；利润高于10万元，低于20万元时，低于10万元的部分按10%提成，高于10万元的部分，可可提成7.5%；20万到40万之间时，高于20万元的部分，可提成5%；40万到60万之间时高于40万元的部分，可提成3%；60万到100万之间时，高于60万元的部分，可提成1.5%，高于100万元时，超过100万元的部分按1%提成，求应发放奖金总数？"><a href="#问题：企业发放的奖金根据利润提成。利润(I)低于或等于10万元时，奖金可提10%；利润高于10万元，低于20万元时，低于10万元的部分按10%提成，高于10万元的部分，可可提成7.5%；20万到40万之间时，高于20万元的部分，可提成5%；40万到60万之间时高于40万元的部分，可提成3%；60万到100万之间时，高于60万元的部分，可提成1.5%，高于100万元时，超过100万元的部分按1%提成，求应发放奖金总数？">问题：企业发放的奖金根据利润提成。利润(I)低于或等于10万元时，奖金可提10%；利润高于10万元，低于20万元时，低于10万元的部分按10%提成，高于10万元的部分，可可提成7.5%；20万到40万之间时，高于20万元的部分，可提成5%；40万到60万之间时高于40万元的部分，可提成3%；60万到100万之间时，高于60万元的部分，可提成1.5%，高于100万元时，超过100万元的部分按1%提成，求应发放奖金总数？</a></h3><p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 企业发放的奖金问题，返回应发放奖金总数
  * <span class="hljs-doctag">@retrun</span>: number
@@ -810,7 +807,7 @@ dfqwr23
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`当月利润200000元时，求应发放奖金总数为：<span class="hljs-subst">${tmpBounus2}</span>`</span>)
 <span class="hljs-comment">// 当月利润200000元时，求应发放奖金总数为：17500</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：学习成绩=90分的同学用A表示，60-89分之间的用B表示，60分以下的用C表示。">  问题：学习成绩&gt;=90分的同学用A表示，60-89分之间的用B表示，60分以下的用C表示。</h4><p>  实现代码：</p>
+<h3 id="问题：学习成绩=90分的同学用A表示，60-89分之间的用B表示，60分以下的用C表示。">问题：学习成绩&gt;=90分的同学用A表示，60-89分之间的用B表示，60分以下的用C表示。</h3><p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 获取一个分数对应的等级
  * <span class="hljs-doctag">@params</span>: (number) 自然数
@@ -840,7 +837,7 @@ dfqwr23
 <span class="hljs-title function_">printScoreGrade</span>(<span class="hljs-number">90</span>)
 您的分数等级是A</span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：利用递归方法求5!">  问题：利用递归方法求5!</h4><p>  实现代码：</p>
+<h3 id="问题：利用递归方法求5!"><a href="#问题：利用递归方法求5!">问题：利用递归方法求5!</a></h3><p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 利用递归方法求阶乘
  * <span class="hljs-doctag">@params</span>: number
@@ -875,7 +872,7 @@ dfqwr23
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`5的阶乘是：<span class="hljs-subst">${factorial(<span class="hljs-number">5</span>)}</span>`</span>)
 <span class="hljs-number">5</span>的阶乘是：<span class="hljs-number">120</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：打印出杨辉三角形（要求打印出10行如下图）">  问题：打印出杨辉三角形（要求打印出10行如下图）</h4><p>  实现代码:</p>
+<h3 id="问题：打印出杨辉三角形（要求打印出10行如下图）"><a href="#问题：打印出杨辉三角形（要求打印出10行如下图）">问题：打印出杨辉三角形（要求打印出10行如下图）</a></h3><p>  实现代码:</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 计算杨辉三角形各行数字
  * <span class="hljs-doctag">@params</span>: number
@@ -937,7 +934,7 @@ dfqwr23
     <span class="hljs-number">1</span>    <span class="hljs-number">8</span>   <span class="hljs-number">28</span>   <span class="hljs-number">56</span>   <span class="hljs-number">70</span>   <span class="hljs-number">56</span>   <span class="hljs-number">28</span>    <span class="hljs-number">8</span>    <span class="hljs-number">1</span>  
   <span class="hljs-number">1</span>    <span class="hljs-number">9</span>   <span class="hljs-number">36</span>   <span class="hljs-number">84</span>   <span class="hljs-number">126</span>  <span class="hljs-number">126</span>  <span class="hljs-number">84</span>   <span class="hljs-number">36</span>    <span class="hljs-number">9</span>    <span class="hljs-number">1</span>  </span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：请输入星期几的第一个字母来判断一下是星期几，如果第一个字母一样，则继续判断第二个字母。">  问题：请输入星期几的第一个字母来判断一下是星期几，如果第一个字母一样，则继续判断第二个字母。</h4><p>  实现代码:</p>
+<h3 id="问题：请输入星期几的第一个字母来判断一下是星期几，如果第一个字母一样，则继续判断第二个字母。"><a href="#问题：请输入星期几的第一个字母来判断一下是星期几，如果第一个字母一样，则继续判断第二个字母。">问题：请输入星期几的第一个字母来判断一下是星期几，如果第一个字母一样，则继续判断第二个字母。</a></h3><p>  实现代码:</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 第一个字母来判断一下是星期几，如果第一个字母一样，则继续判断第二个字母。
  * <span class="hljs-doctag">@params</span>: string
@@ -1008,7 +1005,7 @@ dfqwr23
 <span class="hljs-title function_">test</span>(<span class="hljs-string">'sa'</span>)
 <span class="hljs-comment">// 答案是：星期六</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：输出9*9口诀乘法表">  问题：输出9*9口诀乘法表</h4><p>  实现代码：</p>
+<h3 id="问题：输出9*9口诀乘法表"><a href="#问题：输出9*9口诀乘法表">问题：输出9*9口诀乘法表</a></h3><p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 输出9*9口诀乘法表
  * <span class="hljs-doctag">@params</span>: null
@@ -1038,7 +1035,7 @@ dfqwr23
 9*1=9   9*2=18  9*3=27  9*4=36  9*5=45  9*6=54  9*7=63  9*8=72  9*9=81 
 */</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：将一个数组逆序输出">  问题：将一个数组逆序输出</h4><p>  实现代码:</p>
+<h3 id="问题：将一个数组逆序输出"><a href="#问题：将一个数组逆序输出">问题：将一个数组逆序输出</a></h3><p>  实现代码:</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 数组逆序
  * <span class="hljs-doctag">@params</span>: number[]
@@ -1068,7 +1065,7 @@ dfqwr23
 <span class="hljs-comment">// 1,3,6,8,21,12,1 逆序后结果是：1,12,21,8,6,3,1</span></span>
 </code><span class="copy-button">复制代码</span></pre>
 <p>js里面数组逆序可以直接用reverse 方法实现，我们这里其实相当于是自己实现了个reverse方法。。。</p>
-<h4 id="问题：输入某年某月某日，判断这一天是这一年的第几天？">  问题：输入某年某月某日，判断这一天是这一年的第几天？</h4><p>  tips:</p>
+<h3 id="问题：输入某年某月某日，判断这一天是这一年的第几天？"><a href="#问题：输入某年某月某日，判断这一天是这一年的第几天？">问题：输入某年某月某日，判断这一天是这一年的第几天？</a></h3><p>  tips:</p>
 <h5 id="公历中的闰年是什么？"><a href="#公历中的闰年是什么？">公历中的闰年是什么？</a></h5><p>  闰年（Leap Year）是为了弥补因人为历法规定造成的年度天数与地球实际公转周期的时间差而设立的。补上时间差的年份为闰年。闰年共有366天，其中2月份有29天。</p>
 <p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
@@ -1195,8 +1192,7 @@ dfqwr23
 <span class="hljs-title function_">printDays</span>(<span class="hljs-string">'2020年8月22日'</span>)
 <span class="hljs-comment">// 2020年8月22日 这一天是这一年的第235天</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<p>  <strong>问题</strong>：有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问每个月的兔子总数为多少？</p>
-<p>  实现代码：</p>
+<h3 id="问题：有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问每个月的兔子总数为多少？"><strong>问题</strong>：有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问每个月的兔子总数为多少？</h3><p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-keyword">function</span> <span class="hljs-title function_">rabbitsComputed</span>(<span class="hljs-params">month:number</span>):number{
     <span class="hljs-keyword">if</span>(month &lt; <span class="hljs-number">1</span>){
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>
@@ -1236,7 +1232,7 @@ dfqwr23
 第<span class="hljs-number">12</span>月有<span class="hljs-number">233</span>对兔子</span>
 </code><span class="copy-button">复制代码</span></pre>
 <p>我们知道，这个问题其实就是一个 斐波那契数列 ，从第三项开始，每一项等于前两项之和。。。上面的函数就是实现这个过程。。。</p>
-<h4 id="问题：打印出如下图案（菱形）">  问题：打印出如下图案（菱形）</h4><p>  实现代码：</p>
+<h3 id="问题：打印出如下图案（菱形）"><a href="#问题：打印出如下图案（菱形）">问题：打印出如下图案（菱形）</a></h3><p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 打印出菱形图案
  * <span class="hljs-doctag">@params</span>: number
@@ -1267,7 +1263,7 @@ dfqwr23
 ******
   **</span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：一个数如果恰好等于它的因子之和，这个数就称为完数。例如6=1＋2＋3.编程 找出1000以内的所有完数">  问题：一个数如果恰好等于它的因子之和，这个数就称为"完数"。例如6=1＋2＋3.编程 找出1000以内的所有完数</h4><p>tips:</p>
+<h3 id="问题：一个数如果恰好等于它的因子之和，这个数就称为完数。例如6=1＋2＋3.编程 找出1000以内的所有完数">问题：一个数如果恰好等于它的因子之和，这个数就称为"完数"。例如6=1＋2＋3.编程 找出1000以内的所有完数</h3><p>tips:</p>
 <h5 id="什么是因子？">  什么是因子？</h5><p>假如整数n除以m，结果是无余数的整数，那么我们称m就是n的因子。 需要注意的是，唯有被除数，除数，商皆为整数，余数为零时，此关系才成立。反过来说，我们称n为m的倍数。</p>
 <p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
@@ -1299,7 +1295,7 @@ dfqwr23
 <span class="hljs-title function_">printPerfects</span>(<span class="hljs-number">1000</span>)
 <span class="hljs-number">1000</span> 内的完数有：<span class="hljs-number">6</span>,<span class="hljs-number">28</span>,<span class="hljs-number">496</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：一个整数，它加上100后是一个完全平方数，再加上168又是一个完全平方数，请问该数是多少？">  问题：一个整数，它加上100后是一个完全平方数，再加上168又是一个完全平方数，请问该数是多少？</h4><p>  tips:</p>
+<h3 id="问题：一个整数，它加上100后是一个完全平方数，再加上168又是一个完全平方数，请问该数是多少？"><a href="#问题：一个整数，它加上100后是一个完全平方数，再加上168又是一个完全平方数，请问该数是多少？">问题：一个整数，它加上100后是一个完全平方数，再加上168又是一个完全平方数，请问该数是多少？</a></h3><p>  tips:</p>
 <h5 id="什么是完全平方数？"><a href="#什么是完全平方数？">什么是完全平方数？</a></h5><p>  完全平方指用一个整数乘以自己例如1<em>1，2</em>2，3*3等，依此类推。若一个数能表示成某个整数的平方的形式，则称这个数为完全平方数。完全平方数是非负数，而一个完全平方数的项有两个。</p>
 <p>  <strong>思路：</strong><br>根据题目可以列出计算表达式：</p>
 <p>设这个整数为x，那么就有：<br>x+100=n^2^<br>x+100+168=m^2^<br>即：m^2^-n^2^=168<br>即：(m-n)*(m+n)=168</p>
@@ -1358,7 +1354,7 @@ dfqwr23
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`一个整数，它加上100后是一个完全平方数，再加上168又是一个完全平方数，这个数可以是：<span class="hljs-subst">${separate(<span class="hljs-number">100</span>,<span class="hljs-number">168</span>).toString()}</span>`</span>)
 <span class="hljs-comment">// 一个整数，它加上100后是一个完全平方数，再加上168又是一个完全平方数，这个数可以是：1581,261,21,-99</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：求一个3*3矩阵对角线元素之和">  问题：求一个3*3矩阵对角线元素之和</h4><p>  实现代码:</p>
+<h3 id="问题：求一个3*3矩阵对角线元素之和"><a href="#问题：求一个3*3矩阵对角线元素之和">问题：求一个3*3矩阵对角线元素之和</a></h3><p>  实现代码:</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 求一个3*3矩阵对角线元素之和
  * <span class="hljs-doctag">@params</span>: Array&lt;Array&lt;number&gt;&gt;
@@ -1401,7 +1397,7 @@ dfqwr23
     斜对角线和是：<span class="hljs-number">30</span></span>
 </code><span class="copy-button">复制代码</span></pre>
 <p>我们可以看出来，求一个3*3矩阵对角线元素之和其实就是求一个二维数组的两条斜对角线之和。</p>
-<h4 id="问题：给一个不多于5位的正整数，要求：一、求它是几位数，二、逆序打印出各位数字。">  问题：给一个不多于5位的正整数，要求：一、求它是几位数，二、逆序打印出各位数字。</h4><p>  实现代码，方式一：</p>
+<h3 id="问题：给一个不多于5位的正整数，要求：一、求它是几位数，二、逆序打印出各位数字。"><a href="#问题：给一个不多于5位的正整数，要求：一、求它是几位数，二、逆序打印出各位数字。">问题：给一个不多于5位的正整数，要求：一、求它是几位数，二、逆序打印出各位数字。</a></h3><p>  实现代码，方式一：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 分解数字的每位数字并逆序打印返回
  * <span class="hljs-doctag">@params</span>: number
@@ -1448,7 +1444,7 @@ dfqwr23
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">numberDecompose</span>(<span class="hljs-number">54321</span>).<span class="hljs-title function_">join</span>(<span class="hljs-string">' '</span>))
 <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">5</span></span>
 </code><span class="copy-button">复制代码</span></pre>
-<h4 id="问题：有5个人坐在一起，问第5个人多少岁？他说比第4个人大2岁。问第4个人岁数，他说比第3个人大2岁。问第3个人，又说比第2人大2岁。问第2个人，说比第1个人大2岁。最后问第1个人，他说是10岁。请问第5个人多大？">  问题：有5个人坐在一起，问第5个人多少岁？他说比第4个人大2岁。问第4个人岁数，他说比第3个人大2岁。问第3个人，又说比第2人大2岁。问第2个人，说比第1个人大2岁。最后问第1个人，他说是10岁。请问第5个人多大？</h4><p>  实现代码：</p>
+<h3 id="问题：有5个人坐在一起，问第5个人多少岁？他说比第4个人大2岁。问第4个人岁数，他说比第3个人大2岁。问第3个人，又说比第2人大2岁。问第2个人，说比第1个人大2岁。最后问第1个人，他说是10岁。请问第5个人多大？"><a href="#问题：有5个人坐在一起，问第5个人多少岁？他说比第4个人大2岁。问第4个人岁数，他说比第3个人大2岁。问第3个人，又说比第2人大2岁。问第2个人，说比第1个人大2岁。最后问第1个人，他说是10岁。请问第5个人多大？">问题：有5个人坐在一起，问第5个人多少岁？他说比第4个人大2岁。问第4个人岁数，他说比第3个人大2岁。问第3个人，又说比第2人大2岁。问第2个人，说比第1个人大2岁。最后问第1个人，他说是10岁。请问第5个人多大？</a></h3><p>  实现代码：</p>
 <pre><code class="language-JavaScript"><span class="code-block"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@Description</span>: 有5个人坐在一起，问第5个人多少岁？他说比第4个人大2岁。
  * 问第4个人岁数，他说比第3个人大2岁。问第3个人，又说比第2人大2岁。

@@ -1,9 +1,8 @@
-<p>  在我们使用git的操作中，遇到需要回滚代码的情况几乎是难以避免的，而git重置功能也是非常实用的功能，所以掌握好他们是很有必要的。有的童鞋害怕把自己代码搞乱甚至搞丢了，但是不要去害怕，我们要去掌握好他们，利用好他们。</p>
 <p>  git reset 常用的功能就是将当前分支头重置为&lt;commit&gt;​并可能根据&lt;mode&gt;​（模式）更新暂存区（将其重置为&lt;commit&gt;​的树）和工作树。这里&lt;commit&gt;​既可以是以前的某次提交，也可以是当前的提交记录，也可以是在我们前面的提交。如果省略&lt;mode&gt;，则默认为--mixed。</p>
-<p>  &lt;mode&gt;必须是这五种之一：hard、soft、mixed、merged、keep。默认模式是mixed。<br>  常用的有hard、soft、mixed模式：<br>  一、**- -soft** ：重置 HEAD ，保留工作区和暂存区中的修改，并将重置 HEAD 所带来的差异放进暂存区。<br>  二、**- -mixed** ：重置 HEAD ，保留工作区的修改，并将暂存区的修改放进工作区，重置 HEAD 所带来的差异也放进工作区。<br>  三、**- -hard** ：重置 HEAD ，并将当前工作区、暂存区更改为重置后的HEAD的内容，原来工作区和暂存区的修改将不会被保留，且git无法恢复没有追踪过的修改，即工作区的未add的修改就只能祭天了，当然可以试试还有没有其他工具能找到( * ^ _ ^ * )。</p>
+<p>  &lt;mode&gt;必须是这五种之一：hard、soft、mixed、merged、keep。默认模式是mixed。<br>  常用的有hard、soft、mixed模式：<br>  一、--soft ：重置 HEAD ，保留工作区和暂存区中的修改，并将重置 HEAD 所带来的差异放进暂存区。<br>  二、--mixed ：重置 HEAD ，保留工作区的修改，并将暂存区的修改放进工作区，重置 HEAD 所带来的差异也放进工作区。<br>  三、--hard：重置 HEAD ，并将当前工作区、暂存区更改为重置后的HEAD的内容，原来工作区和暂存区的修改将不会被保留，且git无法恢复没有追踪过的修改，即工作区的未add的修改就只能祭天了，当然可以试试还有没有其他工具能找到( * ^ _ ^ * )。</p>
 <p>  下面我们来说说git reset 的一些常用命令的用法。</p>
 <h5 id="git reset 将暂存区的文件修改放会到工作区"><a href="#git reset 将暂存区的文件修改放会到工作区">git reset 将暂存区的文件修改放会到工作区</a></h5><p>  命令1：git reset -p<br>  tips：将暂存区所有的修改都恢复到工作区去</p>
-<p>  命令2：git reset -p -- test1.txt<br>  tips：将文件 test1.txt 在暂存区的修改恢复到工作区去<br>tips：这和git restore --staged 命令有些相似，restore命令可以查看：<a href="https://liu_yong.gitee.io/blogs/78/">git restore 命令的一些常用的用法</a></p>
+<p>  命令2：git reset -p -- test1.txt<br>  tips：将文件 test1.txt 在暂存区的修改恢复到工作区去<br>tips：这和git restore --staged 命令有些相似。</p>
 <h5 id="git reset 放弃工作区和暂存区的修改"><a href="#git reset 放弃工作区和暂存区的修改">git reset 放弃工作区和暂存区的修改</a></h5><p>  命令：git reset --hard HEAD<br>  tips：执行此命令后，工作区的修改git工具将无法恢复了，所以要谨慎操作哦</p>
 <h5 id="git reset 重置到某个版本库去，并根据版本库该commit重置工作区和暂存区">git reset 重置到某个版本库去，并根据版本库该&lt;commit&gt;重置工作区和暂存区</h5><p>  命令：git reset --hard &lt;commit&gt;<br>  tips：执行此命令后，工作区的修改git工具将无法恢复了，所以要谨慎操作哦</p>
 <h5 id="git reset 重置到某个版本库去，并将新版本和重置前的版本的差异放入暂存区，不修改工作区，也不影响工作区的原有修改"><a href="#git reset 重置到某个版本库去，并将新版本和重置前的版本的差异放入暂存区，不修改工作区，也不影响工作区的原有修改">git reset 重置到某个版本库去，并将新版本和重置前的版本的差异放入暂存区，不修改工作区，也不影响工作区的原有修改</a></h5><p>  命令：git reset --soft &lt;commit&gt;</p>

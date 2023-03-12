@@ -1,5 +1,3 @@
-&emsp;&emsp;&lt;meta&gt; 标签位于文档的头部，不包含任何内容，是html语言head区的一个辅助性标签。<meta> 元素可提供有关页面的元信息，比如针对搜索引擎和更新频度的描述和关键词。
-
 &emsp;&emsp;html5中meta标签共有四个属性，它们分别是charset、content、http-equiv、name属性。meta标签的作用有：搜索引擎优化（SEO），响应式设计，定义页面使用语言，自动刷新并指向新的页面，实现网页转换时的动态效果，控制页面缓存等。
 
 #### &emsp;&emsp;一、charset属性：
