@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>自研 Vite 插件管理本地文章</title>
+</head>
+<body>
+<article class="markdown-body">
+<h1>自研 Vite 插件管理本地文章</h1>
+<p>这个博客的文章编辑后台只在本地开发环境存在，生产构建中完全不可见。核心是两个 Vite 插件。</p>
+<h2>dev：中间件提供 API</h2>
+<p>开发服务器上注册 <code>/__admin/api</code> 中间件：</p>
+<ul>
+<li><code>GET /__admin/api/index</code> 读取全量索引（含草稿）</li>
+<li><code>POST /__admin/api/post</code> 保存文章：渲染 markdown 为 html，写入 <code>content/</code> 目录</li>
+<li><code>DELETE /__admin/api/post/:id</code> 删除文章</li>
+</ul>
+<h2>build：closeBundle 过滤草稿</h2>
+<p>构建时把 <code>content/</code> 中<strong>已发布</strong>的 md / html / 图片复制进 <code>dist/content/</code>，草稿永远留在本地。</p>
+<h2>前端如何剔除管理代码</h2>
+<pre><code class="language-ts">if (import.meta.env.DEV) {
+  routes.push(/* 管理后台路由 */);
+}
+</code></pre>
+<p>生产构建的 tree-shaking 会把整个分支删掉，管理页面代码不会出现在产物中。</p>
+
+</article>
+</body>
+</html>

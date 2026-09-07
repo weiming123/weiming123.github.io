@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>用 IndexedDB 存用户数据</title>
+</head>
+<body>
+<article class="markdown-body">
+<h1>用 IndexedDB 存用户数据</h1>
+<p>不想要账号体系，又想记住访客的收藏与笔记，浏览器本地存储是唯一答案。</p>
+<h2>四个 object store</h2>
+<table>
+<thead>
+<tr>
+<th>store</th>
+<th>keyPath</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>favorites</td>
+<td>post.id</td>
+<td>收藏的文章</td>
+</tr>
+<tr>
+<td>history</td>
+<td>post.id</td>
+<td>最近浏览（导航栏取前 10 条）</td>
+</tr>
+<tr>
+<td>notes</td>
+<td>id (auto)</td>
+<td>文章下的笔记，建了 postId 索引</td>
+</tr>
+<tr>
+<td>prefs</td>
+<td>name</td>
+<td>偏好设置（如列表排序）</td>
+</tr>
+</tbody>
+</table>
+<h2>封装要点</h2>
+<ol>
+<li>单例 <code>openDb()</code>，避免重复打开连接</li>
+<li>事务封装成 Promise，调用方不用碰 <code>onsuccess</code> / <code>onerror</code></li>
+<li>列表类查询在内存中排序，数据量小无所谓性能</li>
+</ol>
+
+</article>
+</body>
+</html>

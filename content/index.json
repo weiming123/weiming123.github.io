@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "posts": [
+    {
+      "id": "hello-zoo-blog",
+      "title": "你好，前端er",
+      "summary": "为什么我自建了这个纯前端博客：架构选型、内容管理方式与设计取舍。",
+      "author": "linot",
+      "category": "随想",
+      "tags": [
+        "博客",
+        "架构"
+      ],
+      "status": "published",
+      "createdAt": "2026-08-20T10:00:00.000Z",
+      "publishedAt": "2026-08-20T10:00:00.000Z",
+      "mdPath": "posts/hello-zoo-blog.md",
+      "htmlPath": "posts/hello-zoo-blog.html"
+    },
+    {
+      "id": "vite-plugin-content-walkthrough",
+      "title": "自研 Vite 插件管理本地文章",
+      "summary": "用 dev-only 中间件提供文章读写 API，build 钩子过滤草稿——一套代码两种形态。",
+      "author": "linot",
+      "category": "前端",
+      "tags": [
+        "vite",
+        "插件",
+        "工程化"
+      ],
+      "status": "published",
+      "createdAt": "2026-08-25T09:30:00.000Z",
+      "publishedAt": "2026-08-25T09:30:00.000Z",
+      "mdPath": "posts/vite-plugin-content-walkthrough.md",
+      "htmlPath": "posts/vite-plugin-content-walkthrough.html"
+    },
+    {
+      "id": "indexeddb-notes",
+      "title": "用 IndexedDB 存用户数据",
+      "summary": "收藏、浏览历史、文章笔记的本地存储设计：四个 object store 与封装思路。",
+      "author": "linot",
+      "category": "前端",
+      "tags": [
+        "IndexedDB",
+        "存储"
+      ],
+      "status": "published",
+      "createdAt": "2026-09-01T14:00:00.000Z",
+      "publishedAt": "2026-09-01T14:00:00.000Z",
+      "mdPath": "posts/indexeddb-notes.md",
+      "htmlPath": "posts/indexeddb-notes.html"
+    }
+  ]
+}
