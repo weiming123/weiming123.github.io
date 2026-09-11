@@ -4,14 +4,26 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 首帧渲染前应用本地主题设置，避免主题闪烁（FOUC） -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('app-theme');
+          if (t !== 'dark' && t !== 'sepia') t = 'light';
+          document.documentElement.dataset.theme = t;
+        } catch (e) {
+          document.documentElement.dataset.theme = 'light';
+        }
+      })();
+    </script>
     <!-- 明确禁用 SEO -->
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
     <meta name="googlebot" content="noindex, nofollow" />
     <meta name="baiduspider" content="noindex, nofollow" />
     <title>前端er</title>
-    <script type="module" crossorigin src="/assets/index-CxxBvzuz.js"></script>
+    <script type="module" crossorigin src="/assets/index-CkoeVvnH.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/reactivity.esm-bundler-DV9C3lNJ.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-DELGzae1.css">
+    <link rel="stylesheet" crossorigin href="/assets/index-C6Y5z68_.css">
   <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
   <body>
     <div id="app"></div>
