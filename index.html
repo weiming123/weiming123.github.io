@@ -16,12 +16,77 @@
         }
       })();
     </script>
+    <!-- 旧版移动端浏览器兼容：pdf.js 6.x 依赖以下现代 API，缺失时在首帧前补齐 -->
+    <script>
+      (function () {
+        if (typeof Promise.withResolvers !== 'function') {
+          Promise.withResolvers = function () {
+            var resolve, reject;
+            var promise = new Promise(function (res, rej) {
+              resolve = res;
+              reject = rej;
+            });
+            return { promise: promise, resolve: resolve, reject: reject };
+          };
+        }
+        if (typeof Object.hasOwn !== 'function') {
+          Object.hasOwn = function (obj, key) {
+            return Object.prototype.hasOwnProperty.call(obj, key);
+          };
+        }
+        if (!Array.prototype.at) {
+          Object.defineProperty(Array.prototype, 'at', {
+            value: function (index) {
+              var i = Math.trunc(index) || 0;
+              if (i < 0) i += this.length;
+              return i >= 0 && i < this.length ? this[i] : undefined;
+            },
+            writable: true,
+            configurable: true,
+          });
+        }
+        var typedProto = Object.getPrototypeOf(Uint8Array.prototype);
+        if (!typedProto.at) {
+          Object.defineProperty(typedProto, 'at', {
+            value: function (index) {
+              var i = Math.trunc(index) || 0;
+              if (i < 0) i += this.length;
+              return i >= 0 && i < this.length ? this[i] : undefined;
+            },
+            writable: true,
+            configurable: true,
+          });
+        }
+        if (typeof URL.parse !== 'function') {
+          URL.parse = function (url, base) {
+            try {
+              return new URL(url, base);
+            } catch (e) {
+              return null;
+            }
+          };
+        }
+        if (typeof structuredClone !== 'function') {
+          window.structuredClone = function clone(value) {
+            if (value === null || typeof value !== 'object') return value;
+            if (value instanceof ArrayBuffer) return value.slice(0);
+            if (ArrayBuffer.isView(value)) return new value.constructor(value);
+            if (Array.isArray(value)) return value.map(clone);
+            var out = {};
+            for (var key in value) {
+              if (Object.hasOwn(value, key)) out[key] = clone(value[key]);
+            }
+            return out;
+          };
+        }
+      })();
+    </script>
     <!-- 明确禁用 SEO -->
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
     <meta name="googlebot" content="noindex, nofollow" />
     <meta name="baiduspider" content="noindex, nofollow" />
     <title>前端er</title>
-    <script type="module" crossorigin src="/assets/index-CkoeVvnH.js"></script>
+    <script type="module" crossorigin src="/assets/index-UCSe8HLR.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/reactivity.esm-bundler-DV9C3lNJ.js">
     <link rel="stylesheet" crossorigin href="/assets/index-C6Y5z68_.css">
   <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
